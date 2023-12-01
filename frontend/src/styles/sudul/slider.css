@@ -1,0 +1,225 @@
+
+.slide-show{
+    margin: 0px;
+    height: 75vh;
+    overflow: hidden;
+    position: relative;
+    top: 0px;
+    z-index: 0;
+  }
+  
+  .slide-show .slide{
+    position: absolute;
+    left:0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index:1; 
+    display:none;
+    padding:0px 15px;
+    animation: slide 2s ease;
+  }
+  .slide-show .slide.active{
+    display: flex;
+  }
+  @keyframes slide{
+    0%{
+        transform:scale(1.1);
+    }
+    100%{
+        transform: scale(1);
+    }
+  }
+  
+  
+  .slide-show .container{
+     flex-grow: 1;
+  }
+  
+  
+  .slide-show .caption h1{
+    font-size:42px;
+    color:white;
+    margin:0;
+    padding-top: 380px;
+    
+  }
+  .slide-show .slide.active .caption h1{
+    opacity:0;
+    animation: captionText .5s ease forwards;
+    animation-delay:1s;
+  }
+  .slide-show .caption p{
+    font-size: 18px;
+    margin: 15px 0 30px;
+    color:white;
+  }
+  .slide-show .slide.active .caption p{
+    opacity:0;
+    animation: captionText .5s ease forwards;
+    animation-delay:1.2s;
+  }
+  .slide-show .caption a{
+  display: inline-block;
+  padding:10px 30px;
+  background-color: #000000;
+  text-decoration: none;
+  color:#ffffff;
+  cursor: pointer;
+  }
+  
+  .slide-show .slide.active .caption a{
+    opacity:0;
+    animation: captionText .5s ease forwards;
+    animation-delay:1.4s;
+  }
+  
+  @keyframes captionText{
+    0%{
+        opacity:0; transform: translateX(-100px);
+    }
+    100%{
+     opacity:1; transform: translateX(0px);	
+    }
+  }
+  
+  .slide-show .controls .prev,
+  .slide-show .controls .next{
+    position: absolute;
+    z-index:2;
+    top:50%;
+    height:40px;
+    width: 40px;
+    margin-top: -20px;
+    color:white;
+    background-color: black;
+    text-align: center;
+    line-height: 40px;
+    font-size:20px;
+    cursor:pointer;
+    transition: all .5s ease;
+  }
+  
+  .slide-show .controls .prev:hover,
+  .slide-show .controls .next:hover{
+    background-color:white;
+    color:black;
+  }
+  .slide-show .controls .prev{
+    padding-top: 0px;	
+    left:0;
+  }
+  .slide-show .controls .next{
+    padding-top: 0px;	
+    right:0;
+  }
+  
+  .slide-show .indicator{
+    position: absolute;
+    cursor: pointer;
+    right :0%;
+    bottom:30px;
+    z-index: 2;
+    transform: translateX(-50%);
+  }
+  
+  .slide-show .indicator div{
+    display: inline-block;
+    width:25px;
+    height: 25px;
+    color: white;
+    background-color: black;
+    border-radius:50%;
+    text-align: center;
+    line-height: 25px;
+    margin:0 3px;
+  }
+  
+  .slide-show .indicator div.active{
+  background-color: white;
+  color: black;
+  }
+  #img1{
+  background-color: #000000;
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/beheth-kade-6ds3w9c.appspot.com/o/asserts%2FE1-R_PBVUAE1EI9.jpg?alt=media&token=556d0ee7-91b2-4611-9f2d-91bd872f5433');
+  background-size: cover;
+  }
+  #img1 h1, #img1 p{
+    color: #ffffff;
+  }
+  #img1 a{
+    background-color: rgb(42, 165, 61);
+  }
+  #img2{
+  background-color: #000000;
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/beheth-kade-6ds3w9c.appspot.com/o/asserts%2Flarge_694664_thp4zwfqktr_tn6sibjkxktbh.jpg?alt=media&token=22960715-4649-44e6-8b76-2fa035bba619');
+  background-size: cover;
+  }
+  #img2 h1, #img2 p{
+    color: black
+    /* -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black; */
+  }
+  #img2 a{
+    background-color: rgb(42, 165, 93);
+  }
+  #img3{
+  background-color: #000000;
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/beheth-kade-6ds3w9c.appspot.com/o/asserts%2Fsoap-ad%20(2).jpg?alt=media&token=47b81438-bb38-4780-b5a0-5e20208c9016');
+  background-size: cover;
+  }
+  #img3 h1, #img3 p{
+    color: #000000;
+  }
+  #img3 a{
+    background-color: rgb(42, 165, 61);
+  }
+  #img4{
+  background-color: #000000;
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/beheth-kade-6ds3w9c.appspot.com/o/asserts%2FGirl-1.jpg?alt=media&token=9c71a909-f550-4c2c-90b5-516c5ae07aeb');
+  background-size: cover;
+  }
+  #img4 h1, #img4 p{
+    color: black;
+    -webkit-text-stroke-width: 0.3px;
+    -webkit-text-stroke-color: wheat;
+  }
+  #img4 a{
+    background-color: rgb(12, 207, 41);
+  }
+  #img5{
+  background-color: #000000;
+  background-image: url('https://firebasestorage.googleapis.com/v0/b/beheth-kade-6ds3w9c.appspot.com/o/asserts%2Fbody-lotion-with-lemon-skin-care-cosmetics-realistic-ads-poster-dispenser-bottle-with-organic-moisturizer_88138-131.avif?alt=media&token=7179dbf2-b6cb-449a-947f-56c49f89b2b8');
+  background-size: cover;
+  }
+  #img5 h1, #img5 p{
+    color: #000000;
+    -webkit-text-stroke-width: 0.1px;
+    -webkit-text-stroke-color: limegreen;
+  }
+  #img5 a{
+    background-color: rgb(12, 207, 41);
+  }
+  
+  .home-container{
+  background-color: rgb(255, 255, 255);
+  padding-top: 0.25%;
+  }
+  .container .home-container >h1>center{
+    padding-top: 0.15%;
+    padding-bottom: 0.15%;
+    font-size: 5rem;
+    font-weight: 200;
+    font-family: Rubik Moonrocks;
+    font-style:oblique;
+    position: relative;
+    color: rgb(5, 46, 53);
+    transform: translate(-0%,0%);
+    z-index: 1;
+  }
+
+  .home_c{
+    color: white;
+  }

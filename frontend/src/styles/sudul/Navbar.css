@@ -1,0 +1,89 @@
+.NavbarCont {
+    width: 100%;
+    position: fixed;
+    /* padding-top: 20px; */
+    padding: 7px 0px;
+    left: 0px;
+    top: 0px;
+    z-index: 2;
+    color: aliceblue;
+    font-family: 'Poppins', sans-serif;
+    /* background-color: rgba(0, 255, 13, 0.073);*/
+    background-image: url("https://firebasestorage.googleapis.com/v0/b/beheth-kade-6ds3w9c.appspot.com/o/asserts%2Fmint-table.png?alt=media&token=25662400-1c7a-457f-8c0f-70ae7001c015");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.NavbarLogo {}
+
+.NavbarCont img {
+    width: 160px;
+    height: auto;
+}
+
+.NavbarList {}
+
+.me-auto {
+    margin-left: 30px;
+}
+
+.navlink {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    margin: 0px 8px;
+    overflow: show;
+    white-space: nowrap;
+}
+
+/* .NavbarList Button {
+    border-radius: 50px;
+    padding: 10px 20px;
+} */
+
+/* .btnContainerlogin {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+} */
+.me-auto{
+    align-items: center;
+}
+
+.NavbarCont img{
+    width: 80px;
+}
+
+.modal-footer{
+    justify-content: left;
+}
+
+.form-control{
+    width: 150%;
+}
+
+.searchBar{
+    align-content: right;
+    margin-left: 30px;
+    width: 80%;
+    overflow: show;
+    white-space: nowrap;
+}
+
+.bar{
+    transform:none;
+}
+
+.searchbtn{
+    margin-left: 10px;
+}
+
+.barInput{
+    width: 90%;
+    height: 30px;
+    background-color: rgba(98, 189, 154, 0.658);
+    border: none;
+    border-radius: 10px;
+}
+.barInput::placeholder{
+    color:rgb(34, 54, 54);
+}

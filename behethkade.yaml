@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: behethkade
+spec:
+  ports:
+  - name: behethkadefront
+    port: 3000
+    protocol: TCP
+    targetPort: 3000
+  - name: apigateway
+    port: 8000
+    protocol: TCP
+    targetPort: 8000
+  - name: userservice
+    port: 7000
+    protocol: TCP
+    targetPort: 7000
+  - name: paymentservice
+    port: 6000
+    protocol: TCP
+    targetPort: 6000 
+  - name: orderservice
+    port: 5000
+    protocol: TCP
+    targetPort: 5000 
+  - name: itemservice
+    port: 4000
+    protocol: TCP
+    targetPort: 4000     
+  selector:
+    app: behethkade
+  type: LoadBalancer
+status:
+  loadBalancer: {}
+ 
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: behethkade
+  name: behethkade
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: behethkade
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: behethkade
+    spec:
+      containers:
+      - name: behethkadefront
+        image: sudelk/herbal-medicine-selling-platform-frontend
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          protocol: TCP
+        resources: {}
+      - name: apigateway
+        image: sudelk/herbal-medicine-selling-platform-apigateway
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        resources: {}
+      - name: userservice
+        image: sudelk/herbal-medicine-selling-platform-userservice
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 7000
+          protocol: TCP
+        resources: {}
+      - name: paymentservice
+        image: sudelk/herbal-medicine-selling-platform-paymentservice
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6000
+          protocol: TCP
+        resources: {}
+      - name: orderservice
+        image: sudelk/herbal-medicine-selling-platform-orderservice
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+          protocol: TCP
+        resources: {}
+      - name: itemservice
+        image: sudelk/herbal-medicine-selling-platform-itemservice
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4000
+          protocol: TCP
+        resources: {}
+      restartPolicy: Always
+status: {}
+
+# kubectl apply -f behethkade.yaml
+# kubectl delete -f behethkade.yaml

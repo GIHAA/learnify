@@ -1,0 +1,49 @@
+.sellerItemsPage {
+    width: 90%;
+    min-height: 580px;
+    background-color: rgba(83, 153, 94, 0.274);
+    margin: 0px auto;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
+Card.itemCard {
+    visibility: hidden;
+}
+
+.sellerItemRow {
+    width: 90%;
+    height: 60px;
+    background-color: rgba(83, 153, 94, 0.274);
+    margin: 0px auto;
+    border-radius: 10px;
+    padding-top: 8px
+}
+
+.SearchForm {
+    width: 200px;
+    position: relative;
+}
+
+.searchInput {
+    width: 400px;
+}
+
+img.itemimgprofile{
+    width: 150px;
+    height: 150px;
+    border-radius: 5%;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.Buyerlanding{
+    width: 90%;
+    height: 530px;
+    margin: 0px auto;
+    border-radius: 10px;
+    background-color: #ACDF87; 
+}

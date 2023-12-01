@@ -1,0 +1,24 @@
+.image{
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 50px;
+    left: 400px;
+    z-index: -1;
+}
+
+.top-color-bar{
+    background-color: #09a843;
+    height: 50px;
+    width: 100%;
+}
+
+.heading{
+    font-size: 80px;
+    font-weight: 600;
+    color: #000000;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

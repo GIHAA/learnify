@@ -1,0 +1,22 @@
+{
+  "name": "Beheth-Kade-Item-Service",
+  "version": "1.0.0",
+  "description": "Item Service, Backend of the Beheth Kade, Backend of Online Herbal Medicine Selling Platform",
+  "main": "index.js",
+  "repository": "",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "author": "Team Tetra",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-session": "^1.17.3",
+    "mongoose": "^6.5.3",
+    "nodemon": "^2.0.19"
+  }
+}

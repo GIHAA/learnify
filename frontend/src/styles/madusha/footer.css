@@ -1,0 +1,27 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  .content-1 {
+    font-size: 20px;
+    flex: 1;
+    padding: 20px;
+  }
+
+  .content-2 {
+    font-size: 15px;
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .footer {
+    background-color: #05963d;
+    opacity: 0.6;
+    padding: 10px;
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+  }

@@ -1,0 +1,29 @@
+.landing {
+    width: 90%;
+    height: 500px;
+    background-color:#ACDF87;
+    margin: 0px auto;
+    border-radius: 10px;
+}
+
+.profile {
+    margin: 0px auto;
+    background-color: rgb(235, 235, 235);
+}
+
+.profileimg {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    margin: 0px auto;
+    display: block;
+}
+
+.box {
+    width: 90%;
+    height: 200px;
+    background-color: rgb(235, 235, 235);
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px;
+}
