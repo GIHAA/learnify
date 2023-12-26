@@ -26,11 +26,7 @@ users.patch(
   celebrate({ [Segments.PARAMS]: userIdSchema, [Segments.BODY]: updateSchema }),
   tracedAsyncHandler(update)
 );
-
-// Admin route to delete any user profile
 users.delete('/:id', adminProtect, tracedAsyncHandler(remove));
-
-// User route to delete their own profile
 users.delete('/me/:id', protect, tracedAsyncHandler(remove));
 
 export default users;
