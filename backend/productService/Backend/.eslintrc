@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "@sliit-foss/eslint-config-internal"
+  ],
+  "env": {
+    "browser": false,
+    "node": true,
+    "jest": true,
+    "es6": true
+  },
+  "rules": {
+    "no-sparse-arrays": "off",
+    "no-nested-ternary": "off",
+    "newline-per-chained-call": "off",
+    "import/order": "off"
+  }
+}
