@@ -14,14 +14,21 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v2
 
-    - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'adopt'
-        java-version: '17'
+    - name: Use Node.JS ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with: 
+        node-version: ${{ matrix.node-version }}
 
-    - name: Run Tests
-      run: mvn test
+    - name: NPM install, build and test
+      run: |
+        cd Backend
+        npm install
+        npm run 
+        npm test
+      env: 
+        DBHOST: ${{ secrets.DBHOST }}
+        TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
+        JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
       working-directory: Backend/authService
 
 
@@ -38,8 +45,8 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/proclient:latest -f Backend/Dockerfile Backend
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/proclient:latest
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-auth:latest -f Backend/Dockerfile Backend
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-auth:latest
       env:
         DOCKER_CLI_ACI: 1
         CONTAINER: oci
