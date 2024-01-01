@@ -81,6 +81,6 @@ const port = process.env.PORT || 3000;
 
 app.listen(port, (err) => {
   if (!err) {
-    logger.info(`Y3S2 server successfully started on port ${port}`);
+    logger.info(`Auth service successfully started on port ${port}`);
   }
 });

@@ -11,7 +11,6 @@ import { omit, pick } from 'lodash';
 import { default as connectDB } from '@/database';
 import { errorHandler, queryMapper, responseInterceptor } from '@/middleware';
 import { default as routes } from '@/routes/index.routes';
-//import{gdconneciopn} from "@/database/imageGrid"
 
 require('dotenv').config();
 
@@ -41,18 +40,14 @@ app.use(
 
 app.use(compression());
 
-//app.use(cors({ origin: true, credentials: true }));
 app.use(cors({ origin: true, credentials: true }));
 
 app.use(express.json({ limit: '1mb' }));
 
 app.use(express.urlencoded({ extended: true }));
+
 app.use(express.static('Assert'))
 
-app.use((req, res, next) => {
-  res.header('Cross-Origin-Resource-Policy', 'same-site');
-  next();
-});
 app.get('/', (_, res) => res.status(200).json({ message: 'Y3S2 Server Up and Running' }));
 
 app.use(context.middleware);
@@ -87,6 +82,6 @@ global.__basedir = __dirname;
 const port = process.env.PORT || 3000;
 app.listen(port, (err) => {
   if (!err) {
-    logger.info(`Y3S2 server successfully started on port ${port}`);
+    logger.info(`Product service successfully started on port ${port}`);
   }
 });

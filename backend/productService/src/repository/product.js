@@ -80,23 +80,3 @@ export const updateproducte = async (filters, data) => {
     throw e;
   }
 };
-
-const conn = mongoose.connection;
-
-// Initialize GridFS
-let gfs;
-
-conn.once('open', () => {
-  gfs = new mongoose.mongo.GridFSBucket(conn.db, { bucketName: 'uploads' });
-});
-
-export const imagefindbyid = (image,res)=>{
-
-  const readstream = gfs.openDownloadStreamByName(image);
-
-  readstream.on('error', () => {
-    res.status(404).json({ error: 'Image not found' });
-  });
-
-  readstream.pipe(res);
-}
