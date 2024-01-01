@@ -1,6 +1,5 @@
 import { default as createError } from 'http-errors';
-import { createproducte, getAllproducte,  getOneproducte, removeproducte, updateproducte,imagefindbyid } from '@/repository/order';
-import { producte } from '@/models';
+import { createproducte, getAllproducte,  getOneproducte, removeproducte, updateproducte,imagefindbyid } from '@/repository/product';
 export const addProductnew = async (payload) => {
 
   console.log(payload)
@@ -8,7 +7,6 @@ export const addProductnew = async (payload) => {
     ...payload
   });
   return newProduct;
-  console.log("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh")
 };
 
 export const getProduct = (query) => getAllproducte(query);
