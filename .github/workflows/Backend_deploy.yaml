@@ -21,9 +21,8 @@ jobs:
 
     - name: install and test
       run:
-        cd .\backend\authService\ 
-        npm install
-        npm run test
+        cd ./backend/authService/ 
+        npm install && npm test
       env: 
         DBHOST: ${{ secrets.DBHOST }}
         TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
