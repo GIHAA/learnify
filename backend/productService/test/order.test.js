@@ -1,5 +1,5 @@
-import { addordernew ,getOrder,getOrderbtID,updatOrder } from '@/services/order';
-import { addorder, getAll, getById, update } from '@/controllers/order';
+import { addordernew ,getOrder,getOrderbtID,updatOrder } from '@/services/product';
+import { addorder, getAll, getById, update } from '@/controllers/product';
 import { makeResponse } from '@/utils/response';
 
 jest.mock('@/services/order', () => ({

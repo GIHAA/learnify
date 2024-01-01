@@ -1,5 +1,5 @@
 
-export { default as producte } from './producte';
+export { default as product } from './product';
 
 
 
