@@ -23,13 +23,13 @@ jobs:
       run: |
         cd Backend
         npm install
-        npm run 
+        npm run
         npm test
       env: 
         DBHOST: ${{ secrets.DBHOST }}
         TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
         JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
-      working-directory: backend/authService
+      working-directory: Backend/authService
 
 
   build-and-push:
