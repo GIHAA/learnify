@@ -1,8 +1,8 @@
 import express from 'express';
 import { tracedAsyncHandler } from '@sliit-foss/functions';
 import { celebrate } from 'celebrate';
-import { addorder, getAll, getById, remove, update ,imagerectrive} from '@/controllers/order';
-import { orderRequestAdd } from '@/validations/order';
+import { addorder, getAll, getById, remove, update ,imagerectrive} from '@/controllers/product';
+import { orderRequestAdd } from '@/validations/product';
 import multer from 'multer';
 import { GridFsStorage } from 'multer-gridfs-storage';
 import mongoose from 'mongoose';

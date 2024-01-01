@@ -48,11 +48,11 @@ app.use(express.json({ limit: '1mb' }));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('Assert'))
+
 app.use((req, res, next) => {
   res.header('Cross-Origin-Resource-Policy', 'same-site');
   next();
 });
-//http://localhost:3002/image_1703611426890-601737452.png(front end access using  url)
 app.get('/', (_, res) => res.status(200).json({ message: 'Y3S2 Server Up and Running' }));
 
 app.use(context.middleware);
@@ -82,7 +82,6 @@ app.use(errorHandler);
 
 connectDB();
 
-//const db= connectDB();
 global.__basedir = __dirname;
 
 const port = process.env.PORT || 3000;

@@ -1,12 +1,9 @@
 import mongoose from 'mongoose';
 
-const producteMouble = new mongoose.Schema(
+const productMouble = new mongoose.Schema(
   {
-     pID : {
-      type : String,
-      require : true
-     },
-     Pname : {
+     
+     pname : {
       type : String,
       require : true
      },
@@ -32,6 +29,6 @@ const producteMouble = new mongoose.Schema(
   }
 );
 
-const producte = mongoose.model('Producate', producteMouble);
+const product = mongoose.model('Producat', productMouble);
 
-export default producte;
+export default product;
