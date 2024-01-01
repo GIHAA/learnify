@@ -1,11 +1,11 @@
 import { moduleLogger } from '@sliit-foss/module-logger';
 import mongoose from 'mongoose';
-import {Grid } from "gridfs-stream"
+//import {Grid } from "gridfs-stream"
 
 const logger = moduleLogger('Database-connection');
 let gfs
 const connectDB = () => {
-  mongoose.connect(process.env.MONGO_URI, { keepAlive: true, connectTimeoutMS: 5000 }).catch((error) => {
+  mongoose.connect(process.env.MONGO_URI, { keepAlive: true, connectTimeoutMS: 3000 }).catch((error) => {
     logger.error(`Error connecting to MongoDB: ${error}`);
    /* const conn = mongoose.connection;
     Grid.mongo = mongoose.mongo;

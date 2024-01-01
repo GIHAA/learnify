@@ -11,7 +11,7 @@ import { omit, pick } from 'lodash';
 import { default as connectDB } from '@/database';
 import { errorHandler, queryMapper, responseInterceptor } from '@/middleware';
 import { default as routes } from '@/routes/index.routes';
-import{gdconneciopn} from "@/database/imageGrid"
+//import{gdconneciopn} from "@/database/imageGrid"
 
 require('dotenv').config();
 

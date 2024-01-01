@@ -3,11 +3,11 @@ import { makeResponse } from '@/utils/response';
 
 export const addorder = async (req, res) => {
   const ProducateData = req.body;
-  const image = req.file.filename  ;
-  console.log(req.file)
-  if (image ) {
-    ProducateData.image = image;
-  }
+  // const image = req.file.filename  ;
+  // console.log(req.file)
+  // if (image ) {
+  //   ProducateData.image = image;
+  // }
   console.log(ProducateData)
   const order = await addProductnew(ProducateData);
 
@@ -33,9 +33,9 @@ export const remove = async (req, res) => {
   const orders = await deleteProduct(req.params.id);
   return makeResponse({ res, data: orders, message: 'product removed successfully' });}
 
-export const imagerectrive = (req, res)=>{
+// export const imagerectrive = (req, res)=>{
 
-      const {filename} = req.params
-      findImage(filename,res);
+//       const {filename} = req.params
+//       findImage(filename,res);
        
-}  
+// }  

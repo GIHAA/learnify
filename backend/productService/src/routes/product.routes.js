@@ -7,7 +7,7 @@ import multer from 'multer';
 import { GridFsStorage } from 'multer-gridfs-storage';
 import mongoose from 'mongoose';
 
-const order = express.Router();
+const product = express.Router();
 /*
 // Create a connection to MongoDB
 const conn = mongoose.connection;
@@ -20,19 +20,19 @@ conn.once('open', () => {
 });
 */
 // Create storage using GridFsStorage
-const storage = new GridFsStorage({
-  url: process.env.MONGO_URI,
-  options: { useNewUrlParser: true, useUnifiedTopology: true },
-  file: (req, file) => {
-    return {
-      bucketName: 'uploads',
-      filename: file.fieldname + '_' + Date.now() + '-' + Math.round(Math.random() * 1E9) + '.png',
-    };
-  },
-});
+// const storage = new GridFsStorage({
+//   url: process.env.MONGO_URI,
+//   options: { useNewUrlParser: true, useUnifiedTopology: true },
+//   file: (req, file) => {
+//     return {
+//       bucketName: 'uploads',
+//       filename: file.fieldname + '_' + Date.now() + '-' + Math.round(Math.random() * 1E9) + '.png',
+//     };
+//   },
+// });
 
 // Initialize multer with the storage engine
-const upload = multer({ storage });
+//const upload = multer({ storage });
 /*
 // Define route to get image
 order.get('/image/:filename', (req, res) => {
@@ -45,7 +45,7 @@ order.get('/image/:filename', (req, res) => {
 
   readstream.pipe(res);
 });*/
-order.get('/image/:filename',imagerectrive)
+//order.get('/image/:filename',imagerectrive)
 // Define other order routes
 /*
 order.delete('/imaged/:filename',(req,res)=>{
@@ -60,11 +60,12 @@ order.delete('/imaged/:filename',(req,res)=>{
       res.status(500).json({ error: 'Error deleting file' });
     }
 })*/
-order.post('/d', upload.single('image'), tracedAsyncHandler(addorder));
-order.get('/', tracedAsyncHandler(getAll));
-order.get('/:id', tracedAsyncHandler(getById));
-order.patch('/:id' ,tracedAsyncHandler(update));
-order.delete('/:id', tracedAsyncHandler(remove));
+//order.post('/d', upload.single('image'), tracedAsyncHandler(addorder));
+product.post('/d', tracedAsyncHandler(addorder));
+product.get('/', tracedAsyncHandler(getAll));
+product.get('/:id', tracedAsyncHandler(getById));
+product.patch('/:id' ,tracedAsyncHandler(update));
+product.delete('/:id', tracedAsyncHandler(remove));
 
-export default order;
+export default product;
 

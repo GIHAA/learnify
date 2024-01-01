@@ -1,12 +1,12 @@
 import { moduleLogger } from '@sliit-foss/module-logger';
-import { producte } from '@/models';
+import { product } from '@/models';
 import mongoose from 'mongoose';
 const logger = moduleLogger('producte-repository');
 
 export const createproducte = async (productes) => {
  
   try {
-    const newproductes = (await new producte(productes).save());
+    const newproductes = (await new product(productes).save());
     logger.info('producte created:', newproductes);
     return newproductes;
   } catch (error) {
@@ -19,7 +19,7 @@ export const createproducte = async (productes) => {
 
 export const getOneproducte = async (filters) => {
   try {
-    const productef = await producte.findOne({ producteId: filters.producteId });
+    const productef = await product.findOne({ producteId: filters.producteId });
     if (!productef) {
       logger.warn('No producte found.');
       return null;
@@ -35,7 +35,7 @@ export const getOneproducte = async (filters) => {
 
 export const getAllproducte = async () => {
   try {
-    const productes = await producte.find();
+    const productes = await product.find();
     if (!productes) {
       logger.warn('No producte found.');
       return null;
@@ -53,7 +53,7 @@ export const getAllproducte = async () => {
 
 export const removeproducte = async (filters) => {
   try {
-    const productedelete = await producte.findOneAndRemove(filters);
+    const productedelete = await product.findOneAndRemove(filters);
     if (!productedelete) {
       logger.warn('No producte found with filters:', filters);
       return null;
@@ -68,7 +68,7 @@ export const removeproducte = async (filters) => {
 
 export const updateproducte = async (filters, data) => {
   try {
-    const producte = await producte.findByIdAndUpdate(filters._id, data);
+    const producte = await product.findByIdAndUpdate(filters._id, data);
     if (!producte) {
       logger.warn('No producte found with filters:', filters);
       return null;
