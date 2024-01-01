@@ -21,7 +21,6 @@ jobs:
 
     - name: install and test
       run: |
-        ls
         cd backend
         cd authService 
         npm install && npm test
