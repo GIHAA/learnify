@@ -43,7 +43,7 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-auth:latest -f backend/authService/Dockerfile authService
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-auth:latest -f backend/authService/Dockerfile backend/authService
         docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-auth:latest
       env:
         DOCKER_CLI_ACI: 1
