@@ -20,7 +20,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: install and test
-      run:
+      run: |
         cd ./backend/authService/ 
         npm install && npm test
       env: 
