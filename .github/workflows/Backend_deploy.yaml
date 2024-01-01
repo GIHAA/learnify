@@ -19,11 +19,10 @@ jobs:
       with: 
         node-version: ${{ matrix.node-version }}
 
-    - name: NPM install, build and test
+    - name: install and test
       run:
         npm install
-        npm run
-        npm test
+        npm run test
       env: 
         DBHOST: ${{ secrets.DBHOST }}
         TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
