@@ -1,16 +1,13 @@
-import {Grid } from "gridfs-stream"
+import { Grid } from 'gridfs-stream';
 import mongoose from 'mongoose';
 
-export const gdconneciopn =  ()=>{
+export const gdconneciopn = () => {
+  let gfs;
 
-    let gfs;
-
-
-const conn = mongoose.connection;
-conn.once("open", function () {
+  const conn = mongoose.connection;
+  conn.once('open', function () {
     gfs = Grid(conn.db, mongoose.mongo);
-    gfs.collection("uploads");
-});
-  return gfs
-}
-
+    gfs.collection('uploads');
+  });
+  return gfs;
+};
