@@ -21,8 +21,7 @@ jobs:
 
     - name: install and test
       run:
-        cd backend
-        cd authService
+        cd .\backend\authService\ 
         npm install
         npm run test
       env: 
