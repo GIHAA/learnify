@@ -6,7 +6,7 @@ import { decodeJwtToken, isFromAdmin } from '@/utils';
 import { sendMail } from './email';
 
 export const authRegister = async ({ name, email, password, university, members }) => {
-  password = hashSync(password, +process.env.BCRYPT_SALT_ROUNDS);
+  password = hashSync(password);
   const verification_code = crypto.randomUUID();
   const registeredUser = await createUser({
     name,
@@ -87,7 +87,7 @@ export const forgotPasswordEmail = async (email) => {
 export const resetPasswordFromEmail = async (password, verificationCode) => {
   const user = await getOneUser({ verification_code: verificationCode });
   if (!user) throw new createError(400, 'Click the link we have sent to your email and try again.');
-  const hashedPassword = hashSync(password, +process.env.BCRYPT_SALT_ROUNDS);
+  const hashedPassword = hashSync(password);
   const updatedUser = await findOneAndUpdateUser(
     { email: user.email },
     { password: hashedPassword, is_verified: true, verification_code: null }

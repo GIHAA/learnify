@@ -9,4 +9,4 @@ export const isFromAdmin = () => context.get('origin') === 'admin';
 
 export const isProduction = process.env.APP_ENV === 'production';
 
-export const rawRepoUrl = `https://raw.githubusercontent.com/GIHAA/af-project/${isProduction ? 'main' : 'development'}`;
+export const rawRepoUrl = `https://raw.githubusercontent.com/GIHAA/af-project/${isProduction ? 'main' : 'develop'}`;

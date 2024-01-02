@@ -16,7 +16,7 @@ export const changePasswordService = async (user, oldPassword, newPassword) => {
   user = await getOneUser({ _id: user._id }, true); 
   const isPasswordMatch = compareSync(oldPassword, user.password);
   if (!isPasswordMatch) throw new createError(400, 'Invalid current password');
-  const hashedPassword = hashSync(newPassword, +process.env.BCRYPT_SALT_ROUNDS);
+  const hashedPassword = hashSync(newPassword);
   return findOneAndUpdateUser({ email: user.email }, { password: hashedPassword });
 };
 
@@ -39,7 +39,7 @@ export const updateUserdetails = async (userId, user, payload) => {
 
 export const addNewUser = async (payload) => {
   const generatedPassword = Math.random().toString(36).slice(-8);
-  const encryptedPassword = hashSync(generatedPassword, +process.env.BCRYPT_SALT_ROUNDS);
+  const encryptedPassword = hashSync(generatedPassword);
   const newUser = await createUser({
     ...payload,
     password: encryptedPassword,
