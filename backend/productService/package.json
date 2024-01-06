@@ -30,6 +30,7 @@
     "@sliit-foss/http-logger": "1.1.2",
     "@sliit-foss/module-logger": "1.1.5",
     "@sliit-foss/service-connector": "1.2.4",
+    "amqplib": "0.10.3",
     "bcryptjs": "2.4.3",
     "celebrate": "15.0.1",
     "compression": "1.7.4",
@@ -49,7 +50,8 @@
     "mongoose-paginate-v2": "1.7.0",
     "nodemailer": "6.7.7",
     "parth": "4.2.3",
-    "path": "0.12.7"
+    "path": "0.12.7",
+    "uuid": "9.0.1"
   },
   "devDependencies": {
     "@babel/cli": "7.17.10",

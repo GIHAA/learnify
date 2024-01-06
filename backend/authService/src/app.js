@@ -11,6 +11,9 @@ import { omit, pick } from 'lodash';
 import { default as connectDB } from '@/database';
 import { errorHandler, queryMapper, responseInterceptor } from '@/middleware';
 import { default as routes } from '@/routes/index.routes';
+import { consumeUserValidationMessages } from './utils/messageBroker';
+
+consumeUserValidationMessages();
 
 require('dotenv').config();
 
