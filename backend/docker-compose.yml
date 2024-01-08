@@ -1,0 +1,43 @@
+version: "3"
+services:
+  rabbitmq:
+    image: rabbitmq:alpine
+    container_name: rabbitmq
+    ports:
+      - '5672:5672'
+
+  product:
+    build:
+      dockerfile: Dockerfile
+      context: ./productService
+    container_name: productService
+    ports:
+      - "3002:3002"
+    restart: always
+    depends_on:
+      - "rabbitmq"
+    env_file:
+      - ./productService/.env
+
+  auth:
+    build:
+      dockerfile: Dockerfile
+      context: ./authService
+    container_name: authService
+    ports:
+      - "3001:3001"
+    restart: always
+    depends_on:
+      - "rabbitmq"
+    env_file:
+      - ./authService/.env
+
+  nginx-proxy:
+    build:
+      dockerfile: Dockerfile
+      context: ./proxy
+    depends_on:
+      - auth
+      - product
+    ports:
+      - "80:80"
