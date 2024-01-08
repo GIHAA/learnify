@@ -69,7 +69,7 @@ app.use(
 
 app.use(queryMapper);
 
-app.use('/api', routes);
+app.use('/productService', routes);
 
 app.use(responseInterceptor);
 
