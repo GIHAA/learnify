@@ -1,4 +1,4 @@
-name: Product Service Docker Build and Push
+name: Proxy Service Docker Build and Push
 
 on:
   push:

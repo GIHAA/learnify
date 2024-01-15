@@ -10,7 +10,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./productService
-    container_name: productService
+    container_name: product-service
     ports:
       - "3002:3002"
     restart: always
@@ -23,7 +23,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./authService
-    container_name: authService
+    container_name: auth-service
     ports:
       - "3001:3001"
     restart: always

@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
       - name: product
-        image: ds-project-product
+        image: gihaa/ds-project-product
         ports:
         - containerPort: 3002
 
@@ -142,3 +142,7 @@ spec:
     port: 80
     targetPort: 80
   type: NodePort
+
+
+# kubectl apply -f deployment.yaml
+# kubectl delete -f deployment.yaml
