@@ -7,6 +7,8 @@ import userRouter from './user.routes';
 const router = express.Router();
 
 router.use('/auth', authRouter);
+//to-do
+router.use('/health', () => {console.log('health check')});
 router.use('/users', protect, userRouter);
 
 

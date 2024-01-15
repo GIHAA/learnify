@@ -51,6 +51,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (_, res) => res.status(200).json({ message: 'Auth service Up and Running' }));
 
+//to-do
+app.get('/health', (_, res) => res.status(200).json({ message: 'Auth service Up and Running' }));
+
 app.use(context.middleware);
 
 app.use((req, _res, next) => {
