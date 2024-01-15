@@ -49,7 +49,7 @@ app.use(express.json({ limit: '1mb' }));
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (_, res) => res.status(200).json({ message: 'Y3S2 Server Up and Running' }));
+app.get('/', (_, res) => res.status(200).json({ message: 'Auth service Up and Running' }));
 
 app.use(context.middleware);
 

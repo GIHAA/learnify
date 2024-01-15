@@ -48,7 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('Assert'))
 
-app.get('/', (_, res) => res.status(200).json({ message: 'Y3S2 Server Up and Running' }));
+app.get('/', (_, res) => res.status(200).json({ message: 'Product service and Running' }));
 
 app.use(context.middleware);
 
