@@ -48,7 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('Assert'))
 
-app.get('/', (_, res) => res.status(200).json({ message: 'Product service and Running' }));
+app.get('/product-service/health', (_, res) => res.status(200).json({ message: 'Product service and Running' }));
 
 app.use(context.middleware);
 
@@ -69,7 +69,7 @@ app.use(
 
 app.use(queryMapper);
 
-app.use('/productService', routes);
+app.use('/product-service/api', routes);
 
 app.use(responseInterceptor);
 
