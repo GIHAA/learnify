@@ -50,7 +50,7 @@ spec:
     spec:
       containers:
       - name: product
-        image: your-product-image:tag
+        image: ds-project-product
         ports:
         - containerPort: 3002
 
@@ -87,7 +87,7 @@ spec:
     spec:
       containers:
       - name: auth
-        image: your-auth-image:tag
+        image: gihaa/ds-project-auth
         ports:
         - containerPort: 3001
 
@@ -124,7 +124,7 @@ spec:
     spec:
       containers:
       - name: nginx-proxy
-        image: your-nginx-proxy-image:tag
+        image: gihaa/ds-project-nginx-proxy
         ports:
         - containerPort: 80
 

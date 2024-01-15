@@ -1,0 +1,31 @@
+name: Product Service Docker Build and Push
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Login to Docker Hub
+      run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login --username "${{ secrets.DOCKERHUB_USERNAME }}" --password-stdin
+
+    - name: Build and Push Docker Image
+      run: |
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-nginx-proxy:latest -f backend/proxy/Dockerfile backend/proxy
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-nginx-proxy:latest -f backend/proxy/Dockerfile backend/proxy
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-nginx-proxy:latest
+      env:
+        DOCKER_CLI_ACI: 1
+        CONTAINER: oci
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        JWT_EXPIRES: ${{ secrets.JWT_EXPIRES_IN }}
+        JWT_SECRET: ${{ secrets.TOKEN_SECRET }}
