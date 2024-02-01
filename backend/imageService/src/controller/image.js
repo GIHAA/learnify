@@ -3,7 +3,7 @@
 //import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"
 import multer from 'multer'
 import express from 'express'
-import {imageUploade} from '../repositery/image.js'
+import {imageUploade,DeleteImage} from '../repositery/image.js'
 
  //import {initializeFirebaseApp} from '../controller/initializeFirebaseApp.js'
 const image = express.Router()
@@ -81,5 +81,31 @@ const upload = multer({storage :multer.memoryStorage()})
      
 // })
 image.post('/',upload.single('images'),imageUploade)
-
+// image.delete('/:id',DeleteImage)
+// image.delete('/:id', async (req, res, next) => {
+//     console.log("sssssssssssssssssssssssssssss")
+//     try {
+//       await DeleteImage(req, res);
+//     } catch (error) {
+//       // Handle errors here
+//       console.error('Error handling request:', error);
+//       return res.status(500).json({
+//         message: 'Internal Server Error',
+//         error: error.message
+//       });
+//     }
+//   });
+image.delete('/:url', async (req, res, next) => {
+    try {
+      await DeleteImage(req, res);
+    } catch (error) {
+      // Handle errors here
+      console.error('Error handling request:', error);
+      return res.status(500).json({
+        message: 'Internal Server Error',
+        error: error.message
+      });
+    }
+  });
+  
 export default image

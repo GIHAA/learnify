@@ -7,7 +7,7 @@ const imageSchema =new mongoose.Schema({
         required: true,
         unique: true
     },
-   
+ 
 })
 
 const image = mongoose.model('Product',imageSchema)
