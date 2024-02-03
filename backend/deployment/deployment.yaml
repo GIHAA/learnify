@@ -87,6 +87,56 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: image-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image
+  template:
+    metadata:
+      labels:
+        app: image
+    spec:
+      containers:
+      - name: image
+        image: gihaa/ds-project-image
+        ports:
+        - containerPort: 3005
+        env:
+        - name: PORT
+          value: "3002"
+        - name: MONGO_URI
+          value: "mongodb+srv://af123:af123@af0.etrzu5q.mongodb.net/?retryWrites=true&w=majority"
+        - name: JWT_EXPIRE
+          value: "360000"
+        - name: JWT_REFRESH_EXPIRE
+          value: "30"
+        - name: JWT_SECRET
+          value: "gihan123"
+        - name: RABBITMQ_URL
+          value: "amqp://rabbitmq:5672"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  selector:
+    app: product
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3002
+  type: NodePort
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: auth-deployment
 spec:
   replicas: 1
