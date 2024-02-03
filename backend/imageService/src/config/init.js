@@ -1,5 +1,6 @@
 import { initializeApp } from 'firebase/app';
-import config from '../config/db.js';
+
+import config from './database.js';
 
 export const initializeFirebaseApp = async () => {
   try {

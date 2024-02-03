@@ -8,9 +8,9 @@ import cors from 'cors';
 import crypto from 'crypto';
 import helmet from 'helmet';
 import { omit, pick } from 'lodash';
-import { default as connectDB } from '@/database';
 import { errorHandler, queryMapper, responseInterceptor } from '@/middleware';
 import { default as routes } from '@/routes/index.routes';
+import { initializeFirebaseApp } from './config/init';
 
 require('dotenv').config();
 
@@ -42,13 +42,13 @@ app.use(compression());
 
 app.use(cors({ origin: true, credentials: true }));
 
-app.use(express.json({ limit: '1mb' }));
+app.use(express.json({ limit: '50mb' }));
 
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('Assert'))
 
-app.get('/product-service/health', (_, res) => res.status(200).json({ message: 'Product service and Running' }));
+app.get('/image-service/health', (_, res) => res.status(200).json({ message: 'Image service and Running' }));
 
 app.use(context.middleware);
 
@@ -69,19 +69,19 @@ app.use(
 
 app.use(queryMapper);
 
-app.use('/product-service/api', routes);
+app.use('/image-service/api', routes);
 
 app.use(responseInterceptor);
 
 app.use(errorHandler);
 
-connectDB();
+initializeFirebaseApp();
 
 global.__basedir = __dirname;
 
 const port = process.env.PORT || 3000;
 app.listen(port, (err) => {
   if (!err) {
-    logger.info(`Product service successfully started on port ${port}`);
+    logger.info(`Image service successfully started on port ${port}`);
   }
 });

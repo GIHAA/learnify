@@ -11,4 +11,4 @@ RUN pnpm build
 
 CMD ["node", "dist/app.js"]
 
-EXPOSE 3002
+EXPOSE 3005
