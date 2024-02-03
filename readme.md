@@ -5,3 +5,7 @@ docker-compose build ; docker-compose up
 ### Kill process on port
 netstat -ano | findstr :<PORT>
 taskkill /F /PID <PID>
+
+ minikube start --memory 3000 --cpus 2
+
+ minikube stop

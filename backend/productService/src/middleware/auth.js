@@ -31,8 +31,6 @@ export const protect = asyncHandler(async (req, res, next) => {
 });
 
 
-
-
 export const adminProtect = asyncHandler((req) => {
   if (req.headers['x-api-key'] === process.env.API_ACCESS_KEY) return;
   if (req.user.role !== 'ADMIN') throw new createError(403, 'You are not permitted to access this resource');

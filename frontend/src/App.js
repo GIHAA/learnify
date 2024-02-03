@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import Login from "./components/Login";
+import Register from "./components/Register";
+import ForgotPassWord from "./components/ForgotPassWord";
+import Home from "./screen/Home";
+import ResetPassword from "./components/ResetPassword";
+import NotFound from "./components/common/NotFound"; // Import a NotFound component or create one
+import Test from "./components/Test";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="forgot" element={<ForgotPassWord />} />
+            <Route path="register" element={<Register />} />
+            <Route path="Home" element={<Home />} />
+            <Route path="reset-password/:token" element={<ResetPassword />} />
+            <Route path="test" element={<Test/>} />
+            <Route path="*" element={<Navigate to="/404" />} />
+          </Routes>
+        </div>
+      </Router>
+      <ToastContainer />
+    </>
   );
 }
 
