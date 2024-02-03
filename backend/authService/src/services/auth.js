@@ -51,7 +51,7 @@ export const updateVerificationStatus = async (verificationCode) => {
 
 export const authResendVerification = async (email) => {
   const user = await getOneUser({ email });
-  if (!user) throw new createError(400, 'A team by the provided email does not exist');
+  if (!user) throw new createError(400, 'User by the provided email does not exist');
   const verification_code = crypto.randomUUID();
   const updatedUser = await findOneAndUpdateUser({ email }, { verification_code });
   await verifyMailTemplate(email, verification_code);

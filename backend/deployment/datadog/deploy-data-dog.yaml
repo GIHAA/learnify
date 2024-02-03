@@ -20,5 +20,6 @@ spec:
       image:
         name: gcr.io/datadoghq/agent:latest
 
-
+# helm repo add datadog https://helm.datadoghq.com
+# helm install my-datadog-operator datadog/datadog-operator
 # kubectl create secret generic datadog-secret --from-literal api-key=668c0df4396c71e817f8827a303caee7 --from-literal app-key=ea14ba347d95996f263fd2d6440e881ffa1f05f9
