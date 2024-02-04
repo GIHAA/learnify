@@ -16,7 +16,7 @@ function App() {
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="af-project" element={<Login />} />
             <Route path="forgot" element={<ForgotPassWord />} />
             <Route path="register" element={<Register />} />
             <Route path="Home" element={<Home />} />
