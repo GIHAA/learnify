@@ -6,11 +6,10 @@ import { register, reset } from "../services/auth/authSlice";
 import registrationbackground from "../assets/registrationbackground.png";
 import { Link } from "react-router-dom";
 import axios from "axios";
+
 const Registration = () => {
   const [image, setImage] = useState();
-  const [disImage,setDisImage] = useState()
- const [urlImage,setURLimage] = useState()
-
+  const [disImage, setDisImage] = useState();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -21,7 +20,7 @@ const Registration = () => {
     image: "",
   });
 
-  const { name, email, password, password2 , phone } = formData;
+  const { name, email, password, password2, phone } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -30,108 +29,72 @@ const Registration = () => {
     (state) => state.auth
   );
 
-  const isNumberAndTenDigit = (str) => {
-    return /^\d{10}$/.test(str);
-  };
- const  addImage = async(e)=>{
-  // setImage(e.target.files[0])
-  // // setTimeout(()=>{
-  // //   disimage()
-  // // },[1000])
-  // const url =  URL.createObjectURL(image);
-  // if(image){
-  //   console.log("insed work") 
- 
-  //   setDisImage(url)
-    
-  // }
-  //    console.log(disImage)  
-  const imagetaget = e.target.files[0] //this way using can taken formdata
+  const isNumberAndTenDigit = (str) => /^\d{10}$/.test(str);
 
-  if(imagetaget){
-    setImage(imagetaget)//this way using assing data 
-    disimage(imagetaget)
-  }
- 
-  // if(image){
-  //   disimage()
-  // }
-    //const imurl =  URL.createObjectURL(image)
-   
- }
- function disimage(selectedImage){
-    const url =  URL.createObjectURL(selectedImage);
-    setDisImage(url)
-  
- }
+  const addImage = async (e) => {
+    const imageTarget = e.target.files[0];
+    if (imageTarget) {
+      setImage(imageTarget);
+      displayImage(imageTarget);
+    }
+  };
+
+  const displayImage = (selectedImage) => {
+    const url = URL.createObjectURL(selectedImage);
+    setDisImage(url);
+  };
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async(e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-               const imagedd = await imageuplodeFirebase()
-        console.log(imagedd)
-    // if (password !== password2) {
-    //   toast.error("Passwords do not match");
-    // } else {
-    //   const userData = {
-    //     name,
-    //     email,
-    //     password,
-    //     phone,
-    //     image,
-    //     role: "USER",
-    //   };
+    const uploadedImage = await uploadImageToFirebase();
+    console.log(uploadedImage);
 
-    //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (password !== password2) {
+      toast.error("Passwords do not match");
+    } else {
+      const userData = {
+        name,
+        email,
+        password,
+        phone,
+        image,
+        role: "USER",
+      };
 
-    //   if (emailRegex.test(email)) {
-    //     if (isNumberAndTenDigit(phone)) {
-    //       dispatch(register(userData));
-    //     } else toast.error("Phone number should be 10 digit number");
-    //   } else {
-    //     toast.error("The email address is invalid.");
-    //   }
-    // }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (emailRegex.test(email)) {
+        if (isNumberAndTenDigit(phone)) {
+          dispatch(register(userData));
+        } else toast.error("Phone number should be 10 digit number");
+      } else {
+        toast.error("The email address is invalid.");
+      }
+    }
   };
-   function imageuplodeFirebase(){
-     
 
-    //   const formData = new FormData()
-    //   formData.append('images',image)
-
-    // axios.post('http://localhost:8000/appimage/im/',formData).then((res)=>{
-
-    //   console.log("uploade ok ")
-    //       console.log(res.data)
-          
-    //       const downloadURL = res.data.DownloadURL;
-    //       resolve(downloadURL);
-
-    // }).catch((error)=>{
-
-    //       console.log(error);
-    // })
+  const uploadImageToFirebase = () => {
     return new Promise((resolve, reject) => {
       const formData = new FormData();
-      formData.append('images', image);
-  
-      axios.post('http://localhost:8000/appimage/im/', formData)
+      formData.append("images", image);
+
+      axios
+        .post("http://localhost:8000/appimage/im/", formData)
         .then((res) => {
-          // Handle success response
-          console.log('Upload successful:', res.data);
+          console.log("Upload successful:", res.data);
           const downloadURL = res.data.DownloadURL;
-          resolve(downloadURL);  // Resolve the Promise with the DownloadURL
+          resolve(downloadURL);
         })
         .catch((error) => {
-          // Handle error
-          console.error('Error uploading image:', error);
-          reject(error);  // Reject the Promise with the error
+          console.error("Error uploading image:", error);
+          reject(error);
         });
     });
-      
+  };
 
-   }
   useEffect(() => {
     if (isError) {
       toast.error(message);
@@ -144,18 +107,14 @@ const Registration = () => {
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  if (isLoading) {
-    return <></>;
-  }
-
   return (
     <>
       <div
         style={{ backgroundImage: `url(${registrationbackground})` }}
-        className="min-h-screen bg-cover bg-gray-100 flex flex-col justify-center "
+        className="min-h-screen bg-cover bg-gray-100 flex flex-col justify-center"
       >
-        <div className="p-10 xs:p-0 mx-auto ">
-          <div className="bg-white drop-shadow-2xl shadow  mx-auto rounded-lg divide-y divide-gray-200">
+        <div className="p-10 xs:p-0 mx-auto">
+          <div className="bg-white drop-shadow-2xl shadow mx-auto rounded-lg divide-y divide-gray-200">
             <div className="px-5 py-7">
               <h1 className="font-bold text-center text-2xl mb-5">REGISTER</h1>
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
@@ -169,6 +128,7 @@ const Registration = () => {
                 type="text"
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               />
+            
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
                 Email
               </label>
@@ -220,12 +180,11 @@ const Registration = () => {
               </label>
               <input
                 className="w-full h-full py-5 pb-8 file:rounded-full file:h-[45px] file:w-[130px] file:bg-secondary file:text-white "
-               
                 type="file"
                 name="images"
                 onChange={addImage}
               />
-                     {disImage && <img src={disImage} alt='image'  height="160px" width="165px"/>}
+              {disImage && <img src={disImage} alt="image" height="160px" width="165px" />}
               <button
                 onClick={onSubmit}
                 type="button"
@@ -247,13 +206,10 @@ const Registration = () => {
                   />
                 </svg>
               </button>
-
               <p className="text-[14px] mt-[15px] text-gray-500">
                 Already have an account?
                 <Link to="/" className="ml-1">
-                  <span className="text-secondary font-[20px]">
-                    Login now
-                  </span>
+                  <span className="text-secondary font-[20px]">Login now</span>
                 </Link>
               </p>
             </div>
@@ -280,10 +236,10 @@ const Registration = () => {
             </div>
           </div>
         </div>
-     <img src="https://firebasestorage.googleapis.com/v0/b/imageuplode-3e802.appspot.com/o/images%2Fup-1707048246033-113871002.png?alt=media&token=bb54a728-ee16-4d45-be24-7292ee83d311" />
       </div>
     </>
   );
 };
 
 export default Registration;
+
