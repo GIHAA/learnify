@@ -5,49 +5,11 @@ import { toast } from "react-toastify";
 import { register, reset } from "../services/auth/authSlice";
 import registrationbackground from "../assets/registrationbackground.png";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Registration = () => {
-  const [image, setImage] = useState("");
-
-  const convertToBase64 = (e) => {
-    console.log(e);
-    var reader = new FileReader();
-    reader.readAsDataURL(e.target.files[0]);
-    reader.onload = () => {
-      const imgElement = document.createElement("img");
-      imgElement.src = reader.result;
-      imgElement.onload = () => {
-        const canvas = document.createElement("canvas");
-        const MAX_WIDTH = 630;
-        const MAX_HEIGHT = 630;
-        let width = imgElement.width;
-        let height = imgElement.height;
-
-        if (width > height) {
-          if (width > MAX_WIDTH) {
-            height *= MAX_WIDTH / width;
-            width = MAX_WIDTH;
-          }
-        } else {
-          if (height > MAX_HEIGHT) {
-            width *= MAX_HEIGHT / height;
-            height = MAX_HEIGHT;
-          }
-        }
-        canvas.width = width;
-        canvas.height = height;
-        const ctx = canvas.getContext("2d");
-        ctx.drawImage(imgElement, 0, 0, width, height);
-        const dataURL = canvas.toDataURL(e.target.files[0].type, 0.5);
-        setImage(dataURL);
-      };
-    };
-    reader.onerror = (error) => {
-      console.log("Error: ", error);
-    };
-    setFormData({ ...formData, image: image });
-  };
-
+  const [image, setImage] = useState();
+  const [disImage, setDisImage] = useState();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -58,7 +20,7 @@ const Registration = () => {
     image: "",
   });
 
-  const { name, email, password, password2 , phone } = formData;
+  const { name, email, password, password2, phone } = formData;
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -67,14 +29,28 @@ const Registration = () => {
     (state) => state.auth
   );
 
-  const isNumberAndTenDigit = (str) => {
-    return /^\d{10}$/.test(str);
+  const isNumberAndTenDigit = (str) => /^\d{10}$/.test(str);
+
+  const addImage = async (e) => {
+    const imageTarget = e.target.files[0];
+    if (imageTarget) {
+      setImage(imageTarget);
+      displayImage(imageTarget);
+    }
+  };
+
+  const displayImage = (selectedImage) => {
+    const url = URL.createObjectURL(selectedImage);
+    setDisImage(url);
   };
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  const onSubmit = (e) => {
+
+  const onSubmit = async (e) => {
     e.preventDefault();
+    const uploadedImage = await uploadImageToFirebase();
+    console.log(uploadedImage);
 
     if (password !== password2) {
       toast.error("Passwords do not match");
@@ -100,6 +76,25 @@ const Registration = () => {
     }
   };
 
+  const uploadImageToFirebase = () => {
+    return new Promise((resolve, reject) => {
+      const formData = new FormData();
+      formData.append("images", image);
+
+      axios
+        .post("http://localhost:8000/appimage/im/", formData)
+        .then((res) => {
+          console.log("Upload successful:", res.data);
+          const downloadURL = res.data.DownloadURL;
+          resolve(downloadURL);
+        })
+        .catch((error) => {
+          console.error("Error uploading image:", error);
+          reject(error);
+        });
+    });
+  };
+
   useEffect(() => {
     if (isError) {
       toast.error(message);
@@ -112,18 +107,14 @@ const Registration = () => {
     dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  if (isLoading) {
-    return <></>;
-  }
-
   return (
     <>
       <div
         style={{ backgroundImage: `url(${registrationbackground})` }}
-        className="min-h-screen bg-cover bg-gray-100 flex flex-col justify-center "
+        className="min-h-screen bg-cover bg-gray-100 flex flex-col justify-center"
       >
-        <div className="p-10 xs:p-0 mx-auto ">
-          <div className="bg-white drop-shadow-2xl shadow  mx-auto rounded-lg divide-y divide-gray-200">
+        <div className="p-10 xs:p-0 mx-auto">
+          <div className="bg-white drop-shadow-2xl shadow mx-auto rounded-lg divide-y divide-gray-200">
             <div className="px-5 py-7">
               <h1 className="font-bold text-center text-2xl mb-5">REGISTER</h1>
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
@@ -137,6 +128,7 @@ const Registration = () => {
                 type="text"
                 className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
               />
+            
               <label className="font-semibold text-sm text-gray-600 pb-1 block">
                 Email
               </label>
@@ -188,11 +180,11 @@ const Registration = () => {
               </label>
               <input
                 className="w-full h-full py-5 pb-8 file:rounded-full file:h-[45px] file:w-[130px] file:bg-secondary file:text-white "
-                accept="image/*"
                 type="file"
-                onChange={convertToBase64}
+                name="images"
+                onChange={addImage}
               />
-
+              {disImage && <img src={disImage} alt="image" height="160px" width="165px" />}
               <button
                 onClick={onSubmit}
                 type="button"
@@ -214,13 +206,10 @@ const Registration = () => {
                   />
                 </svg>
               </button>
-
               <p className="text-[14px] mt-[15px] text-gray-500">
                 Already have an account?
                 <Link to="/" className="ml-1">
-                  <span className="text-secondary font-[20px]">
-                    Login now
-                  </span>
+                  <span className="text-secondary font-[20px]">Login now</span>
                 </Link>
               </p>
             </div>
@@ -253,3 +242,4 @@ const Registration = () => {
 };
 
 export default Registration;
+

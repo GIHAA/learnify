@@ -1,4 +1,4 @@
-import { HashRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter  as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -9,20 +9,22 @@ import Home from "./screen/Home";
 import ResetPassword from "./components/ResetPassword";
 import NotFound from "./components/common/NotFound"; // Import a NotFound component or create one
 import Test from "./components/Test";
-
-function App() {
+import Navigates from './components/Navigate'
+function 
+App() {
   return (
     <>
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="" element={<Login />} />
             <Route path="forgot" element={<ForgotPassWord />} />
             <Route path="register" element={<Register />} />
             <Route path="Home" element={<Home />} />
             <Route path="reset-password/:token" element={<ResetPassword />} />
             <Route path="test" element={<Test/>} />
-            <Route path="*" element={<Navigate to="/404" />} />
+            <Route path="*" element={<Navigates/>} />
+       
           </Routes>
         </div>
       </Router>

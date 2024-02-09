@@ -32,6 +32,17 @@ services:
     env_file:
       - ./authService/.env
 
+  image:
+    build:
+      dockerfile: Dockerfile
+      context: ./imageService
+    container_name: image-service
+    ports:
+      - "3005:3005"
+    restart: always
+    env_file:
+      - ./imageService/.env
+
   nginx-proxy:
     build:
       dockerfile: Dockerfile
