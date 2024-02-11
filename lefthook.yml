@@ -32,6 +32,4 @@
 #     "hello.js":
 #       runner: node
 #     "any.go":
-#       runner:
-
- go run
+#       runner: go run

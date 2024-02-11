@@ -1,0 +1,235 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rabbitmq-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rabbitmq
+  template:
+    metadata:
+      labels:
+        app: rabbitmq
+    spec:
+      containers:
+      - name: rabbitmq
+        image: rabbitmq:alpine
+        ports:
+        - containerPort: 5672
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+  - protocol: TCP
+    port: 5672
+    targetPort: 5672
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product
+  template:
+    metadata:
+      labels:
+        app: product
+    spec:
+      containers:
+      - name: product
+        image: gihaa/ds-project-product
+        ports:
+        - containerPort: 3002
+        env:
+        - name: PORT
+          value: "3002"
+        - name: MONGO_URI
+          value: "mongodb+srv://af123:af123@af0.etrzu5q.mongodb.net/?retryWrites=true&w=majority"
+        - name: JWT_EXPIRE
+          value: "360000"
+        - name: JWT_REFRESH_EXPIRE
+          value: "30"
+        - name: JWT_SECRET
+          value: "gihan123"
+        - name: RABBITMQ_URL
+          value: "amqp://rabbitmq:5672"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  selector:
+    app: product
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3002
+  type: NodePort
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: image-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: image
+  template:
+    metadata:
+      labels:
+        app: image
+    spec:
+      containers:
+      - name: image
+        image: gihaa/ds-project-image
+        ports:
+        - containerPort: 3005
+        env:
+        - name: PORT
+          value: "3002"
+        - name: MONGO_URI
+          value: "mongodb+srv://af123:af123@af0.etrzu5q.mongodb.net/?retryWrites=true&w=majority"
+        - name: JWT_EXPIRE
+          value: "360000"
+        - name: JWT_REFRESH_EXPIRE
+          value: "30"
+        - name: JWT_SECRET
+          value: "gihan123"
+        - name: RABBITMQ_URL
+          value: "amqp://rabbitmq:5672"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-service
+spec:
+  selector:
+    app: product
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3002
+  type: NodePort
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+      - name: auth
+        image: gihaa/ds-project-auth
+        ports:
+        - containerPort: 3001
+        env:
+        - name: MONGO_URI
+          value: "mongodb+srv://af123:af123@af0.etrzu5q.mongodb.net/?retryWrites=true&w=majority"
+        - name: JWT_EXPIRE
+          value: "360000"
+        - name: JWT_REFRESH_EXPIRE
+          value: "30"
+        - name: JWT_SECRET
+          value: "gihan123"
+        - name: MAIL_HOST
+          value: "smtp.gmail.com"
+        - name: MAIL_USER
+          value: "spmsneakerhub@gmail.com"
+        - name: MAIL_PASSWORD
+          value: "bzuvzlqqqvztpmke"
+        - name: APP_DOMAIN
+          value: "http://localhost:3001"
+        - name: FRONTEND_DOMAIN
+          value: "http://localhost:3000"
+        - name: ADMIN_FRONTEND_DOMAIN
+          value: "http://localhost:3000"
+        - name: RABBITMQ_URL
+          value: "amqp://rabbitmq:5672"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-service
+spec:
+  selector:
+    app: auth
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3001
+  type: NodePort
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-proxy-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-proxy
+  template:
+    metadata:
+      labels:
+        app: nginx-proxy
+    spec:
+      containers:
+      - name: nginx-proxy
+        image: gihaa/ds-project-nginx-proxy
+        ports:
+        - containerPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-proxy-service
+spec:
+  selector:
+    app: nginx-proxy
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: NodePort
+
+
+
+# kubectl apply -f deployment.yaml
+# kubectl delete -f deployment.yaml
