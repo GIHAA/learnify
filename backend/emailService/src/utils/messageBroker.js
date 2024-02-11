@@ -1,15 +1,17 @@
 import { moduleLogger } from '@sliit-foss/module-logger';
 import { RABBIMQ_CONFIG } from './config';
+import sendEmail from '@/service/email';
+
 const amqp = require('amqplib');
 
 const logger = moduleLogger('RabbitMQ');
 let connection;
 
-export async function consumeUserValidationMessages() {
+export async function consumeEmailRequestMessages() {
   try {
     connection = await connectToRabbitMQ();
     const channel = await connection.createChannel();
-    const queue = RABBIMQ_CONFIG.USER_VALIDATION_QUEUE || 'user_validation_queue';
+    const queue = RABBIMQ_CONFIG.EMAIL_REQUEST_QUEUE || 'email_request_queue';
 
     logger.info('RabbitMQ connection successful');
     // Ensure the queue exists before consuming
@@ -17,20 +19,21 @@ export async function consumeUserValidationMessages() {
 
     channel.consume(queue, (message) => {
       try {
-        const userDetails = JSON.parse(message.content.toString());
+        const emaiDetails = JSON.parse(message.content.toString());
+        // console.log(message.content.toString());
+        // console.log(emaiDetails);
 
-        logger.info(`Received message from User Service: ${JSON.stringify(userDetails)}`);
+        logger.info(`Email request recieved: `);
+
         // Validate user logic here
-        const userValidated = validateUser(userDetails);
-
-        logger.info(`Sending validation response: ${JSON.stringify(userValidated)}`);
-
-        // Respond to the Product Service
-        channel.sendToQueue(message.properties.replyTo, Buffer.from(JSON.stringify({ userValidated })), {
-          correlationId: message.properties.correlationId
-        });
-
+        const emailSent = sendEmail(emaiDetails);
+        
+       if(emailSent){
         channel.ack(message);
+       }
+          
+      
+
       } catch (error) {
         logger.error('Error consuming message:', error);
         // Optionally, you can nack or handle the error accordingly
@@ -39,7 +42,7 @@ export async function consumeUserValidationMessages() {
   } catch (error) {
     logger.error('Error setting up RabbitMQ connection:', error);
     // Attempt to reconnect after a delay
-    setTimeout(consumeUserValidationMessages, 5000); // Reconnect after 5 seconds
+    setTimeout(consumeEmailRequestMessages, 5000); // Reconnect after 5 seconds
   }
 }
 
@@ -51,9 +54,3 @@ const connectToRabbitMQ = async () => {
   }
 };
 
-const validateUser = (userDetails) => {
-  // Replace this with your actual validation logic
-  // Here, we preserve the original validation status
-  const newUserDetails = { ...userDetails, valid: true };
-  return newUserDetails;
-}

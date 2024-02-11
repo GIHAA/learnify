@@ -8,6 +8,7 @@ import cors from 'cors';
 import crypto from 'crypto';
 import helmet from 'helmet';
 import { omit, pick } from 'lodash';
+import { consumeEmailRequestMessages } from './utils/messageBroker';
 
 
 require('dotenv').config();
@@ -64,6 +65,8 @@ app.use(
 
 
 global.__basedir = __dirname;
+
+consumeEmailRequestMessages();
 
 const port = process.env.PORT || 3000;
 app.listen(port, (err) => {

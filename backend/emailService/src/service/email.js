@@ -1,37 +1,47 @@
 const nodemailer = require("nodemailer");
-const dotenv = require("dotenv"); // Use require for CommonJS module
 
-dotenv.config(); // Load environment variables from .env file
+// const transporter = nodemailer.createTransport({
+//     host: process.env.MAIL_HOST,
+//     port: 465,
+//     secure: false,
+//     auth: {
+//       user: process.env.EMAIL_USER, // Use environment variable for user
+//       pass: process.env.EMAIL_PASS // Use environment variable for password
+//     },
+//   });
+
 
 const transporter = nodemailer.createTransport({
-    host: process.env.MAIL_HOST,
-    port: 465,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER, // Use environment variable for user
-      pass: process.env.EMAIL_PASS // Use environment variable for password
-    },
-  });
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: "spmsneakerhub@gmail.com", 
+    pass: "bzuvzlqqqvztpmke" 
+  },
+});
 
-// async..await is not allowed in global scope, must use a wrapper
-async function sendEmail() {
-  // send mail with defined transport object
+async function sendEmail(emailDetails) {
+
+  console.log(emailDetails.to)
+  console.log(emailDetails.subject)
+  console.log(emailDetails.text)
+
   const info = await transporter.sendMail({
-    from: process.env.EMAIL_USER , // sender address
-    to: "bar@example.com", // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
+    from: process.env.EMAIL_USER, // sender address
+    to: emailDetails.to, // list of receivers
+    subject: emailDetails.subject, // Subject line
+    text: emailDetails.text, // plain text body
   });
+ 
 
   console.log("Message sent: %s", info.messageId);
-  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-
-  //
-  // NOTE: You can go to https://forwardemail.net/my-account/emails to see your email delivery status and preview
-  //       Or you can use the "preview-email" npm package to preview emails locally in browsers and iOS Simulator
-  //       <https://github.com/forwardemail/preview-email>
-  //
+ 
+    return true;
+  
 }
 
-sendEmail().catch(console.error);
+
+// Export the sendEmail function
+module.exports = sendEmail;
+
