@@ -105,9 +105,7 @@ spec:
         - containerPort: 3005
         env:
         - name: PORT
-          value: "3002"
-        - name: MONGO_URI
-          value: "mongodb+srv://af123:af123@af0.etrzu5q.mongodb.net/?retryWrites=true&w=majority"
+          value: "3005"
         - name: JWT_EXPIRE
           value: "360000"
         - name: JWT_REFRESH_EXPIRE
@@ -116,20 +114,35 @@ spec:
           value: "gihan123"
         - name: RABBITMQ_URL
           value: "amqp://rabbitmq:5672"
+        - name: API_KEY
+          value: "AIzaSyD5O27PfzVM4RHQjFXSEwysbMPLFN55rcE"  
+        - name: AUTH_DOMAIN
+          value: "ds-project-53aa8.firebaseapp.com"
+        - name: PROJECT_ID
+          value: "ds-project-53aa8"  
+        - name: STORAGE_BUKET
+          value: "ds-project-53aa8.appspot.com"           
+        - name: MASSAGE_CONF_id
+          value: "805074147839"  
+        - name: APP_ID
+          value: "1:805074147839:web:4d0dbea5c04dffbf04efca"  
+        - name: MESURMENT_ID
+          value: "G-ZY9MC3W124"  
+
 
 ---
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: product-service
+  name: image-service
 spec:
   selector:
-    app: product
+    app: image
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 3002
+    targetPort: 3005
   type: NodePort
 
 ---

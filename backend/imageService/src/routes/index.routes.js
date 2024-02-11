@@ -4,6 +4,6 @@ import productRouter from './image.routes';
 
 const router = express.Router();
 
-router.use('/user-images', protect ,  productRouter);
+router.use('/user-images', productRouter);
 
 export default router;
