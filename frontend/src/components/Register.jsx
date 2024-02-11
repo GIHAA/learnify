@@ -61,6 +61,7 @@ const Registration = () => {
         password,
         phone,
         image,
+        uploadedImage,
         role: "USER",
       };
 
