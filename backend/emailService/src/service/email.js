@@ -1,47 +1,34 @@
-const nodemailer = require("nodemailer");
+const { moduleLogger } = require('@sliit-foss/module-logger');
+const nodemailer = require('nodemailer');
 
-// const transporter = nodemailer.createTransport({
-//     host: process.env.MAIL_HOST,
-//     port: 465,
-//     secure: false,
-//     auth: {
-//       user: process.env.EMAIL_USER, // Use environment variable for user
-//       pass: process.env.EMAIL_PASS // Use environment variable for password
-//     },
-//   });
-
+const logger = moduleLogger("email-service");
 
 const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false,
+  host: process.env.MAIL_HOST,
+  port: 465,
+  secure: true,
   auth: {
-    user: "spmsneakerhub@gmail.com", 
-    pass: "bzuvzlqqqvztpmke" 
-  },
+    user: process.env.EMAIL_USER, 
+    pass: process.env.EMAIL_PASS 
+  }
 });
 
 async function sendEmail(emailDetails) {
+  try {
+    const info = await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: emailDetails.to,
+      subject: emailDetails.subject,
+      text: emailDetails.text
+    });
 
-  console.log(emailDetails.to)
-  console.log(emailDetails.subject)
-  console.log(emailDetails.text)
-
-  const info = await transporter.sendMail({
-    from: process.env.EMAIL_USER, // sender address
-    to: emailDetails.to, // list of receivers
-    subject: emailDetails.subject, // Subject line
-    text: emailDetails.text, // plain text body
-  });
- 
-
-  console.log("Message sent: %s", info.messageId);
- 
+    logger.info(`Message sent to: ${emailDetails.to}`);
     return true;
-  
+  } catch (error) {
+    logger.error(`Error sending email to ${emailDetails.to}: ${error.message}`);
+    return false;
+  }
 }
 
 
-// Export the sendEmail function
 module.exports = sendEmail;
-
