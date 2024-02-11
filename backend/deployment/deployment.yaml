@@ -98,22 +98,20 @@ spec:
         - secretRef:
             name: image-secret
 
-           
-
 ---
 
 
 apiVersion: v1
 kind: Service
 metadata:
-  name: product-service
+  name: image-service
 spec:
   selector:
-    app: product
+    app: image
   ports:
   - protocol: TCP
     port: 80
-    targetPort: 3002
+    targetPort: 3005
   type: NodePort
 
 ---
@@ -141,7 +139,6 @@ spec:
          - secretRef:
               name: auth-secret
         
-
 ---
 
 apiVersion: v1

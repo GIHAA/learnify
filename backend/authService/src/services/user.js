@@ -7,7 +7,6 @@ export const getUsers = (query) => getAllUsers(query);
 
 export const getUserByID = async (id) => {
   const user = await getOneUser({ _id: id });
-  console.log(user.role)
   if (!user) throw new createError(404, 'Invalid user ID');
   return user;
 };
