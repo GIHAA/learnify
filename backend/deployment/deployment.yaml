@@ -159,6 +159,46 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: email-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: email
+  template:
+    metadata:
+      labels:
+        app: email
+    spec:
+      containers:
+      - name: email
+        image: gihaa/ds-project-email
+        ports:
+        - containerPort: 3003
+        envFrom:
+        - secretRef:
+            name: email-secret
+
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  name: email-service
+spec:
+  selector:
+    app: email
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 3003
+  type: NodePort
+
+--- 
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: nginx-proxy-deployment
 spec:
   replicas: 1
