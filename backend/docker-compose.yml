@@ -43,6 +43,17 @@ services:
     env_file:
       - ./imageService/.env
 
+  email:
+    build:
+      dockerfile: Dockerfile
+      context: ./emailService
+    container_name: email-service
+    ports:
+      - "3003:3003"
+    restart: always
+    env_file:
+      - ./emailService/.env
+
   nginx-proxy:
     build:
       dockerfile: Dockerfile
