@@ -1,6 +1,17 @@
 import mongoose from 'mongoose';
 import aggregatePaginate from 'mongoose-aggregate-paginate-v2';
 
+const CartSchema = new mongoose.Schema({
+  items: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }],
+  total: {
+    type: Number,
+    default: 0
+  }
+});
+
 const UserSchema = new mongoose.Schema(
   {
     name: {
@@ -34,9 +45,13 @@ const UserSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ['ADMIN', 'GROUP'],
-      default: 'GROUP'
+      enum: ['ADMIN', 'USER'],
+      default: 'USER'
     },
+    cart: {
+      type: CartSchema,
+      default: {}
+    }
   },
   {
     versionKey: '__v',
