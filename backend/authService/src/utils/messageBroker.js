@@ -9,10 +9,9 @@ export async function consumeUserValidationMessages() {
   try {
     connection = await connectToRabbitMQ();
     const channel = await connection.createChannel();
-    const queue = RABBIMQ_CONFIG.USER_VALIDATION_QUEUE || 'user_validation_queue';
+    const queue = RABBIMQ_CONFIG.USER_VALIDATION_QUEUE || 'feedback_validation_queue';
 
     logger.info('RabbitMQ connection successful');
-    // Ensure the queue exists before consuming
     await channel.assertQueue(queue, { durable: true });
 
     channel.consume(queue, (message) => {
@@ -20,12 +19,10 @@ export async function consumeUserValidationMessages() {
         const userDetails = JSON.parse(message.content.toString());
 
         logger.info(`Received message from User Service: ${JSON.stringify(userDetails)}`);
-        // Validate user logic here
         const userValidated = validateUser(userDetails);
 
         logger.info(`Sending validation response: ${JSON.stringify(userValidated)}`);
 
-        // Respond to the Product Service
         channel.sendToQueue(message.properties.replyTo, Buffer.from(JSON.stringify({ userValidated })), {
           correlationId: message.properties.correlationId
         });
@@ -33,13 +30,11 @@ export async function consumeUserValidationMessages() {
         channel.ack(message);
       } catch (error) {
         logger.error('Error consuming message:', error);
-        // Optionally, you can nack or handle the error accordingly
       }
     });
   } catch (error) {
     logger.error('Error setting up RabbitMQ connection:', error);
-    // Attempt to reconnect after a delay
-    setTimeout(consumeUserValidationMessages, 5000); // Reconnect after 5 seconds
+    setTimeout(consumeUserValidationMessages, 5000);
   }
 }
 
@@ -52,8 +47,8 @@ const connectToRabbitMQ = async () => {
 };
 
 const validateUser = (userDetails) => {
-  // Replace this with your actual validation logic
-  // Here, we preserve the original validation status
+  // Todo
+  console.log('Validating user:', userDetails)
   const newUserDetails = { ...userDetails, valid: true };
   return newUserDetails;
 }
