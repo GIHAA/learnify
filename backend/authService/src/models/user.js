@@ -1,18 +1,6 @@
 import mongoose from 'mongoose';
 import aggregatePaginate from 'mongoose-aggregate-paginate-v2';
 
-const CartItemSchema = new mongoose.Schema({
-  productId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Product',
-    required: true
-  },
-  quantity: {
-    type: Number,
-    default: 1
-  }
-});
-
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -29,7 +17,16 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 8
   },
-  cart: [CartItemSchema],
+  cart: [{
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true
+    },
+    quantity: {
+      type: Number,
+      default: 1
+    }
+  }],
   is_verified: {
     type: Boolean,
     default: false
