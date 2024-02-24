@@ -24,6 +24,20 @@ spec:
                 name: product-service
                 port:
                   number: 80
+          - path: /image-service
+            pathType: Prefix
+            backend:
+              service:
+                name: image-service
+                port:
+                  number: 80
+          - path: /email-service
+            pathType: Prefix
+            backend:
+              service:
+                name: email-service
+                port:
+                  number: 80
 
 # kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/cloud/deploy.yaml
 # minikube tunnel

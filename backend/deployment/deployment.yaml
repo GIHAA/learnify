@@ -13,13 +13,12 @@ spec:
         app: rabbitmq
     spec:
       containers:
-      - name: rabbitmq
-        image: rabbitmq:alpine
-        ports:
-        - containerPort: 5672
+        - name: rabbitmq
+          image: rabbitmq:alpine
+          ports:
+            - containerPort: 5672
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -28,12 +27,11 @@ spec:
   selector:
     app: rabbitmq
   ports:
-  - protocol: TCP
-    port: 5672
-    targetPort: 5672
+    - protocol: TCP
+      port: 5672
+      targetPort: 5672
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -49,17 +47,15 @@ spec:
         app: product
     spec:
       containers:
-      - name: product
-        image: gihaa/ds-project-product
-        ports:
-        - containerPort: 3002
-        envFrom:
-        - secretRef:
-            name: product-secret
-
+        - name: product
+          image: gihaa/ds-project-product
+          ports:
+            - containerPort: 3002
+          envFrom:
+            - secretRef:
+                name: product-secret
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -68,13 +64,12 @@ spec:
   selector:
     app: product
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 3002
-  type: NodePort
+    - protocol: TCP
+      port: 80
+      targetPort: 3002
+  type: ClusterIP
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -90,17 +85,15 @@ spec:
         app: image
     spec:
       containers:
-      - name: image
-        image: gihaa/ds-project-image
-        ports:
-        - containerPort: 3005
-        envFrom:
-        - secretRef:
-            name: image-secret
+        - name: image
+          image: gihaa/ds-project-image
+          ports:
+            - containerPort: 3005
+          envFrom:
+            - secretRef:
+                name: image-secret
 
 ---
-
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -109,13 +102,12 @@ spec:
   selector:
     app: image
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 3005
-  type: NodePort
+    - protocol: TCP
+      port: 80
+      targetPort: 3005
+  type: ClusterIP
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -131,16 +123,15 @@ spec:
         app: auth
     spec:
       containers:
-      - name: auth
-        image: gihaa/ds-project-auth
-        ports:
-        - containerPort: 3001
-        envFrom:
-         - secretRef:
-              name: auth-secret
-        
----
+        - name: auth
+          image: gihaa/ds-project-auth
+          ports:
+            - containerPort: 3001
+          envFrom:
+            - secretRef:
+                name: auth-secret
 
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -149,13 +140,12 @@ spec:
   selector:
     app: auth
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 3001
-  type: NodePort
+    - protocol: TCP
+      port: 80
+      targetPort: 3001
+  type: ClusterIP
 
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -171,15 +161,15 @@ spec:
         app: email
     spec:
       containers:
-      - name: email
-        image: gihaa/ds-project-email
-        ports:
-        - containerPort: 3003
-        envFrom:
-        - secretRef:
-            name: email-secret
+        - name: email
+          image: gihaa/ds-project-email
+          ports:
+            - containerPort: 3003
+          envFrom:
+            - secretRef:
+                name: email-secret
 
---- 
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -188,14 +178,12 @@ spec:
   selector:
     app: email
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 3003
-  type: NodePort
+    - protocol: TCP
+      port: 80
+      targetPort: 3003
+  type: ClusterIP
 
---- 
-
-
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -211,13 +199,12 @@ spec:
         app: nginx-proxy
     spec:
       containers:
-      - name: nginx-proxy
-        image: gihaa/ds-project-nginx-proxy
-        ports:
-        - containerPort: 80
+        - name: nginx-proxy
+          image: gihaa/ds-project-nginx-proxy
+          ports:
+            - containerPort: 80
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:
@@ -226,12 +213,9 @@ spec:
   selector:
     app: nginx-proxy
   ports:
-  - protocol: TCP
-    port: 80
-    targetPort: 80
-  type: NodePort
-
-
-
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: ClusterIP
 # kubectl apply -f deployment.yaml
 # kubectl delete -f deployment.yaml
