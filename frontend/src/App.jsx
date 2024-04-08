@@ -1,21 +1,38 @@
-import React from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Login from './pages/Login';
-import Admin from './pages/Admin'
-import Home from './pages/Home'
+import React from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import AuthProvider from './components/AuthProvider';
+import Admin from './pages/Admin';
+import Home from './pages/Home';
+import ProtectedRoute from './components/ProtectedRoute';
+import SignIn from './pages/SignIn';
+//import SignIn from './pages/SignIn';
 
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <SignIn />,
+  },
+  {
+    path: '/admin',
+    element: <ProtectedRoute component={Admin} />,
+  },
+  {
+    path: '/home',
+    element: <ProtectedRoute component={Home} />,
+  },
+  {
+    path: '*',
+    element: <div>404</div>,
+  }
+]);
 
-function App() {
+const App = () => {
   return (
-    <>
-     <Routes>
-     <Route path="/" element={<Login />} />
-      <Route path="admin" element={<Admin />} />
-      <Route path="home" element={<Home />} />
-      {/* <Route path="*" element={<NoMatch />} /> */}
-     </Routes>
-    </>
-  )
-}
+    <AuthProvider >
+     <RouterProvider router={router} />
+    </AuthProvider>
+  );
+};
 
-export default App
+export default App;
+
