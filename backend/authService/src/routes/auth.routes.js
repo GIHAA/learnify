@@ -28,8 +28,8 @@ import {
 const auth = express.Router();
 
 const verifyEmailLimiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 1 minute
-  max: 2, // 2 requests per 1 minute allowed
+  windowMs: 1 * 60 * 1000, 
+  max: 2, 
   standardHeaders: true,
   legacyHeaders: false
 });
