@@ -1,7 +1,7 @@
-import { addProductnew ,getProduct,getProductbtID,updatProduct,deleteProduct,findImage } from '@/services/product';
+import { addProductnew ,getProduct,getProductbtID,updatProduct,deleteProduct  } from '@/services/product';
 import { makeResponse } from '@/utils/response';
 
-export const addorder = async (req, res) => {
+export const addProduct = async (req, res) => {
   const ProducateData = req.body;
   const order = await addProductnew(ProducateData);
   return makeResponse({ res, data: order, message: 'product added successfully' });
