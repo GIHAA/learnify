@@ -18,25 +18,17 @@ const UserSchema = new mongoose.Schema(
       required: true,
       minlength: 8
     },
-    verification_code: {
-      type: String
-    },
-    is_verified: {
-      type: Boolean,
-      default: false
-    },
-    is_active: {
-      type: Boolean,
-      default: true
-    },
-    photo_url: {
-      type: String
-    },
     role: {
       type: String,
-      enum: ['ADMIN', 'GROUP'],
-      default: 'GROUP'
+      enum: ['ADMIN', 'LEARNER','INSTRUCTOR'],
+      default: 'LEARNER'
     },
+    enrolledCourses: {
+      type: String,
+      default: false
+    },
+  
+    
   },
   {
     versionKey: '__v',

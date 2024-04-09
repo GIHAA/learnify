@@ -27,6 +27,6 @@ users.patch(
   tracedAsyncHandler(update)
 );
 users.delete('/:id', adminProtect, tracedAsyncHandler(remove));
-users.delete('/me/:id', protect, tracedAsyncHandler(remove));
+users.delete('/me/:id', tracedAsyncHandler(remove));
 
 export default users;
