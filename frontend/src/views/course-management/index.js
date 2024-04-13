@@ -1,20 +1,46 @@
 // material-ui
-import { Typography } from '@mui/material';
+import styled from '@emotion/styled';
+import Grid from '@mui/material/Grid'; // Import Grid component from Material-UI
+import SearchSection from 'layout/MainLayout/Header/SearchSection';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
+import BasicCard from 'ui-component/cards/BasicCard';
 
-// ==============================|| SAMPLE PAGE ||============================== //
+const MainCardStyle = styled(MainCard)(() => ({
+  '& .MuiCardHeader-root': {
+    paddingLeft: '38px',
+  },
+}));
 
 const CourseManagementPage = () => (
-  <MainCard title="Course Management">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>
+  <MainCardStyle title="Course Management">
+    <SearchSection />
+    {/* Grid container for the cards */}
+    <Grid container spacing={2}>
+      {/* Grid items for individual cards */}
+      <Grid item xs={12} sm={6} md={4} lg={3}>
+        <BasicCard imageUrl={"https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs"} title={"test"} price={1000}/>
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3}>
+        <BasicCard imageUrl={"https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs"} title={"test"} price={1000}/>
+      </Grid>
+
+      <Grid item xs={12} sm={6} md={4} lg={3}>
+        <BasicCard imageUrl={"https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs"} title={"test"} price={1000}/>
+      </Grid>
+
+
+      <Grid item xs={12} sm={6} md={4} lg={3}>
+        <BasicCard imageUrl={"https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs"} title={"test"} price={1000}/>
+      </Grid>
+
+
+      
+      {/* Add more Grid items for additional cards */}
+    </Grid>
+  </MainCardStyle>
 );
 
 export default CourseManagementPage;
