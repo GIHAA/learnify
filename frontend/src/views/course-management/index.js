@@ -6,6 +6,7 @@ import SearchSection from 'layout/MainLayout/Header/SearchSection';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import BasicCard from 'ui-component/cards/BasicCard';
+import { Pagination } from '@mui/material';
 
 const MainCardStyle = styled(MainCard)(() => ({
   '& .MuiCardHeader-root': {
@@ -37,13 +38,12 @@ const CourseManagementPage = () => (
 
 
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <BasicCard imageUrl={"https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs"} title={"test"} price={1000}/>
+        <BasicCard imageUrl={"https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs"} title={"Test"} price={1000}/>
       </Grid>
-
-
-      
-      {/* Add more Grid items for additional cards */}
     </Grid>
+    <div className='mt-[40px]' >
+          <Pagination count={10} color="primary" />
+    </div>
   </MainCardStyle>
 );
 
