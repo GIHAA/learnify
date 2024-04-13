@@ -2,7 +2,7 @@
   "name": "berry-free-material-react-cra",
   "version": "3.4.2",
   "private": true,
-  "homepage": "https://berrydashboard.io/admin",
+  "homepage": "https://ds-project-q1aqfny8i-gihaas-projects.vercel.app/admin",
   "dependencies": {
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.3",
