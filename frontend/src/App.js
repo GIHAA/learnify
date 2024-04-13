@@ -1,36 +1,32 @@
-import { HashRouter  as Router, Routes, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from 'react-redux';
 
-import Login from "./components/Login";
-import Register from "./components/Register";
-import ForgotPassWord from "./components/ForgotPassWord";
-import Home from "./screen/Home";
-import ResetPassword from "./components/ResetPassword";
-import NotFound from "./components/common/NotFound"; // Import a NotFound component or create one
-import Test from "./components/Test";
-import Navigates from './components/Navigate'
-function 
-App() {
+import { ThemeProvider } from '@mui/material/styles';
+import { CssBaseline, StyledEngineProvider } from '@mui/material';
+
+// routing
+import Routes from 'routes';
+
+// defaultTheme
+import themes from 'themes';
+
+// project imports
+import NavigationScroll from 'layout/NavigationScroll';
+
+// ==============================|| APP ||============================== //
+
+const App = () => {
+  const customization = useSelector((state) => state.customization);
+
   return (
-    <>
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route path="" element={<Login />} />
-            <Route path="forgot" element={<ForgotPassWord />} />
-            <Route path="register" element={<Register />} />
-            <Route path="Home" element={<Home />} />
-            <Route path="reset-password/:token" element={<ResetPassword />} />
-            <Route path="test" element={<Test/>} />
-            <Route path="*" element={<Navigates/>} />
-       
-          </Routes>
-        </div>
-      </Router>
-      <ToastContainer />
-    </>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={themes(customization)}>
+        <CssBaseline />
+        <NavigationScroll>
+          <Routes />
+        </NavigationScroll>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
-}
+};
 
 export default App;

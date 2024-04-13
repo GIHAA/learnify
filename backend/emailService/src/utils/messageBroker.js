@@ -25,9 +25,6 @@ export async function consumeEmailRequestMessages() {
        if(emailSent){
         channel.ack(message);
        }
-          
-      
-
       } catch (error) {
         logger.error('Error consuming message:', error);
       }
