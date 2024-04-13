@@ -84,8 +84,12 @@ const MainRoutes = {
     {
       path: 'sample-page',
       element: <SamplePage />
-    }
-  ]
+    },
+    {
+      path: '*',
+      element: <div>4004</div>
+    },
+  ],
 };
 
 export default MainRoutes;
