@@ -5,10 +5,16 @@ import Loader from './Loader';
 
 // ==============================|| LOADABLE - LAZY LOADING ||============================== //
 
-const Loadable = (Component) => (props) => (
-  <Suspense fallback={<Loader />}>
-    <Component {...props} />
-  </Suspense>
-);
+const Loadable = (Component) => {
+  const LoadableComponent = (props) => (
+    <Suspense fallback={<Loader />}>
+      <Component {...props} />
+    </Suspense>
+  );
+
+  LoadableComponent.displayName = `Loadable(${Component.displayName || Component.name || 'Component'})`;
+
+  return LoadableComponent;
+};
 
 export default Loadable;

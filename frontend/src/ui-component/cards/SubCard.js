@@ -48,6 +48,8 @@ const SubCard = forwardRef(({ children, content, contentClass, darkTitle, second
   );
 });
 
+SubCard.displayName = 'SubCard';
+
 SubCard.propTypes = {
   children: PropTypes.node,
   content: PropTypes.bool,

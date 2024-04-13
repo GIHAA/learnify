@@ -71,6 +71,8 @@ const AnimateButton = forwardRef(({ children, type, direction, offset, scale }, 
   }
 });
 
+AnimateButton.displayName = 'AnimateButton';
+
 AnimateButton.propTypes = {
   children: PropTypes.node,
   offset: PropTypes.number,
