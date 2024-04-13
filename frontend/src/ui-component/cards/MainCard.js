@@ -3,7 +3,7 @@ import { forwardRef } from 'react';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
+import { Button, Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
 
 // constant
 const headerSX = {
@@ -26,6 +26,8 @@ const MainCard = forwardRef(
       shadow,
       sx = {},
       title,
+      onClick , 
+      buttonText,
       ...others
     },
     ref
@@ -33,32 +35,45 @@ const MainCard = forwardRef(
     const theme = useTheme();
 
     return (
-      <Card
-        ref={ref}
-        {...others}
-        sx={{
-          border: border ? '1px solid' : 'none',
-          borderColor: theme.palette.primary[200] + 25,
-          ':hover': {
-            boxShadow: boxShadow ? shadow || '0 2px 14px 0 rgb(32 40 45 / 8%)' : 'inherit'
-          },
-          ...sx
-        }}
-      >
-        {/* card header and action */}
-        {title && <CardHeader sx={headerSX} title={darkTitle ? <Typography variant="h3">{title}</Typography> : title} action={secondary} />}
+      <div>
+        <Card
+          ref={ref}
+          {...others}
+          sx={{
+            border: border ? '1px solid' : 'none',
+            borderColor: theme.palette.primary[200] + 25,
+            ':hover': {
+              boxShadow: boxShadow ? shadow || '0 2px 14px 0 rgb(32 40 45 / 8%)' : 'inherit'
+            },
+            ...sx
+          }}
+        >
+          {/* card header and action */}
+          {title && (
+            <CardHeader
+              sx={{ ...headerSX, display: 'inline-flex' }}
+              title={darkTitle ? <Typography variant="h3">{title}</Typography> : title}
+              action={secondary}
+            />
+          )}
+          {onClick && (
+            <Button variant="contained" color="primary" onClick={onClick}>
+              {buttonText}
+            </Button>
+          
+          )}
+          {/* content & header divider */}
+          {title && <Divider />}
 
-        {/* content & header divider */}
-        {title && <Divider />}
-
-        {/* card content */}
-        {content && (
-          <CardContent sx={contentSX} className={contentClass}>
-            {children}
-          </CardContent>
-        )}
-        {!content && children}
-      </Card>
+          {/* card content */}
+          {content && (
+            <CardContent sx={contentSX} className={contentClass}>
+              {children}
+            </CardContent>
+          )}
+          {!content && children}
+        </Card>
+      </div>
     );
   }
 );
@@ -66,6 +81,8 @@ const MainCard = forwardRef(
 MainCard.displayName = 'MainCard';
 
 MainCard.propTypes = {
+  onClick: PropTypes.func,
+  buttonText: PropTypes.string,
   border: PropTypes.bool,
   boxShadow: PropTypes.bool,
   children: PropTypes.node,

@@ -12,7 +12,9 @@ export default function BasicCard({ imageUrl, title, price }) {
         border: "1px solid #e0e0e0",
         boxShadow: "0 0 10px 0 rgba(0,0,0,0.1)",
         margin: "12px"
-    }}>
+    }}
+    >
+    
       <CardMedia
         component="img"
         height="140"

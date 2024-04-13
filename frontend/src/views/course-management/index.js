@@ -13,8 +13,12 @@ const MainCardStyle = styled(MainCard)(() => ({
   },
 }));
 
+const onClick = () => {
+  //add course
+}
+
 const CourseManagementPage = () => (
-  <MainCardStyle title="Course Management">
+  <MainCardStyle title="Course Management" onClick={onClick} buttonText={"Add Course"}>
     <SearchSection />
     {/* Grid container for the cards */}
     <Grid container spacing={2}>
