@@ -33,6 +33,10 @@ const MainRoutes = {
         {
           path: 'default',
           element: <DashboardDefault />
+        },
+        {
+          path: 'course-management',
+          element: <SamplePage />
         }
       ]
     },
