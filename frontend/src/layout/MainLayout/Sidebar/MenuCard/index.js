@@ -3,21 +3,21 @@ import PropTypes from 'prop-types';
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';
 import {
-  Avatar,
+  //Avatar,
   Card,
   CardContent,
   Grid,
   LinearProgress,
   List,
   ListItem,
-  ListItemAvatar,
-  ListItemText,
+  //ListItemAvatar,
+  //ListItemText,
   Typography,
   linearProgressClasses
 } from '@mui/material';
 
 // assets
-import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
+//import TableChartOutlinedIcon from '@mui/icons-material/TableChartOutlined';
 
 // styles
 const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
@@ -82,14 +82,14 @@ LinearProgressWithLabel.propTypes = {
 // ==============================|| SIDEBAR MENU Card ||============================== //
 
 const MenuCard = () => {
-  const theme = useTheme();
+  //const theme = useTheme();
 
   return (
     <CardStyle>
       <CardContent sx={{ p: 2 }}>
         <List sx={{ p: 0, m: 0 }}>
           <ListItem alignItems="flex-start" disableGutters sx={{ p: 0 }}>
-            <ListItemAvatar sx={{ mt: 0 }}>
+            {/* <ListItemAvatar sx={{ mt: 0 }}>
               <Avatar
                 variant="rounded"
                 sx={{
@@ -104,8 +104,8 @@ const MenuCard = () => {
               >
                 <TableChartOutlinedIcon fontSize="inherit" />
               </Avatar>
-            </ListItemAvatar>
-            <ListItemText
+            </ListItemAvatar> */}
+            {/* <ListItemText
               sx={{ mt: 0 }}
               primary={
                 <Typography variant="subtitle1" sx={{ color: theme.palette.primary[800] }}>
@@ -113,7 +113,7 @@ const MenuCard = () => {
                 </Typography>
               }
               secondary={<Typography variant="caption"> 28/23 GB</Typography>}
-            />
+            /> */}
           </ListItem>
         </List>
         <LinearProgressWithLabel value={80} />

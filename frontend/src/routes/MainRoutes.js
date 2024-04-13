@@ -86,6 +86,10 @@ const MainRoutes = {
       element: <SamplePage />
     },
     {
+      path: 'course-management',
+      element: <div>400sdsd4</div>
+    },
+    {
       path: '*',
       element: <div>4004</div>
     },
