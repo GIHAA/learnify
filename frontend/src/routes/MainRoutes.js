@@ -48,16 +48,16 @@ const MainRoutes = {
         {
           path: "default",
           element: <DashboardDefault />,
-        },
-        {
-          path: "course-management",
-          element: <CouserManagement />,
-        },
-        {
-          path: "user-management",
-          element: <UserManagement />,
-        },
+        }
       ],
+    },
+    {
+      path: "course-management",
+      element: <CouserManagement />,
+    },
+    {
+      path: "user-management",
+      element: <UserManagement />,
     },
     {
       path: "sign-in",

@@ -22,7 +22,7 @@ const adminMenu = {
       id: 'course-management',
       title: 'Course Management',
       type: 'item',
-      url: '/dashboard/course-management',
+      url: '/course-management',
       icon: icons.IconCertificate,
       breadcrumbs: false
     },
@@ -30,7 +30,7 @@ const adminMenu = {
       id: 'user-management',
       title: 'User Management',
       type: 'item',
-      url: '/dashboard/user-management',
+      url: '/user-management',
       icon: icons.IconUsers,
       breadcrumbs: false
     },
