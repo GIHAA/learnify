@@ -1,97 +1,71 @@
-import { lazy } from 'react';
+import { lazy } from "react";
 
 // project imports
-import MainLayout from 'layout/MainLayout';
-import Loadable from 'ui-component/Loadable';
+import MainLayout from "layout/MainLayout";
+import Loadable from "ui-component/Loadable";
 
 // dashboard routing
-const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
+const DashboardDefault = Loadable(
+  lazy(() => import("views/dashboard/Default"))
+);
 
 // utilities routing
-const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
-const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
-const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
-const UtilsMaterialIcons = Loadable(lazy(() => import('views/utilities/MaterialIcons')));
-const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons')));
+// const UtilsTypography = Loadable(
+//   lazy(() => import("views/utilities/Typography"))
+// );
+// const UtilsColor = Loadable(lazy(() => import("views/utilities/Color")));
+// const UtilsShadow = Loadable(lazy(() => import("views/utilities/Shadow")));
+// const UtilsMaterialIcons = Loadable(
+//   lazy(() => import("views/utilities/MaterialIcons"))
+// );
+// const UtilsTablerIcons = Loadable(
+//   lazy(() => import("views/utilities/TablerIcons"))
+// );
 
 // sample page routing
-const SamplePage = Loadable(lazy(() => import('views/sample-page')));
+//const SamplePage = Loadable(lazy(() => import('views/sample-page')));
+const CouserManagement = Loadable(
+  lazy(() => import("views/course-management"))
+);
+const UserManagement = Loadable(lazy(() => import("views/user-management")));
+const AuthLogin3 = Loadable(
+  lazy(() => import("views/pages/authentication/authentication3/Login3"))
+);
 
 // ==============================|| MAIN ROUTING ||============================== //
 
 const MainRoutes = {
-  path: '/',
+  path: "/",
   element: <MainLayout />,
   children: [
     {
-      path: '/',
-      element: <DashboardDefault />
+      path: "/",
+      element: <DashboardDefault />,
     },
     {
-      path: 'dashboard',
+      path: "dashboard",
       children: [
         {
-          path: 'default',
-          element: <DashboardDefault />
-        }
-      ]
-    },
-    {
-      path: 'utils',
-      children: [
+          path: "default",
+          element: <DashboardDefault />,
+        },
         {
-          path: 'util-typography',
-          element: <UtilsTypography />
-        }
-      ]
-    },
-    {
-      path: 'utils',
-      children: [
+          path: "course-management",
+          element: <CouserManagement />,
+        },
         {
-          path: 'util-color',
-          element: <UtilsColor />
-        }
-      ]
+          path: "user-management",
+          element: <UserManagement />,
+        },
+      ],
     },
     {
-      path: 'utils',
-      children: [
-        {
-          path: 'util-shadow',
-          element: <UtilsShadow />
-        }
-      ]
+      path: "sign-in",
+      element: <AuthLogin3 />,
     },
     {
-      path: 'icons',
-      children: [
-        {
-          path: 'tabler-icons',
-          element: <UtilsTablerIcons />
-        }
-      ]
-    },
-    {
-      path: 'icons',
-      children: [
-        {
-          path: 'material-icons',
-          element: <UtilsMaterialIcons />
-        }
-      ]
-    },
-    {
-      path: 'sample-page',
-      element: <SamplePage />
-    },
-    {
-      path: 'course-management',
-      element: <div>400sdsd4</div>
-    },
-    {
-      path: '*',
-      element: <div>4004</div>
+      path: "*",
+      element: <div>404</div>,
     },
   ],
 };
