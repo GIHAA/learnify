@@ -2,6 +2,7 @@
   "name": "berry-free-material-react-cra",
   "version": "3.4.2",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@emotion/cache": "^11.11.0",
     "@emotion/react": "^11.11.3",
