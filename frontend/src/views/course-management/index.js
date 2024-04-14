@@ -15,8 +15,6 @@ const MainCardStyle = styled(MainCard)(() => ({
   },
 }));
 
-
-
 const CourseManagementPage = () => {
 
   const navigate = useNavigate();
