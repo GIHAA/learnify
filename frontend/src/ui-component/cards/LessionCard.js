@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import { CardMedia } from "@mui/material";
+import CircularWithValueLabel from "ui-component/CircularProgressWithLabel";
 
 export default function LessionCard({
   title,
@@ -16,9 +17,15 @@ export default function LessionCard({
           border: "1px solid #e0e0e0",
           boxShadow: "0 0 10px 0 rgba(0,0,0,0.1)",
           margin: "12px",
+          position: "relative",
         }}
       >
         <div className="p-[10px] flex">
+          <div
+            className="w-[50px] h-[50px] m-2.5 rounded-[7px] absolute top-1 left-0 flex justify-center"
+          >
+            <CircularWithValueLabel value={100} />
+          </div>
           <CardMedia
             className="w-[50px] h-[50px] rounded-[7px]"
             component="img"
