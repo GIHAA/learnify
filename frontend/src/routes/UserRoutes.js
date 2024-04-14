@@ -1,11 +1,4 @@
-import { lazy } from "react";
-
-// // project imports
-// //import MainLayout from "layout/MainLayout";
-import Loadable from "ui-component/Loadable";
-
-
-const Landing = Loadable(lazy(() => import("views/landing")));
+import Landing from "views/landing";
 
 // ==============================|| MAIN ROUTING ||============================== //
 
