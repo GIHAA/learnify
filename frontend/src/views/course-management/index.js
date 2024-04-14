@@ -21,9 +21,9 @@ const onClick = () => {
 const CourseManagementPage = () => (
   <MainCardStyle title="Course Management" onClick={onClick} buttonText={"Add Course"}>
     <SearchSection />
-    {/* Grid container for the cards */}
-    <Grid container spacing={2}>
-      {/* Grid items for individual cards */}
+
+    <Grid container spacing={2} className='mt-[10px]'>
+
       <Grid item xs={12} sm={6} md={4} lg={3}>
         <BasicCard imageUrl={"https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs"} title={"test"} price={1000}/>
       </Grid>

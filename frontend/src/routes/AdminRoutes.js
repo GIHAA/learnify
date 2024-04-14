@@ -3,6 +3,8 @@ import { lazy } from "react";
 // project imports
 import MainLayout from "layout/MainLayout";
 import Loadable from "ui-component/Loadable";
+//import { element } from "prop-types";
+//import { element } from "prop-types";
 
 // dashboard routing
 const DashboardDefault = Loadable(
@@ -32,24 +34,16 @@ const AuthLogin3 = Loadable(
   lazy(() => import("views/pages/authentication/authentication3/Login3"))
 );
 
+
 // ==============================|| MAIN ROUTING ||============================== //
 
-const MainRoutes = {
-  path: "/",
+const AdminRoutes = {
+  path: "/admin",
   element: <MainLayout />,
   children: [
     {
-      path: "/",
-      element: <DashboardDefault />,
-    },
-    {
       path: "dashboard",
-      children: [
-        {
-          path: "default",
-          element: <DashboardDefault />,
-        }
-      ],
+      element: <DashboardDefault />
     },
     {
       path: "course-management",
@@ -70,4 +64,4 @@ const MainRoutes = {
   ],
 };
 
-export default MainRoutes;
+export default AdminRoutes;
