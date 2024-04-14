@@ -3,8 +3,7 @@ import { lazy } from "react";
 // project imports
 import MainLayout from "layout/MainLayout";
 import Loadable from "ui-component/Loadable";
-//import { element } from "prop-types";
-//import { element } from "prop-types";
+
 
 // dashboard routing
 const DashboardDefault = Loadable(
@@ -30,12 +29,9 @@ const CouserManagement = Loadable(
   lazy(() => import("views/course-management"))
 );
 const UserManagement = Loadable(lazy(() => import("views/user-management")));
-const AuthLogin3 = Loadable(
-  lazy(() => import("views/pages/authentication/authentication3/Login3"))
-);
 
+//const AddCourse = Loadable(lazy(() => import("views/course-management/AddCourse")));
 
-// ==============================|| MAIN ROUTING ||============================== //
 
 const AdminRoutes = {
   path: "/admin",
@@ -52,11 +48,7 @@ const AdminRoutes = {
     {
       path: "user-management",
       element: <UserManagement />,
-    },
-    {
-      path: "sign-in",
-      element: <AuthLogin3 />,
-    },
+    }, 
     {
       path: "*",
       element: <div>404</div>,
