@@ -30,7 +30,7 @@ const CouserManagement = Loadable(
 );
 const UserManagement = Loadable(lazy(() => import("views/user-management")));
 
-//const AddCourse = Loadable(lazy(() => import("views/course-management/AddCourse")));
+const AddCourse = Loadable(lazy(() => import("views/add-course")));
 
 
 const AdminRoutes = {
@@ -48,7 +48,10 @@ const AdminRoutes = {
     {
       path: "user-management",
       element: <UserManagement />,
-    }, 
+    },{
+      path: "course-management/add",
+      element: <AddCourse />,
+    },
     {
       path: "*",
       element: <div>404</div>,
