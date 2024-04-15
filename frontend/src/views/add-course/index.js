@@ -2,14 +2,15 @@ import MainCard from "ui-component/cards/MainCard";
 import LessionCard from "ui-component/cards/LessionCard";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
-import { Button, TextField, Avatar } from "@mui/material";
-import ReactPlayer from "react-player/lazy";
+import { Button, TextField, Avatar, CardMedia } from "@mui/material";
+// import ReactPlayer from "react-player/lazy";
+// import { VideoPlayer } from "@graphland/react-video-player";
 import InputFileUpload from "ui-component/form-components/InputFileUpload";
 import LinearWithValueLabel from "ui-component/LinearProgressWithLabel";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import BasicModal from "ui-component/BasicModal";
 
-const SamplePage = () => {
+const AddCourse = () => {
   const [section, setSection] = useState([
     {
       title: "Introduction to React",
@@ -40,17 +41,56 @@ const SamplePage = () => {
     console.log("Course Published");
   };
 
+  // const videoSources = [
+  //   {
+  //     src: "https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5",
+  //     type: "video/mp4",
+  //   },
+  //   // Add more video sources as needed
+  // ];
+
+  // const videoProps = {
+  //   theme: "forest", // 'city', 'fantasy', 'forest', 'sea'
+  //   height: "auto",
+  //   width: "auto",
+  //   autoPlay: false,
+  //   loop: false,
+  //   sources: videoSources,
+  //   controlBar: {
+  //     skipButtons: {
+  //       forward: 5,
+  //       backward: 5,
+  //     },
+  //   },
+  //   playbackRates: [0.5, 1, 1.5, 2],
+  //   disablePictureInPicture: false,
+  //   onReady: () => {
+  //     console.log("Video player is ready!");
+  //   },
+  // };
+
+
   return (
     <MainCard title="Add Course">
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           <div className="mx-2">
-            <ReactPlayer
+            {/* <ReactPlayer
               className="rounded-player"
               url="https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5"
               controls={true}
               width="100%"
               height="auto"
+            /> */}
+            {/* <VideoPlayer {...videoProps} /> */}
+
+            <CardMedia 
+              component="video"
+              controls
+              src="https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5"
+              alt="green iguana"
+              title="green iguana"
+              className="w-full h-[300px] rounded-[7px]"
             />
           </div>
           <div className="ml-2">
@@ -178,4 +218,4 @@ const SamplePage = () => {
   );
 };
 
-export default SamplePage;
+export default AddCourse;
