@@ -35,13 +35,16 @@ const SamplePage = () => {
     <MainCard title="Add Course">
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
-          <ReactPlayer
-            className="rounded-player"
-            url="https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5"
-            controls={true}
-            width="100%"
-          />
-
+<div className="mx-2">
+            <ReactPlayer
+              className="rounded-player"
+              url="https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5"
+              controls={true}
+              width="100%"
+              height="auto"
+            />
+  
+</div>
 <div className="ml-2">
             <LinearWithValueLabel />
 </div>
