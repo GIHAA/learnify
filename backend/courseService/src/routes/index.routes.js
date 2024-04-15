@@ -1,9 +1,9 @@
 import { protect } from '@/middleware/auth';
 import express from 'express';
-import productRouter from './product.routes';
+import courseRouter from './course.routes';
 
 const router = express.Router();
 
-router.use('/order', protect , productRouter);
+router.use('/course' , courseRouter);
 
 export default router;

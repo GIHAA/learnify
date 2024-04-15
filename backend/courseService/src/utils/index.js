@@ -7,6 +7,6 @@ export * from './response';
 
 export const isFromAdmin = () => context.get('origin') === 'admin';
 
-export const isProduction = process.env.APP_ENV === 'production';
+export const isCourseion = process.env.APP_ENV === 'courseion';
 
-export const rawRepoUrl = `https://raw.githubusercontent.com/GIHAA/af-project/${isProduction ? 'main' : 'develop'}`;
+export const rawRepoUrl = `https://raw.githubusercontent.com/GIHAA/af-project/${isCourseion ? 'main' : 'develop'}`;
