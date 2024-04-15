@@ -7,6 +7,7 @@ import ReactPlayer from "react-player";
 import InputFileUpload from "ui-component/form-components/InputFileUpload";
 import LinearWithValueLabel from "ui-component/LinearProgressWithLabel";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import BasicModal from "ui-component/BasicModal";
 
 const SamplePage = () => {
   const [section, setSection] = useState([
@@ -30,6 +31,13 @@ const SamplePage = () => {
           "https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs",
       },
     ]);
+  };
+
+  const publishCourse = (isChecked) => {
+    if (isChecked) {
+      console.log("Notify User on Publish");
+    }
+    console.log("Course Published");
   };
 
   return (
@@ -100,19 +108,33 @@ const SamplePage = () => {
                   fullWidth
                 />
 
-                <div className="flex w-full justify-between mt-5">
-                  <Avatar variant="rounded" className="w-[50px] h-[50px]">
-                    <AssignmentIcon />
-                  </Avatar>
-                  <Avatar variant="rounded" className="w-[50px] h-[50px]">
-                    <AssignmentIcon />
-                  </Avatar>
-                  <Avatar variant="rounded" className="w-[50px] h-[50px]">
-                    <AssignmentIcon />
-                  </Avatar>
-                  <Avatar variant="rounded" className="w-[50px] h-[50px]">
-                    <AssignmentIcon />
-                  </Avatar>
+                <div className="mt-[34px] ml-[20px]">
+                  <Grid container spacing={2} justifyContent="space-between">
+                    <Avatar
+                      variant="rounded"
+                      className="w-[50px] mt-1 h-[50px]"
+                    >
+                      <AssignmentIcon />
+                    </Avatar>
+                    <Avatar
+                      variant="rounded"
+                      className="w-[50px] mt-1 h-[50px]"
+                    >
+                      <AssignmentIcon />
+                    </Avatar>
+                    <Avatar
+                      variant="rounded"
+                      className="w-[50px] mt-1 h-[50px]"
+                    >
+                      <AssignmentIcon />
+                    </Avatar>
+                    <Avatar
+                      variant="rounded"
+                      className="w-[50px] mt-1 h-[50px]"
+                    >
+                      <AssignmentIcon />
+                    </Avatar>
+                  </Grid>
                 </div>
               </Grid>
             </Grid>
@@ -140,6 +162,16 @@ const SamplePage = () => {
               Add Lession
             </Button>
           </div>
+
+          <BasicModal
+            onClick={publishCourse}
+            checkBox={true}
+            text="Publish Course"
+            conClassName="flex justify-center"
+            className=" w-[92%] mt-4 text-white bg-green-500 hover:bg-green-700"
+            btnText="Publish Course"
+            btnClassName="w-full mt-4 "
+          />
         </Grid>
       </Grid>
     </MainCard>
