@@ -49,25 +49,25 @@ const AddCourse = () => {
     // Add more video sources as needed
   ];
 
-  const videoProps = {
-    theme: "forest", // 'city', 'fantasy', 'forest', 'sea'
-    height: "auto",
-    width: "auto",
-    autoPlay: false,
-    loop: false,
-    sources: videoSources,
-    controlBar: {
-      skipButtons: {
-        forward: 5,
-        backward: 5,
-      },
-    },
-    playbackRates: [0.5, 1, 1.5, 2],
-    disablePictureInPicture: false,
-    onReady: () => {
-      console.log("Video player is ready!");
-    },
-  };
+  // const videoProps = {
+  //   theme: "forest", // 'city', 'fantasy', 'forest', 'sea'
+  //   height: "auto",
+  //   width: "auto",
+  //   autoPlay: false,
+  //   loop: false,
+  //   sources: videoSources,
+  //   controlBar: {
+  //     skipButtons: {
+  //       forward: 5,
+  //       backward: 5,
+  //     },
+  //   },
+  //   playbackRates: [0.5, 1, 1.5, 2],
+  //   disablePictureInPicture: false,
+  //   onReady: () => {
+  //     console.log("Video player is ready!");
+  //   },
+  // };
 
 
   return (
