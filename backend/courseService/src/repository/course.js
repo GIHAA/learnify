@@ -36,13 +36,21 @@ export const getOneCourseRepo = async (filters) => {
 export const getAllCoursesRepo = async (query) => {
   const page = parseInt(query.page) || 1;
   const limit = parseInt(query.limit) || 10;
+  const searchTerm = query.searchTerm || '';
+
+  const filters = {
+    $or: [
+      { title: { $regex: searchTerm, $options: 'i' } },
+      { sl: { $regex: searchTerm, $options: 'i' } },
+    ],
+  };
 
   const options = {
     page,
     limit,
   };
   try {
-    const courses = await course.paginate({}, options);
+    const courses = await course.paginate(filters, options);
 
     logger.info('All courses retrieved:', courses);
 
