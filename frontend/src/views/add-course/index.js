@@ -3,7 +3,7 @@ import LessionCard from "ui-component/cards/LessionCard";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import { Button, TextField, Avatar } from "@mui/material";
-import ReactPlayer from "react-player";
+import ReactPlayer from "react-player/lazy";
 import InputFileUpload from "ui-component/form-components/InputFileUpload";
 import LinearWithValueLabel from "ui-component/LinearProgressWithLabel";
 import AssignmentIcon from "@mui/icons-material/Assignment";
