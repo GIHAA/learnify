@@ -7,14 +7,14 @@ const icons = { IconBrandChrome, IconHelp , IconDashboard , IconCertificate , Ic
 // ==============================|| SAMPLE PAGE & DOCUMENTATION MENU ITEMS ||============================== //
 
 const adminMenu = {
-  id: 'course-management',
+  id: 'admin-side',
   type: 'group',
   children: [
     {
-      id: 'default',
+      id: 'Dashboard',
       title: 'Dashboard',
       type: 'item',
-      url: '/dashboard/default',
+      url: '/admin/dashboard',
       icon: icons.IconDashboard,
       breadcrumbs: false
     },
@@ -22,7 +22,7 @@ const adminMenu = {
       id: 'course-management',
       title: 'Course Management',
       type: 'item',
-      url: '/dashboard/course-management',
+      url: '/admin/course-management',
       icon: icons.IconCertificate,
       breadcrumbs: false
     },
@@ -30,7 +30,7 @@ const adminMenu = {
       id: 'user-management',
       title: 'User Management',
       type: 'item',
-      url: '/dashboard/user-management',
+      url: '/admin/user-management',
       icon: icons.IconUsers,
       breadcrumbs: false
     },
