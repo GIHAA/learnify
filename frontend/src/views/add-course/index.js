@@ -2,10 +2,11 @@ import MainCard from "ui-component/cards/MainCard";
 import LessionCard from "ui-component/cards/LessionCard";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
-import { Button, TextField } from "@mui/material";
+import { Button, TextField, Avatar } from "@mui/material";
 import ReactPlayer from "react-player";
 import InputFileUpload from "ui-component/form-components/InputFileUpload";
 import LinearWithValueLabel from "ui-component/LinearProgressWithLabel";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 
 const SamplePage = () => {
   const [section, setSection] = useState([
@@ -35,7 +36,7 @@ const SamplePage = () => {
     <MainCard title="Add Course">
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
-<div className="mx-2">
+          <div className="mx-2">
             <ReactPlayer
               className="rounded-player"
               url="https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5"
@@ -43,26 +44,25 @@ const SamplePage = () => {
               width="100%"
               height="auto"
             />
-  
-</div>
-<div className="ml-2">
+          </div>
+          <div className="ml-2">
             <LinearWithValueLabel />
-</div>
+          </div>
 
           <InputFileUpload
             text="Upload Video"
             className=" flex justify-center m-2"
           />
 
- <div className="mr-4">
-           <TextField
-             id="outlined-multiline-flexible"
-             label="Multiline"
-             multiline
-             maxRows={6}
-             className="w-full mt-5 m-2 "
-           />
- </div>
+          <div className="mr-4">
+            <TextField
+              id="outlined-multiline-flexible"
+              label="Multiline"
+              multiline
+              maxRows={6}
+              className="w-full mt-5 m-2 "
+            />
+          </div>
 
           <div className="mr-4">
             <Button
@@ -99,6 +99,21 @@ const SamplePage = () => {
                   variant="outlined"
                   fullWidth
                 />
+
+                <div className="flex w-full justify-between mt-5">
+                  <Avatar variant="rounded" className="w-[50px] h-[50px]">
+                    <AssignmentIcon />
+                  </Avatar>
+                  <Avatar variant="rounded" className="w-[50px] h-[50px]">
+                    <AssignmentIcon />
+                  </Avatar>
+                  <Avatar variant="rounded" className="w-[50px] h-[50px]">
+                    <AssignmentIcon />
+                  </Avatar>
+                  <Avatar variant="rounded" className="w-[50px] h-[50px]">
+                    <AssignmentIcon />
+                  </Avatar>
+                </div>
               </Grid>
             </Grid>
           </div>
