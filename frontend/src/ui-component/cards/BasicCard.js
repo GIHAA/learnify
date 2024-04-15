@@ -4,8 +4,9 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import Rating from "@mui/material/Rating";
 
-export default function BasicCard({ imageUrl, title, price }) {
+export default function BasicCard({ imageUrl, title, price , rating }) {
   return (
     <Card sx={{
         maxWidth: 345,
@@ -32,6 +33,7 @@ export default function BasicCard({ imageUrl, title, price }) {
         <Typography variant="body2" color="text.secondary">
           Price: {price}
         </Typography>
+        <Rating name="read-only" value={rating} readOnly />
       </CardContent>
     </Card>
   );
@@ -41,4 +43,5 @@ BasicCard.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  rating: PropTypes.number.isRequired,
 };

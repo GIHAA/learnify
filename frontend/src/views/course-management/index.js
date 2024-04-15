@@ -6,7 +6,7 @@ import SearchSection from "layout/MainLayout/Header/SearchSection";
 // project imports
 import MainCard from "ui-component/cards/MainCard";
 import BasicCard from "ui-component/cards/BasicCard";
-import { Pagination } from "@mui/material";
+import { Pagination  } from "@mui/material";
 import { useNavigate } from "react-router";
 
 const MainCardStyle = styled(MainCard)(() => ({
@@ -21,7 +21,6 @@ const CourseManagementPage = () => {
   
   const onClick = () => {
     navigate("/admin/course-management/add");
-    console.log("add course");
   };
 
   return (
@@ -40,6 +39,7 @@ const CourseManagementPage = () => {
             }
             title={"test"}
             price={1000}
+            rating={4}
           />
         </Grid>
 
@@ -50,6 +50,7 @@ const CourseManagementPage = () => {
             }
             title={"test"}
             price={1000}
+            rating={4}
           />
         </Grid>
 
@@ -70,6 +71,7 @@ const CourseManagementPage = () => {
             }
             title={"Test"}
             price={1000}
+            rating={5}
           />
         </Grid>
       </Grid>
