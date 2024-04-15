@@ -84,7 +84,7 @@ const SamplePage = () => {
 
           <div className="mx-2 mt-6">
             <Grid container spacing={2}>
-              <Grid item xs={6} spacing={4}>
+              <Grid item xs={6} >
                 <TextField
                   id="outlined-basic"
                   label="Title"
