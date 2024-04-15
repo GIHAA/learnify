@@ -41,13 +41,13 @@ const AddCourse = () => {
     console.log("Course Published");
   };
 
-  const videoSources = [
-    {
-      src: "https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5",
-      type: "video/mp4",
-    },
-    // Add more video sources as needed
-  ];
+  // const videoSources = [
+  //   {
+  //     src: "https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5",
+  //     type: "video/mp4",
+  //   },
+  //   // Add more video sources as needed
+  // ];
 
   // const videoProps = {
   //   theme: "forest", // 'city', 'fantasy', 'forest', 'sea'
