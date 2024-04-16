@@ -27,17 +27,13 @@ LinearProgressWithLabel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-export default function LinearWithValueLabel() {
-  const [progress, setProgress] = React.useState(10);
+export default function LinearWithValueLabel(params) {
+  const [progress, setProgress ] = React.useState(10);
 
   React.useEffect(() => {
-    const timer = setInterval(() => {
-      setProgress((prevProgress) => (prevProgress >= 100 ? 10 : prevProgress + 10));
-    }, 800);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+    setProgress(params.progress)
+  }, [params]);
+
 
   return (
     <Box sx={{ width: '100%' }}>

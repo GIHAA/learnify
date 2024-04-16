@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
@@ -14,6 +14,7 @@ import Transitions from 'ui-component/extended/Transitions';
 // assets
 import { IconAdjustmentsHorizontal, IconSearch, IconX } from '@tabler/icons-react';
 import { shouldForwardProp } from '@mui/system';
+import { debounce } from 'lodash';
 
 // styles
 const PopperStyle = styled(Popper, { shouldForwardProp })(({ theme }) => ({
@@ -115,9 +116,20 @@ MobileSearch.propTypes = {
 
 // ==============================|| SEARCH INPUT ||============================== //
 
-const SearchSection = () => {
+const SearchSection = ({ setSearchText }) => {
   const theme = useTheme();
   const [value, setValue] = useState('');
+
+  const debouncedSetSearchText = debounce((text) => {
+    setSearchText(text);
+  }, 300); 
+
+  useEffect(() => {
+    debouncedSetSearchText(value); 
+    return () => {
+      debouncedSetSearchText.cancel();
+    };
+  }, [value, debouncedSetSearchText]);
 
   return (
     <>
@@ -187,6 +199,10 @@ const SearchSection = () => {
       </Box>
     </>
   );
+};
+
+SearchSection.propTypes = {
+  setSearchText: PropTypes.func
 };
 
 export default SearchSection;

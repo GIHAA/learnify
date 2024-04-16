@@ -11,6 +11,15 @@ import { store } from 'store';
 import 'assets/scss/style.scss';
 import config from './config';
 
+//firebase
+import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage';
+import "firebase/firestore";
+import firebaseConfig from './firebaseConfig';
+
+const app = initializeApp(firebaseConfig);
+getStorage(app);
+
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 const container = document.getElementById('root');
