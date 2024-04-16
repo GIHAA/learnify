@@ -69,7 +69,7 @@ const AddCourseForm = ({getCourseMetaData}) => {
         />
       </div>
 
-      <Button type="submit" variant="contained" className="mt-4">
+      <Button type="submit" variant="contained" className="mt-4 w-full">
         Submit
       </Button>
     </form>

@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
-import { CardMedia } from "@mui/material";
-import CircularWithValueLabel from "ui-component/CircularProgressWithLabel";
+import {  Avatar } from "@mui/material";
+// import CircularWithValueLabel from "ui-component/CircularProgressWithLabel";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 
 export default function LessionCard({
   title,
   description,
-  imageUrl,
+
   duration,
 }) {
   return (
@@ -21,18 +22,12 @@ export default function LessionCard({
         }}
       >
         <div className="p-[10px] flex">
-          <div
-            className="w-[50px] h-[50px] m-2.5 rounded-[7px] absolute top-1 left-0 flex justify-center"
-          >
-            <CircularWithValueLabel value={100} />
+          <div className="w-[50px] h-[50px] m-2.5 rounded-[7px] absolute top-1 left-0 flex justify-center">
+            {/* <CircularWithValueLabel value={100} /> */}
           </div>
-          <CardMedia
-            className="w-[50px] h-[50px] rounded-[7px]"
-            component="img"
-            height="20"
-            image={imageUrl}
-            alt="green iguana"
-          />
+          <Avatar variant="rounded" className={`w-[50px] mt-1 h-[50px] `}>
+            <AssignmentIcon />
+          </Avatar>
 
           <div>
             <h1 className="font-bold text-[20px] pl-5 pt-1">{title}</h1>
