@@ -5,7 +5,7 @@ import ShopPage from "views/shop-page";
 // ==============================|| MAIN ROUTING ||============================== //
 
 const UserRoutes = {
-  path: "/home",
+  path: "",
   element: <CusLayout />,
   children: [
     {
