@@ -2,6 +2,7 @@ import { compareSync, hashSync } from 'bcryptjs';
 import { default as createError } from 'http-errors';
 import { createUser, findOneAndRemoveUser, findOneAndUpdateUser, getAllUsers, getOneUser } from '@/repository/user';
 import { sendMail } from './email';
+import { User } from '@/models';
 
 export const getUsers = (query) => getAllUsers(query);
 
@@ -20,13 +21,7 @@ export const changePasswordService = async (user, oldPassword, newPassword) => {
 };
 
 export const updateUserdetails = async (userId, user, payload) => {
-  if (user.role !== 'ADMIN') {
-    if (userId !== user._id.toString()) {
-      throw new createError(403, 'You are not authorized to update this user');
-    }
-    delete payload.is_active;
-    delete payload.eliminated;
-  }
+
   if (payload.name) {
     const existingUser = await getOneUser({ name: payload.name, _id: { $ne: userId } });
     if (existingUser) throw new createError(422, 'Name is already taken');
@@ -37,28 +32,60 @@ export const updateUserdetails = async (userId, user, payload) => {
 };
 
 export const addNewUser = async (payload) => {
+  // const generatedPassword = Math.random().toString(36).slice(-8);
+  // const encryptedPassword = hashSync(generatedPassword);
+  // const totalecouser=  await User.find().lean();
+  // const newUser = await createUser({
+  //   ...payload,
+  //   password: encryptedPassword,
+  //   progress:[
+  //     {
+  //       totalContent : totalecouser
+  //     }
+  //   ]
+  // });
+  // try {
+  //   await sendAdminPassword(payload.email, generatedPassword);
+  //   return newUser;
+  // } catch (e) {
+  //   findOneAndRemoveUser({ email: payload.email }).exec();
+  //   throw e;
+  // }
+
   const generatedPassword = Math.random().toString(36).slice(-8);
-  const encryptedPassword = hashSync(generatedPassword);
-  const newUser = await createUser({
-    ...payload,
-    password: encryptedPassword,
-    is_verified: true,
-    role: 'ADMIN'
-  });
+  // Hash the generated password
+  const encryptedPassword = hashSync(generatedPassword, 10); // Hashing the password with bcrypt
+
   try {
+    // Find total number of users (or courses) to calculate progress
+    const totalecouser = await User.find().lean();
+    const totalContent = totalecouser.length;
+
+    // Create the new user with hashed password and progress
+    const newUser = await createUser({
+      ...payload,
+      password: encryptedPassword,
+      progress: [{
+       
+        totalContent: totalContent
+      }]
+    });
+
+    // Send the admin password to the user via email
     await sendAdminPassword(payload.email, generatedPassword);
+
     return newUser;
-  } catch (e) {
-    findOneAndRemoveUser({ email: payload.email }).exec();
-    throw e;
+  } catch (error) {
+    // If an error occurs during email sending, remove the newly created user
+   // await findOneAndRemoveUser({ email: payload.email }).exec();
+   console.log(error)
+    throw error;
   }
 };
 
 
 export const removeUserByID = async (currentUser, id) => {
-  if (currentUser.role !== 'ADMIN' && currentUser._id !== id) {
-    throw new createError(403, 'Permission denied');
-  }
+ 
   const user = await findOneAndRemoveUser({ _id: id });
   if (!user) {
     throw new createError(401, 'Invalid user ID');
