@@ -11,6 +11,7 @@ import themes from 'themes';
 
 // project imports
 import NavigationScroll from 'layout/NavigationScroll';
+// import ResponsiveAppBar from 'ui-component/header/ResponsiveAppBar';
 
 // ==============================|| APP ||============================== //
 
@@ -21,9 +22,13 @@ const App = () => {
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={themes(customization)}>
         <CssBaseline />
+       
         <NavigationScroll>
+        {/* <ResponsiveAppBar> */}
           <Routes />
+          {/* </ResponsiveAppBar> */}
         </NavigationScroll>
+  
       </ThemeProvider>
     </StyledEngineProvider>
   );
