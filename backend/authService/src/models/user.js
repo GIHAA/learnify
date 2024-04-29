@@ -17,30 +17,30 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 8
   },
-  progress: [{
-    courseid: {
-      type: String,
-      
-    
+  cart: [{
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true
     },
-   
-    completedContent: {
-      type: Number,
-      default: 1
-    },
-     totalContent: {
-      type: Number,
-      default: 1
-      
-    },
-    percentComplete: {
+    quantity: {
       type: Number,
       default: 1
     }
-    
   }],
-  enrolledCourses:[],
- 
+  is_verified: {
+    type: Boolean,
+    default: false
+  },
+  is_active: {
+    type: Boolean,
+    default: true
+  },
+  role: {
+    type: String,
+    enum: ['ADMIN', 'USER'],
+    default: 'USER'
+  },
+  photo_url: String
 }, {
   versionKey: '__v',
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
