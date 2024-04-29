@@ -16,16 +16,18 @@ export default function BasicCard({ imageUrl, title, price , rating }) {
     }}
     >
     
-      <CardMedia
-        component="img"
-        height="140"
-        image={imageUrl}
-        alt="Card Image"
-        sx={{
-            objectFit: "cover",
-            backgroundSize: "contain",
-        }}
-      />
+    <CardMedia
+  component="img"
+  image={imageUrl}
+  alt="Card Image"
+  sx={{
+    width: "auto", // Set your desired width
+    height: "200px", // Set your desired height
+    objectFit: "cover",
+    backgroundSize: "contain",
+  }}
+/>
+
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}

@@ -3,9 +3,6 @@ import { autoInc } from 'auto-increment-group';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 const courseSchema = new mongoose.Schema({
-  sn:{
-    type: String,
-  },
   title: {
     type: String,
     required: true

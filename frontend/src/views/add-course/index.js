@@ -2,15 +2,18 @@ import MainCard from "ui-component/cards/MainCard";
 import LessionCard from "ui-component/cards/LessionCard";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
-import { Button } from "@mui/material";
+// import { Button } from "@mui/material";
 // import LinearWithValueLabel from "ui-component/LinearProgressWithLabel";
 import BasicModal from "ui-component/BasicModal";
 import AddCourseForm from "ui-component/AddCourseForm";
 import AddSectionForm from "ui-component/AddSectionForm";
+import { createCourse } from "api/courseService";
+import { useNavigate } from "react-router";
 
 const AddCourse = () => {
-  const [metaData, setMetaData] = useState({}); //todo
+  const [metaData, setMetaData] = useState(); 
   const [section, setSection] = useState([]);
+  const navigate = useNavigate();
 
   const addSection = (sectionData) => {
     setSection((prevState) => [
@@ -20,17 +23,23 @@ const AddCourse = () => {
         title: sectionData.title,
         description: sectionData.description,
         duration: sectionData.duration,
-        image: sectionData.image,
+        //todo
+        icon: sectionData.image,
         video: sectionData.video,
       },
     ]);
   };
 
-  const publishCourse = (isChecked) => {
+  const publishCourse = async (isChecked) => {
     if (isChecked) {
       console.log("Notify User on Publish");
     }
-    console.log("Course Published");
+   
+    const res = await createCourse({ ...metaData, addedBy: "60f5b14eb2c4b417885a2e3a", section });
+  
+    //todo toast  
+    navigate("/admin/course-management");
+
   };
 
   return (
@@ -38,7 +47,7 @@ const AddCourse = () => {
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           {!metaData && <AddCourseForm getCourseMetaData={setMetaData} />}
-          <AddSectionForm getSectionData={addSection} />
+          {metaData && <AddSectionForm getSectionData={addSection} /> }
         </Grid>
         <Grid item xs={12} md={4}>
           {section.map((lession , index) => (
@@ -51,7 +60,7 @@ const AddCourse = () => {
             />
           ))}
           <div className="flex justify-center">
-            <Button
+            {/* <Button
               variant="contained"
               color="primary"
               sx={{
@@ -60,7 +69,7 @@ const AddCourse = () => {
               onClick={addSection}
             >
               Add Lession
-            </Button>
+            </Button> */}
           </div>
 
           <BasicModal

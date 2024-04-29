@@ -1,11 +1,11 @@
-import { Typography, TextField, Button } from "@mui/material";
+import {  TextField, Button } from "@mui/material";
 import { useFormik } from 'formik';
 import InputFileUpload from "./form-components/InputFileUpload";
 import propTypes from 'prop-types';
 
 const AddCourseForm = ({getCourseMetaData}) => {
   const getsDownloadURL = (url) => {
-    formik.setFieldValue('imageUrl', url);
+    formik.setFieldValue('thumbnail', url);
   };
 
   const formik = useFormik({
@@ -13,7 +13,7 @@ const AddCourseForm = ({getCourseMetaData}) => {
       title: "",
       description: "",
       price: "",
-      imageUrl: "",
+      thumbnail: "",
     },
     onSubmit: (values) => {
       getCourseMetaData(values);
@@ -23,24 +23,24 @@ const AddCourseForm = ({getCourseMetaData}) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className="mt-3">
-        <Typography variant="h4" className="font-medium">
+        {/* <Typography variant="h4" className="font-medium">
           Enter Title
-        </Typography>
+        </Typography> */}
         <TextField
           id="title"
-          label="title"
+          label="Course Title"
           className="w-full mt-2"
           {...formik.getFieldProps('title')}
         />
       </div>
 
       <div className="mt-3">
-        <Typography variant="h4" className="font-medium">
+        {/* <Typography variant="h4" className="font-medium">
           Enter Description
-        </Typography>
+        </Typography> */}
         <TextField
           id="description"
-          label="description"
+          label="Course Description"
           multiline
           maxRows={6}
           className="w-full mt-2"
@@ -49,12 +49,13 @@ const AddCourseForm = ({getCourseMetaData}) => {
       </div>
 
       <div className="mt-3">
-        <Typography variant="h4" className="font-medium">
+        {/* <Typography variant="h4" className="font-medium">
           Enter Price
-        </Typography>
+        </Typography> */}
         <TextField
           id="price"
-          label="price"
+          label="Course Price"
+          type="number"
           className="w-full mt-2"
           {...formik.getFieldProps('price')}
         />
