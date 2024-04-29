@@ -13,6 +13,8 @@ const Landing = () => {
 
 
         <Button component={Link} to="/admin" variant="contained" color="primary">Admin</Button>
+        
+        <Button component={Link} to="/test" variant="contained" color="primary">Test</Button>
 
     </div>
   );

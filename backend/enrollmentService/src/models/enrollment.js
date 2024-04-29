@@ -13,17 +13,8 @@ const enrollmentSchema = new mongoose.Schema({
     ref: 'Course',
     required: true
   },
-  paymentId: {
+  stripePaymentIntentId: {
     type: String,
-    required: true
-  },
-  paymentAmount: {
-    type: Number,
-    required: true
-  },
-  paymentStatus: {
-    type: String,
-    enum : ['pending', 'completed'],
     required: true
   },
   totalSections: {
