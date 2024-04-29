@@ -35,7 +35,7 @@ const AddCourse = () => {
       console.log("Notify User on Publish");
     }
    
-    const res = await createCourse({ ...metaData, addedBy: "60f5b14eb2c4b417885a2e3a", section });
+    await createCourse({ ...metaData, addedBy: "60f5b14eb2c4b417885a2e3a", section });
   
     //todo toast  
     navigate("/admin/course-management");
