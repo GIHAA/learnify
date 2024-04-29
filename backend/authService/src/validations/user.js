@@ -1,9 +1,18 @@
 import { Joi } from 'celebrate';
-import { genders, mealPreferences } from '@/models/user';
+
 
 export const addUserSchema = {
   name: Joi.string().required(),
-  email: Joi.string().email().required()
+  email: Joi.string().email().required(),
+  password: Joi.string().min(8).required(),
+  progress: Joi.array().items(Joi.object({
+    courseid: Joi.string(),
+    completedContent: Joi.number().default(1),
+    totalContent: Joi.number().default(1),
+    percentComplete: Joi.number().default(1)
+  })),
+  enrolledCourses: Joi.array().items(Joi.string())
+
 };
 
 export const userIdSchema = {
@@ -12,7 +21,7 @@ export const userIdSchema = {
 
 export const updateSchema = {
   name: Joi.string().optional(),
-  photo_url: Joi.string().optional(),
+ 
 
 };
 
