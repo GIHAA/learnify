@@ -5,7 +5,6 @@ const logger = moduleLogger('User-repository');
 
 export const createUser = async (user) => {
   try {
-    
     const newUser = (await new User(user).save()).toObject();
     delete newUser.password;
     logger.info('User created:', newUser);
