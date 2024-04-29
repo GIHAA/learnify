@@ -11,8 +11,10 @@ export const initialState = {
   fontFamily: config.fontFamily,
   borderRadius: config.borderRadius,
   opened: false,
-  adminOpened: true
+  adminOpened: true,
+  user: null
 };
+
 
 // ==============================|| CUSTOMIZATION REDUCER ||============================== //
 
@@ -50,6 +52,16 @@ const customizationReducer = (state = initialState, action) => {
       return {
         ...state,
         borderRadius: action.borderRadius
+      };
+    case actionTypes.SET_USER:
+      return {
+        ...state,
+        user: action.user
+      };
+    case actionTypes.REMOVE_USER:
+      return {
+        ...state,
+        user: null
       };
     default:
       return state;

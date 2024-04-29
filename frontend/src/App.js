@@ -11,6 +11,7 @@ import themes from 'themes';
 
 // project imports
 import NavigationScroll from 'layout/NavigationScroll';
+import { Toaster } from 'react-hot-toast';
 
 // ==============================|| APP ||============================== //
 
@@ -25,6 +26,7 @@ const App = () => {
           <Routes />
         </NavigationScroll>
       </ThemeProvider>
+      <Toaster />
     </StyledEngineProvider>
   );
 };

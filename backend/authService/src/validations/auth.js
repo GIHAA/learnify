@@ -20,22 +20,6 @@ export const registerSchema = Joi.object({
       'string.pattern.base':
         'Password should have at least one lowercase letter, one uppercase letter, one number and one special character and should be at least 8 characters long'
     }),
-  university: Joi.string().required(),
-  members: Joi.array()
-    .items(
-      Joi.object({
-        name: Joi.string().required(),
-        email: Joi.string().email().required(),
-        phone: Joi.string().min(9).required(),
-        academic_year: Joi.number().required().min(1).max(4)
-      })
-    )
-    .max(4)
-    .unique((a, b) => a.email === b.email)
-    .unique((a, b) => a.phone === b.phone)
-    .messages({ 'array.unique': 'Member details should be unique' })
-    .min(1)
-    .optional()
 });
 
 export const resendVerifyMailSchema = Joi.object({
