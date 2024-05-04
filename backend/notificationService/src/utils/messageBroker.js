@@ -1,6 +1,7 @@
 import { moduleLogger } from '@sliit-foss/module-logger';
 import { RABBIMQ_CONFIG } from './config';
 import sendEmail from '@/service/email';
+import { sendSms } from '@/service/sms';
 
 const amqp = require('amqplib');
 
@@ -11,17 +12,18 @@ export async function consumeEmailRequestMessages() {
   try {
     connection = await connectToRabbitMQ();
     const channel = await connection.createChannel();
-    const queue = RABBIMQ_CONFIG.EMAIL_REQUEST_QUEUE || 'email_request_queue';
+    const queue = RABBIMQ_CONFIG.EMAIL_REQUEST_QUEUE || 'email_request_queue_2';
 
     logger.info('RabbitMQ connection successful');
     await channel.assertQueue(queue, { durable: true });
 
-    channel.consume(queue, (message) => {
+    channel.consume(queue, async (message) => {
       try {
         const emaiDetails = JSON.parse(message.content.toString());
-        logger.info(`Email request recieved: `);
-
-        const emailSent = sendEmail(emaiDetails);
+        logger.info(`Notification Request Recieved: `);
+        
+        const emailSent = await sendEmail(emaiDetails);
+        const smsSent = sendSms(emaiDetails);
        if(emailSent){
         channel.ack(message);
        }

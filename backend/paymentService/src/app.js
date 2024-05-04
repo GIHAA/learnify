@@ -79,7 +79,7 @@ connectDB();
 
 global.__basedir = __dirname;
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3004;
 app.listen(port, (err) => {
   if (!err) {
     logger.info(`Payment service successfully started on port ${port}`);

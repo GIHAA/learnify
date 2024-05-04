@@ -103,7 +103,7 @@ io.on("connection", (socket) => {
   });
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3005;
 server.listen(port, (err) => {
   if (!err) {
     logger.info(`Server started on port ${port}`);
