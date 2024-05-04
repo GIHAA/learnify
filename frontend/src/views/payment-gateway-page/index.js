@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
+import toast from 'react-hot-toast';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
@@ -41,16 +42,16 @@ const handleSubmit = async (event) => {
         // Handle payment error
         console.error(result.error);
       } else {
-        // Handle successful payment
-        console.log('Payment successful!');
 
-        // // Here, you can create a new enrollment with the paymentIntentId
-        // await axios.post('/api/enrollments', {
-        //   userId: 'user_id',
-        //   courseId: 'course_id',
-        //   stripePaymentIntentId: data.paymentIntentId,
-        //   // other enrollment data
-        // });
+        toast.success('Payment successful');
+
+        // to make a service for this 
+        await axios.post('/api/enrollments', {
+          userId: 'user_id',
+          courseId: 'course_id',
+          stripePaymentIntentId: data.paymentIntentId,
+          // other enrollment data
+        });
       }
     } catch (err) {
       console.error(err);

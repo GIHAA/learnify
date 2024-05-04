@@ -57,4 +57,57 @@ export const getPaymentIntentService = async (payload) => {
   if (!paymentIntent) throw new createError(401, 'Payment Intent Creation Failed');
 
   return paymentIntent;
+
+  // let totalEarnings = 0;
+  // let totalOrders = 0;
+  // const limit = 100; // Max limit per API call as defined by Stripe
+
+  // let hasMore = true;
+  // let startingAfter = null;
+
+  // while (hasMore) {
+  //   const params = {
+  //     limit: limit,
+  //   };
+  //   if (startingAfter) {
+  //     params.starting_after = startingAfter;
+  //   }
+
+  //   try {
+  //     const charges = await stripe.charges.list(params);
+
+  //     // Accumulate totals
+  //     charges.data.forEach(charge => {
+  //       if (charge.paid && !charge.refunded) {
+  //         totalEarnings += charge.amount;
+  //         totalOrders += 1;
+  //       }
+  //     });
+
+  //     if (charges.data.length < limit) {
+  //       hasMore = false;
+  //     } else {
+  //       startingAfter = charges.data[charges.data.length - 1].id;
+  //     }
+  //   } catch (error) {
+  //     console.error(`Error fetching charges: ${error.message}`);
+  //     break;
+  //   }
+  // }
+
+  // return {
+  //   totalEarnings: totalEarnings / 100, 
+  //   totalOrders: totalOrders
+  // };
+
 };
+
+
+export const getPaymentDetailsService = async (id) => {
+
+  const paymentIntent = await stripe.paymentIntents.retrieve(id);
+
+  if (!paymentIntent) throw new createError(401, 'Payment Intent Fetching Failed');
+
+  return paymentIntent;
+}
