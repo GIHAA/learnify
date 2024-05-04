@@ -23,7 +23,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && pr
   borderBottomLeftRadius: 0,
   borderBottomRightRadius: 0,
   transition: theme.transitions.create(
-    '',
+    'margin',
     open
       ? {
           easing: theme.transitions.easing.easeOut,
@@ -39,15 +39,15 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && pr
     width: `calc(100% - ${drawerWidth}px)`
   },
   [theme.breakpoints.down('md')]: {
-    // marginLeft: '20px',
-    // width: `calc(100% - ${drawerWidth}px)`,
-    // padding: '16px'
+    marginLeft: '20px',
+    width: `calc(100% - ${drawerWidth}px)`,
+    padding: '16px'
   },
   [theme.breakpoints.down('sm')]: {
-    // marginLeft: '10px',
-    // width: `calc(100% - ${drawerWidth}px)`,
-    // padding: '16px',
-    // marginRight: '10px'
+    marginLeft: '10px',
+    width: `calc(100% - ${drawerWidth}px)`,
+    padding: '16px',
+    marginRight: '10px'
   }
 }));
 

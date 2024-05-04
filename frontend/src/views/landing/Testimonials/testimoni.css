@@ -1,3 +1,4 @@
 .swiper-slide{
-    width: auto !important;
+    display: flex;
+    justify-content: center;
 }
