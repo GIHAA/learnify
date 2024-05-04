@@ -41,7 +41,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
 
 // ==============================|| DASHBOARD - TOTAL INCOME DARK CARD ||============================== //
 
-const TotalIncomeDarkCard = ({ isLoading , income }) => {
+const ServiceStatus = ({ isLoading , service , status  }) => {
   const theme = useTheme();
 
   return (
@@ -49,7 +49,7 @@ const TotalIncomeDarkCard = ({ isLoading , income }) => {
       {isLoading ? (
         <TotalIncomeCard />
       ) : (
-        <CardWrapper border={false} content={false}>
+        <CardWrapper className="my-2" border={false} content={false} >
           <Box sx={{ p: 2 }}>
             <List sx={{ py: 0 }}>
               <ListItem alignItems="center" disableGutters sx={{ py: 0 }}>
@@ -74,15 +74,16 @@ const TotalIncomeDarkCard = ({ isLoading , income }) => {
                   }}
                   primary={
                     <Typography variant="h4" sx={{ color: '#fff' }}>
-                      ${income}
+                      {service}
                     </Typography>
                   }
                   secondary={
                     <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>
-                      Total Income
+                      Status : {status}
                     </Typography>
                   }
                 />
+                <div className={`bg-${status === 'running' ? 'green' : 'red'}-400 w-[50px] h-[50px] rounded-xl`}></div>
               </ListItem>
             </List>
           </Box>
@@ -92,9 +93,10 @@ const TotalIncomeDarkCard = ({ isLoading , income }) => {
   );
 };
 
-TotalIncomeDarkCard.propTypes = {
+ServiceStatus.propTypes = {
   isLoading: PropTypes.bool,
-  income: PropTypes.number
+  service: PropTypes.string,
+  status: PropTypes.string
 };
 
-export default TotalIncomeDarkCard;
+export default ServiceStatus;
