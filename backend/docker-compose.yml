@@ -6,18 +6,18 @@ services:
     ports:
       - '5672:5672'
 
-  product:
-    build:
-      dockerfile: Dockerfile
-      context: ./productService
-    container_name: product-service
-    ports:
-      - "3002:3002"
-    restart: always
-    depends_on:
-      - "rabbitmq"
-    env_file:
-      - ./productService/.env
+  # product:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ./productService
+  #   container_name: product-service
+  #   ports:
+  #     - "3002:3002"
+  #   restart: always
+  #   depends_on:
+  #     - "rabbitmq"
+  #   env_file:
+  #     - ./productService/.env
 
   auth:
     build:
@@ -32,16 +32,16 @@ services:
     env_file:
       - ./authService/.env
 
-  image:
-    build:
-      dockerfile: Dockerfile
-      context: ./imageService
-    container_name: image-service
-    ports:
-      - "3005:3005"
-    restart: always
-    env_file:
-      - ./imageService/.env
+  # image:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: ./imageService
+  #   container_name: image-service
+  #   ports:
+  #     - "3005:3005"
+  #   restart: always
+  #   env_file:
+  #     - ./imageService/.env
 
   nginx-proxy:
     build:
