@@ -7,3 +7,5 @@ export const ADMIN_MENU_TOGGLE = '@customization/ADMIN_MENU_TOGGLE';
 export const ADMIN_MENU_OPEN = '@customization/ADMIN_MENU_OPEN';
 export const SET_FONT_FAMILY = '@customization/SET_FONT_FAMILY';
 export const SET_BORDER_RADIUS = '@customization/SET_BORDER_RADIUS';
+export const SET_USER = 'SET_USER';
+export const REMOVE_USER = 'REMOVE_USER';

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -7,18 +7,18 @@ import {
   Box,
   Button,
   Checkbox,
-  Divider,
+  //Divider,
   FormControl,
   FormControlLabel,
   FormHelperText,
-  Grid,
+  //Grid,
   IconButton,
   InputAdornment,
   InputLabel,
   OutlinedInput,
   Stack,
   Typography,
-  useMediaQuery
+  // useMediaQuery
 } from '@mui/material';
 
 // third party
@@ -33,20 +33,29 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-import Google from 'assets/images/icons/social-google.svg';
+// import Google from 'assets/images/icons/social-google.svg';
+import { login } from 'api/authService';
+import toast from 'react-hot-toast';
+import { useDispatch, 
+ // useSelector
+ } from 'react-redux';
+ import { useNavigate } from 'react-router-dom';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
 const FirebaseLogin = ({ ...others }) => {
   const theme = useTheme();
   const scriptedRef = useScriptRef();
-  const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
-  const customization = useSelector((state) => state.customization);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  // const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
+ // const customization = useSelector((state) => state.customization);
   const [checked, setChecked] = useState(true);
+  // const user = useSelector((state) => state.user.user);
 
-  const googleHandler = async () => {
-    console.error('Login');
-  };
+  // const googleHandler = async () => {
+  //   console.error('Login');
+  // };
 
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => {
@@ -57,10 +66,28 @@ const FirebaseLogin = ({ ...others }) => {
     event.preventDefault();
   };
 
+  const handleLogin = async (email, password) => {
+    try {
+      const response = await login({ email, password });
+      toast.success('Login successful');
+      dispatch({ type: 'SET_USER', user: response.data.user })
+      if (response.data.user.role === 'USER') {
+        navigate('/')
+      }
+      if (response.data.user.role === 'ADMIN') {
+        navigate('/admin')
+      }
+    }
+    catch (error) {
+      console.log(error.response);
+      toast.error(error.response.data.message);
+    }
+  }
+
   return (
     <>
-      <Grid container direction="column" justifyContent="center" spacing={2}>
-        <Grid item xs={12}>
+      {/* <Grid container direction="column" justifyContent="center" spacing={2}>
+        {/* <Grid item xs={12}>
           <AnimateButton>
             <Button
               disableElevation
@@ -80,7 +107,7 @@ const FirebaseLogin = ({ ...others }) => {
               Sign in with Google
             </Button>
           </AnimateButton>
-        </Grid>
+        </Grid> 
         <Grid item xs={12}>
           <Box
             sx={{
@@ -116,12 +143,12 @@ const FirebaseLogin = ({ ...others }) => {
             <Typography variant="subtitle1">Sign in with Email address</Typography>
           </Box>
         </Grid>
-      </Grid>
+      </Grid> */}
 
       <Formik
         initialValues={{
-          email: 'info@codedthemes.com',
-          password: '123456',
+          email: 'gihansudeeparandimal@gmail.com',
+          password: 'Sachini@123',
           submit: null
         }}
         validationSchema={Yup.object().shape({
@@ -134,6 +161,7 @@ const FirebaseLogin = ({ ...others }) => {
               setStatus({ success: true });
               setSubmitting(false);
             }
+            handleLogin(values.email, values.password)
           } catch (err) {
             console.error(err);
             if (scriptedRef.current) {
