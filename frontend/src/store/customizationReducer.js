@@ -5,11 +5,13 @@ import config from 'config';
 import * as actionTypes from './actions';
 
 export const initialState = {
-  isOpen: [], // for active default menu
+  isOpen: [], 
+  isAdminOpen: [], 
   defaultId: 'default',
   fontFamily: config.fontFamily,
   borderRadius: config.borderRadius,
-  opened: true
+  opened: false,
+  adminOpened: true
 };
 
 // ==============================|| CUSTOMIZATION REDUCER ||============================== //
@@ -17,6 +19,17 @@ export const initialState = {
 const customizationReducer = (state = initialState, action) => {
   let id;
   switch (action.type) {
+    case actionTypes.ADMIN_MENU_OPEN:
+      id = action.id;
+      return {
+        ...state,
+        isAdminOpen: [id]
+      };
+    case actionTypes.ADMIN_SET_MENU:
+      return {
+        ...state,
+        adminOpened: action.adminOpened
+      };
     case actionTypes.MENU_OPEN:
       id = action.id;
       return {

@@ -2,34 +2,26 @@ import MainCard from "ui-component/cards/MainCard";
 import LessionCard from "ui-component/cards/LessionCard";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
-import { Button, TextField, Avatar, CardMedia } from "@mui/material";
-// import ReactPlayer from "react-player/lazy";
-// import { VideoPlayer } from "@graphland/react-video-player";
-import InputFileUpload from "ui-component/form-components/InputFileUpload";
-import LinearWithValueLabel from "ui-component/LinearProgressWithLabel";
-import AssignmentIcon from "@mui/icons-material/Assignment";
+import { Button } from "@mui/material";
+// import LinearWithValueLabel from "ui-component/LinearProgressWithLabel";
 import BasicModal from "ui-component/BasicModal";
+import AddCourseForm from "ui-component/AddCourseForm";
+import AddSectionForm from "ui-component/AddSectionForm";
 
 const AddCourse = () => {
-  const [section, setSection] = useState([
-    {
-      title: "Introduction to React",
-      description: "Lession 1",
-      duration: "00:00:00",
-      imageUrl:
-        "https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs",
-    },
-  ]);
+  const [metaData, setMetaData] = useState({}); //todo
+  const [section, setSection] = useState([]);
 
-  const addSection = () => {
-    setSection([
-      ...section,
+  const addSection = (sectionData) => {
+    setSection((prevState) => [
+      ...prevState,
       {
-        title: "Introduction to React",
-        description: "Lession 1",
-        duration: "00:00:00",
-        imageUrl:
-          "https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs",
+        id: section.length,
+        title: sectionData.title,
+        description: sectionData.description,
+        duration: sectionData.duration,
+        image: sectionData.image,
+        video: sectionData.video,
       },
     ]);
   };
@@ -41,153 +33,21 @@ const AddCourse = () => {
     console.log("Course Published");
   };
 
-  // const videoSources = [
-  //   {
-  //     src: "https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5",
-  //     type: "video/mp4",
-  //   },
-  //   // Add more video sources as needed
-  // ];
-
-  // const videoProps = {
-  //   theme: "forest", // 'city', 'fantasy', 'forest', 'sea'
-  //   height: "auto",
-  //   width: "auto",
-  //   autoPlay: false,
-  //   loop: false,
-  //   sources: videoSources,
-  //   controlBar: {
-  //     skipButtons: {
-  //       forward: 5,
-  //       backward: 5,
-  //     },
-  //   },
-  //   playbackRates: [0.5, 1, 1.5, 2],
-  //   disablePictureInPicture: false,
-  //   onReady: () => {
-  //     console.log("Video player is ready!");
-  //   },
-  // };
-
-
   return (
     <MainCard title="Add Course">
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
-          <div className="mx-2">
-            {/* <ReactPlayer
-              className="rounded-player"
-              url="https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5"
-              controls={true}
-              width="100%"
-              height="auto"
-            /> */}
-            {/* <VideoPlayer {...videoProps} /> */}
-
-            <CardMedia 
-              component="video"
-              controls
-              src="https://firebasestorage.googleapis.com/v0/b/ds-project-53aa8.appspot.com/o/videos%2Fgojo2.mp4?alt=media&token=f7787d9f-b982-4725-9e53-d28d9d972dd5"
-              alt="green iguana"
-              title="green iguana"
-              className="w-full h-[300px] rounded-[7px]"
-            />
-          </div>
-          <div className="ml-2">
-            <LinearWithValueLabel />
-          </div>
-
-          <InputFileUpload
-            text="Upload Video"
-            className=" flex justify-center m-2"
-          />
-
-          <div className="mr-4">
-            <TextField
-              id="outlined-multiline-flexible"
-              label="Multiline"
-              multiline
-              maxRows={6}
-              className="w-full mt-5 m-2 "
-            />
-          </div>
-
-          <div className="mr-4">
-            <Button
-              variant="contained"
-              color="primary"
-              className="m-2 w-full flex justify-center mr-4 "
-            >
-              Add Text Area{" "}
-            </Button>
-          </div>
-
-          <div className="mx-2 mt-6">
-            <Grid container spacing={2}>
-              <Grid item xs={6} >
-                <TextField
-                  id="outlined-basic"
-                  label="Title"
-                  variant="outlined"
-                  fullWidth
-                />
-
-                <TextField
-                  id="outlined-basic"
-                  label="Duration"
-                  variant="outlined"
-                  fullWidth
-                  className="mt-5"
-                />
-              </Grid>
-              <Grid item xs={6}>
-                <TextField
-                  id="outlined-basic"
-                  label="Description"
-                  variant="outlined"
-                  fullWidth
-                />
-
-                <div className="mt-[34px] ml-[20px]">
-                  <Grid container spacing={2} justifyContent="space-between">
-                    <Avatar
-                      variant="rounded"
-                      className="w-[50px] mt-1 h-[50px]"
-                    >
-                      <AssignmentIcon />
-                    </Avatar>
-                    <Avatar
-                      variant="rounded"
-                      className="w-[50px] mt-1 h-[50px]"
-                    >
-                      <AssignmentIcon />
-                    </Avatar>
-                    <Avatar
-                      variant="rounded"
-                      className="w-[50px] mt-1 h-[50px]"
-                    >
-                      <AssignmentIcon />
-                    </Avatar>
-                    <Avatar
-                      variant="rounded"
-                      className="w-[50px] mt-1 h-[50px]"
-                    >
-                      <AssignmentIcon />
-                    </Avatar>
-                  </Grid>
-                </div>
-              </Grid>
-            </Grid>
-          </div>
+          {!metaData && <AddCourseForm getCourseMetaData={setMetaData} />}
+          <AddSectionForm getSectionData={addSection} />
         </Grid>
         <Grid item xs={12} md={4}>
-          {section.map((lession) => (
+          {section.map((lession , index) => (
             <LessionCard
-              key={lession.title}
+              key={index}
               title={lession.title}
               description={lession.description}
               duration={lession.duration}
-              imageUrl={lession.imageUrl}
+              imageUrl={lession.image}
             />
           ))}
           <div className="flex justify-center">
