@@ -11,6 +11,7 @@
     "@mui/material": "^5.15.7",
     "@mui/system": "^5.15.7",
     "@mui/utils": "^5.15.7",
+    "@stripe/react-stripe-js": "^2.7.0",
     "@tabler/icons-react": "^2.46.0",
     "apexcharts": "^3.45.2",
     "axios": "^1.6.8",
