@@ -12,7 +12,7 @@ function FAQ() {
       <h2 className='text-[28px] leading-[42px] font-semibold md:text-[44px] md:leading-[61px] text-center mb-[38px] md:mb-[48px]'> Frequently asked questions</h2>
       <div className='lg:max-w-[886px] md:max-w-[688px] mx-auto flex flex-col gap-[20px]'>
      
-      <Accordion className=' border-[2px] border-[#D0D3D8]'>
+      <Accordion className=' '>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2-content"
@@ -27,7 +27,7 @@ function FAQ() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion className=' border-[2px] border-[#D0D3D8]'>
+      <Accordion className=' '>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2-content"
@@ -42,7 +42,7 @@ function FAQ() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion className=' border-[2px] border-[#D0D3D8]'>
+      <Accordion className=' '>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2-content"
@@ -57,7 +57,7 @@ function FAQ() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion className=' border-[2px] border-[#D0D3D8]'>
+      <Accordion className=''>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2-content"
@@ -72,7 +72,7 @@ function FAQ() {
         </AccordionDetails>
       </Accordion>
 
-      <Accordion className=' border-[2px] border-[#D0D3D8]'>
+      <Accordion className=' '>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2-content"
