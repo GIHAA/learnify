@@ -22,7 +22,7 @@ jobs:
     - name: install and test
       run: |
         cd backend
-        cd productService 
+        cd notificationService 
         npm install && npm test
       env: 
         DBHOST: ${{ secrets.DBHOST }}
