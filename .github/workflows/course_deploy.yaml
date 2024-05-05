@@ -45,7 +45,7 @@ jobs:
       run: |
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-course:latest -f backend/courseService/Dockerfile backend/courseService
         docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-course:latest -f backend/courseService/Dockerfile backend/courseService
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-curse:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-course:latest
       env:
         DOCKER_CLI_ACI: 1
         CONTAINER: oci
