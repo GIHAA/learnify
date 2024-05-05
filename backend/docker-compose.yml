@@ -1,23 +1,5 @@
 version: "3"
 services:
-  rabbitmq:
-    image: rabbitmq:alpine
-    container_name: rabbitmq
-    ports:
-      - '5672:5672'
-
-  product:
-    build:
-      dockerfile: Dockerfile
-      context: ./productService
-    container_name: product-service
-    ports:
-      - "3002:3002"
-    restart: always
-    depends_on:
-      - "rabbitmq"
-    env_file:
-      - ./productService/.env
 
   auth:
     build:
@@ -27,28 +9,45 @@ services:
     ports:
       - "3001:3001"
     restart: always
-    depends_on:
-      - "rabbitmq"
     env_file:
       - ./authService/.env
 
-  image:
+  course:
     build:
       dockerfile: Dockerfile
-      context: ./imageService
-    container_name: image-service
+      context: ./courseService
+    container_name: course-service
     ports:
-      - "3005:3005"
+      - "3002:3002"
     restart: always
     env_file:
-      - ./imageService/.env
+      - ./courseService/.env
+
+  enrollment:
+    build:
+      dockerfile: Dockerfile
+      context: ./enrollmentService
+    container_name: enrollment-service
+    ports:
+      - "3003:3003"
+    restart: always
+    env_file:
+      - ./enrollmentService/.env
+
+  payment:
+    build:
+      dockerfile: Dockerfile
+      context: ./paymentService
+    container_name: payment-service
+    ports:
+      - "3004:3004"
+    restart: always
+    env_file:
+      - ./paymentService/.env
 
   nginx-proxy:
     build:
       dockerfile: Dockerfile
       context: ./proxy
-    depends_on:
-      - auth
-      - product
     ports:
       - "80:80"

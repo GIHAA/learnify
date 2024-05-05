@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import  { useState , useRef } from 'react';
 import { TextField, Button, Grid, Avatar } from "@mui/material";
 import { useFormik } from 'formik';
 import InputFileUpload from "./form-components/InputFileUpload";
@@ -7,6 +7,8 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 
 const AddSectionForm = ({ getSectionData }) => {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
+  const resetVideoInput = useRef(null);
+  const resetImageInput = useRef(null);
 
   const handleAvatarClick = (avatarId) => {
     setSelectedAvatar(avatarId);
@@ -31,8 +33,10 @@ const AddSectionForm = ({ getSectionData }) => {
       selectedAvatar: null,
     },
     onSubmit: (values) => {
-      console.log(values);
       getSectionData(values);
+      resetVideoInput.current();
+      resetImageInput.current();
+      formik.resetForm();
     },
   });
 
@@ -40,6 +44,7 @@ const AddSectionForm = ({ getSectionData }) => {
     <form onSubmit={formik.handleSubmit}>
       <InputFileUpload
         setDownloadURL={getsVideoDownloadURL}
+        setResetFunction={(reset) => { resetVideoInput.current = reset; }}
         text="Upload Video"
         type="video"
         className="flex justify-center"
@@ -47,6 +52,7 @@ const AddSectionForm = ({ getSectionData }) => {
 
       <InputFileUpload
         setDownloadURL={getsImageDownloadURL}
+        setResetFunction={(reset) => { resetImageInput.current = reset; }}
         text="Upload Image"
         type="image"
         className="flex justify-center mt-5"

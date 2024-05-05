@@ -12,6 +12,8 @@ import NotificationSection from "./NotificationSection";
 
 // assets
 import { IconMenu2 } from "@tabler/icons-react";
+import DropDown from "./DropDown";
+import { Link } from "react-router-dom";
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -29,6 +31,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
             width: "auto",
           },
         }}
+        className='lg:flex lg:justify-between flex-row w-[100%] '
       >
         <Box
           component="span"
@@ -52,16 +55,14 @@ const Header = ({ handleLeftDrawerToggle }) => {
             }}
             onClick={handleLeftDrawerToggle}
             color="inherit"
+            // className="lg:hidden"
           >
             <IconMenu2 stroke={1.5} size="1.3rem" />
           </Avatar>
         </ButtonBase>
-        <div className="hidden lg:flex">
-          <div className="mx-3">sdsds</div>
-          <div className="mx-3">sdsds</div>
-          <div className="mx-3">sdsds</div>
-          <div className="mx-3">sdsds</div>
-          <div className="mx-3">sdsds</div>
+        <div className="hidden lg:flex lg:justify-center lg:items-center">
+          <DropDown/>
+          <Link to="/admin" className="mx-3">My Course</Link>
         </div>
       </Box>
 

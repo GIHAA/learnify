@@ -47,7 +47,7 @@ export const getAllCoursesRepo = async (query) => {
 
   const options = {
     page,
-    limit,
+    limit
   };
   try {
     const courses = await course.paginate(filters, options);
