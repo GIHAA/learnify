@@ -2,6 +2,8 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { IoMdCheckmarkCircle } from "react-icons/io";
+import data from './data'
 
 
 function FAQ() {
@@ -11,82 +13,24 @@ function FAQ() {
       <div>
       <h2 className='text-[28px] leading-[42px] font-semibold md:text-[44px] md:leading-[61px] text-center mb-[38px] md:mb-[48px]'> Frequently asked questions</h2>
       <div className='lg:max-w-[886px] md:max-w-[688px] mx-auto flex flex-col gap-[20px]'>
-     
-      <Accordion className=' '>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2-content"
-          id="panel2-header"
-          className=' text-[20px]  leading-[28px] md:text-[24px] md:leading-[33px] font-medium'
-        >
-          Accordion 2
-        </AccordionSummary>
-        <AccordionDetails className=' text-[15px]  leading-[24px]'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion className=' '>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2-content"
-          id="panel2-header"
-          className=' text-[20px]  leading-[28px] md:text-[24px] md:leading-[33px] font-medium'
-        >
-          Accordion 2
-        </AccordionSummary>
-        <AccordionDetails className=' text-[15px]  leading-[24px]'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion className=' '>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2-content"
-          id="panel2-header"
-          className=' text-[20px]  leading-[28px] md:text-[24px] md:leading-[33px] font-medium'
-        >
-          Accordion 2
-        </AccordionSummary>
-        <AccordionDetails className=' text-[15px]  leading-[24px]'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion className=''>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2-content"
-          id="panel2-header"
-          className=' text-[20px]  leading-[28px] md:text-[24px] md:leading-[33px]  font-medium'
-        >
-          Accordion 2
-        </AccordionSummary>
-        <AccordionDetails className=' text-[15px]  leading-[24px]'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion className=' '>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2-content"
-          id="panel2-header"
-          className=' text-[20px]  leading-[28px] md:text-[24px] md:leading-[33px] font-medium'
-        >
-          Accordion 2
-        </AccordionSummary>
-        <AccordionDetails className=' text-[15px]  leading-[24px]'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-          malesuada lacus ex, sit amet blandit leo lobortis eget.
-        </AccordionDetails>
-      </Accordion>
-    
+        {data.map((item, index) => (
+          <Accordion className=' ' key={index}>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+              className=' text-[20px]  leading-[28px] md:text-[24px] md:leading-[33px] font-medium'
+            >
+              <div className='flex max-w-fit gap-[10px] justify-center items-center'>
+              <IoMdCheckmarkCircle className='text-[#409AE9] ' />
+              {item.question}
+              </div>
+            </AccordionSummary>
+            <AccordionDetails className=' text-[15px]  leading-[24px]'>
+              {item.answer}
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </div>
       </div>
     </section>
