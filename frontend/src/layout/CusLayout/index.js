@@ -16,6 +16,8 @@ import { SET_MENU } from 'store/actions';
 
 // assets
 import { IconChevronRight } from '@tabler/icons-react';
+import Footer from './Footer';
+
 
 // styles
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' && prop !== 'theme' })(({ theme, open }) => ({
@@ -64,6 +66,7 @@ const MainLayout = () => {
   };
 
   return (
+    <>
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       {/* header */}
@@ -93,6 +96,8 @@ const MainLayout = () => {
       </Main>
       <Customization />
     </Box>
+    <Footer />
+    </>
   );
 };
 
