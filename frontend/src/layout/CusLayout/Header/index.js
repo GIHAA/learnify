@@ -62,7 +62,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
         </ButtonBase>
         <div className="hidden lg:flex lg:justify-center lg:items-center">
           <DropDown/>
-          <Link to="/admin" className="mx-3">My Course</Link>
+          <Link to="/my-courses" className="mx-3">My Course</Link>
         </div>
       </Box>
 
