@@ -1,4 +1,4 @@
-name: Email Service Docker Build and Push
+name: Notification Service Docker Build and Push
 
 on:
   push:
@@ -43,9 +43,9 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-email:latest -f backend/emailService/Dockerfile backend/emailService
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-email:latest -f backend/emailService/Dockerfile backend/emailService
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-email:latest
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-notification:latest -f backend/notificationService/Dockerfile backend/notificationService
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-notification:latest -f backend/notificationService/Dockerfile backend/notificationService
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-notification:latest
       env:
         DOCKER_CLI_ACI: 1
         CONTAINER: oci

@@ -21,7 +21,7 @@ services:
       - "3002:3002"
     restart: always
     env_file:
-      - ./authService/.env
+      - ./courseService/.env
 
   enrollment:
     build:
@@ -29,39 +29,25 @@ services:
       context: ./enrollmentService
     container_name: enrollment-service
     ports:
-      - "3001:3001"
+      - "3003:3003"
     restart: always
     env_file:
-      - ./authService/.env
+      - ./enrollmentService/.env
 
-  çauth:
+  payment:
     build:
       dockerfile: Dockerfile
-      context: ./authService
-    container_name: auth-service
+      context: ./paymentService
+    container_name: payment-service
     ports:
-      - "3001:3001"
+      - "3004:3004"
     restart: always
     env_file:
-      - ./authService/.env
-
-    auth:
-    build:
-      dockerfile: Dockerfile
-      context: ./authService
-    container_name: auth-service
-    ports:
-      - "3001:3001"
-    restart: always
-    env_file:
-      - ./authService/.env
+      - ./paymentService/.env
 
   nginx-proxy:
     build:
       dockerfile: Dockerfile
       context: ./proxy
-    depends_on:
-      - auth
-      - product
     ports:
       - "80:80"

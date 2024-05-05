@@ -1,4 +1,4 @@
-name: Product Service Docker Build and Push
+name: Course Service Docker Build and Push
 
 on:
   push:
@@ -22,12 +22,12 @@ jobs:
     - name: install and test
       run: |
         cd backend
-        cd productService 
+        cd courseService 
         npm install && npm test
       env: 
         DBHOST: ${{ secrets.DBHOST }}
         TOKEN_SECRET: ${{ secrets.TOKEN_SECRET }}
-        JWT_EXPIRES_IN: ${{ secrets.JWT_EXPIRES_IN }}
+        JWT_EXPIRES: ${{ secrets.JWT_EXPIRES_IN }}
 
 
   build-and-push:
@@ -43,12 +43,22 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-product:latest -f backend/productService/Dockerfile backend/productService
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-product:latest -f backend/productService/Dockerfile backend/productService
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-product:latest
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-course:latest -f backend/courseService/Dockerfile backend/courseService
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-course:latest -f backend/courseService/Dockerfile backend/courseService
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-curse:latest
       env:
         DOCKER_CLI_ACI: 1
         CONTAINER: oci
-        MONGO_URI: ${{ secrets.MONGO_URI }}
+        MONGO_URI: ${{ secrets.AUTH_MONGO_URI }}
         JWT_EXPIRES: ${{ secrets.JWT_EXPIRES_IN }}
         JWT_SECRET: ${{ secrets.TOKEN_SECRET }}
+        MAIL_HOST: ${{ secrets.MAIL_HOST }}
+        MAIL_USER: ${{ secrets.MAIL_USER }}
+        MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+        APP_DOMAIN: ${{ secrets.APP_DOMAIN }}
+        FRONTEND_DOMAIN: ${{ secrets.FRONTEND_DOMAIN }}
+        ADMIN_FRONTEND_DOMAIN: ${{ secrets.ADMIN_FRONTEND_DOMAIN }}
+
+
+
+
