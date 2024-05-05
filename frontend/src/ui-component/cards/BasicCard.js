@@ -1,14 +1,12 @@
-import PropTypes from 'prop-types';
-import {
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Rating,
-} from "@mui/material";
+import PropTypes from "prop-types";
 
-export default function BasicCard({ imageUrl, title, price, rating, isBtnExist }) {
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Typography from "@mui/material/Typography";
+import Rating from "@mui/material/Rating";
+
+export default function BasicCard({ imageUrl, title, price, rating }) {
   return (
     <Card
       sx={{
@@ -18,19 +16,16 @@ export default function BasicCard({ imageUrl, title, price, rating, isBtnExist }
         margin: "12px",
       }}
     >
-    
-    <CardMedia
-  component="img"
-  image={imageUrl}
-  alt="Card Image"
-  sx={{
-    width: "auto", // Set your desired width
-    height: "200px", // Set your desired height
-    objectFit: "cover",
-    backgroundSize: "contain",
-  }}
-/>
-
+      <CardMedia
+        component="img"
+        height="140"
+        image={imageUrl}
+        alt="Card Image"
+        sx={{
+          objectFit: "cover",
+          backgroundSize: "contain",
+        }}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}
@@ -39,11 +34,6 @@ export default function BasicCard({ imageUrl, title, price, rating, isBtnExist }
           Price: {price}
         </Typography>
         <Rating name="read-only" value={rating} readOnly />
-        {isBtnExist && (
-          <Button variant="contained" color="primary">
-            More Info
-          </Button>
-        )}
       </CardContent>
     </Card>
   );
@@ -54,5 +44,4 @@ BasicCard.propTypes = {
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   rating: PropTypes.number.isRequired,
-  isBtnExist: PropTypes.bool,
 };
