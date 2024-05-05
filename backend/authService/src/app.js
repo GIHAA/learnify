@@ -70,7 +70,7 @@ app.use(
 
 app.use(queryMapper);
 
-app.use('auth/auth-service/api', routes);
+app.use('/auth/auth-service/api', routes);
 
 app.use(responseInterceptor);
 
