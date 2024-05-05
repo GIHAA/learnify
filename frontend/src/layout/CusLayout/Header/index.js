@@ -31,7 +31,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
             width: "auto",
           },
         }}
-        className='lg:flex lg:justify-between flex-row w-[100%]'
+        className='lg:flex lg:justify-between flex-row w-[100%] '
       >
         <Box
           component="span"
@@ -55,7 +55,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
             }}
             onClick={handleLeftDrawerToggle}
             color="inherit"
-            className="lg:hidden"
+            // className="lg:hidden"
           >
             <IconMenu2 stroke={1.5} size="1.3rem" />
           </Avatar>
