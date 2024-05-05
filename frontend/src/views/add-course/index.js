@@ -36,6 +36,7 @@ const AddCourse = () => {
     }
    
     await createCourse({ ...metaData, addedBy: "60f5b14eb2c4b417885a2e3a", section });
+    
   
     //todo toast  
     navigate("/admin/course-management");

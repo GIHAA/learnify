@@ -1,4 +1,4 @@
-name: Product Service Docker Build and Push
+name: Notification Service Docker Build and Push
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
     - name: install and test
       run: |
         cd backend
-        cd productService 
+        cd notificationService 
         npm install && npm test
       env: 
         DBHOST: ${{ secrets.DBHOST }}
@@ -43,12 +43,10 @@ jobs:
 
     - name: Build and Push Docker Image
       run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-product:latest -f backend/productService/Dockerfile backend/productService
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-product:latest -f backend/productService/Dockerfile backend/productService
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-product:latest
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-notification:latest -f backend/notificationService/Dockerfile backend/notificationService
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-notification:latest -f backend/notificationService/Dockerfile backend/notificationService
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/ds-project-notification:latest
       env:
         DOCKER_CLI_ACI: 1
         CONTAINER: oci
-        MONGO_URI: ${{ secrets.MONGO_URI }}
-        JWT_EXPIRES: ${{ secrets.JWT_EXPIRES_IN }}
-        JWT_SECRET: ${{ secrets.TOKEN_SECRET }}
+      

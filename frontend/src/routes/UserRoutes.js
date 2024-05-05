@@ -2,6 +2,7 @@ import Landing from "views/landing";
 import CusLayout from "layout/CusLayout";
 import ShopPage from "views/shop-page";
 import PaymentGateway from "views/payment-gateway-page";
+import CourseInfo from "views/course-info"
 
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -21,6 +22,10 @@ const UserRoutes = {
     {
       path: "shop",
       element: <ShopPage />,
+    },
+    {
+      path: "course-info",
+      element: <CourseInfo />,
     },
     {
       path: "test",

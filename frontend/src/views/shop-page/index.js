@@ -1,20 +1,60 @@
-// material-ui
-import { Typography } from '@mui/material';
+import styled from "@emotion/styled";
+import Grid from "@mui/material/Grid";
+import SearchSection from "layout/MainLayout/Header/SearchSection";
 
-// project imports
-import MainCard from 'ui-component/cards/MainCard';
+import MainCard from "ui-component/cards/MainCard";
+import BasicCard from "ui-component/cards/BasicCard";
+import { useEffect, useState } from "react";
+import { getAllCourses } from "api/courseService";
 
-// ==============================|| SAMPLE PAGE ||============================== //
+const MainCardStyle = styled(MainCard)(() => ({
+  "& .MuiCardHeader-root": {
+    paddingLeft: "38px",
+  },
+}));
 
-const ShopPage = () => (
-  <MainCard title="Shop page">
-    <Typography variant="body2">
-      Lorem ipsum dolor sit amen, consenter nipissing eli, sed do elusion tempos incident ut laborers et doolie magna alissa. Ut enif ad
-      minim venice, quin nostrum exercitation illampu laborings nisi ut liquid ex ea commons construal. Duos aube grue dolor in reprehended
-      in voltage veil esse colum doolie eu fujian bulla parian. Exceptive sin ocean cuspidate non president, sunk in culpa qui officiate
-      descent molls anim id est labours.
-    </Typography>
-  </MainCard>
-);
+const CourseManagementPage = () => {
+  const [courses, setCourses] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
-export default ShopPage;
+  const fetchCourses = async (searchText = "") => {
+    try {
+      const response = await getAllCourses(searchText);
+      setCourses(response.docs);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCourses();
+  }, []);
+
+  useEffect(() => {
+    fetchCourses(searchText);
+  }, [searchText]);
+
+
+  return (
+    <MainCardStyle title="Shop">
+      <SearchSection setSearchText={setSearchText} />
+
+      <Grid container spacing={2} className="mt-[10px]">
+        {courses.map((course) => (
+          <Grid item xs={12} sm={6} md={4} lg={3} key={course.id}>
+            <BasicCard
+              title={course.title}
+              description={course.description}
+              imageUrl={course.thumbnail}
+              rating={course.rating}
+              price={course.price}
+              isBtnExist={true}
+            />
+          </Grid>
+        ))}
+      </Grid>
+    </MainCardStyle>
+  );
+};
+
+export default CourseManagementPage;
