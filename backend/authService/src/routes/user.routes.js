@@ -26,7 +26,7 @@ users.patch(
   celebrate({ [Segments.PARAMS]: userIdSchema, [Segments.BODY]: updateSchema }),
   tracedAsyncHandler(update)
 );
-users.delete('/:id', adminProtect, tracedAsyncHandler(remove));
-users.delete('/me/:id', protect, tracedAsyncHandler(remove));
+users.delete('/:id', tracedAsyncHandler(remove));
+// users.delete('/me/:id', protect, tracedAsyncHandler(remove));
 
 export default users;

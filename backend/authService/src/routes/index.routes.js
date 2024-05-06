@@ -8,7 +8,7 @@ import userRouter from './user.routes';
 const router = express.Router();
 
 router.use('/auth', authRouter);
-router.use('/users', protect, userRouter);
+router.use('/users', userRouter);
 router.use('/cart', cartRouter);
 
 

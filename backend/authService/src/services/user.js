@@ -20,13 +20,13 @@ export const changePasswordService = async (user, oldPassword, newPassword) => {
 };
 
 export const updateUserdetails = async (userId, user, payload) => {
-  if (user.role !== 'ADMIN') {
-    if (userId !== user._id.toString()) {
-      throw new createError(403, 'You are not authorized to update this user');
-    }
-    delete payload.is_active;
-    delete payload.eliminated;
-  }
+  // if (user.role !== 'ADMIN') {
+  //   if (userId !== user._id.toString()) {
+  //     throw new createError(403, 'You are not authorized to update this user');
+  //   }
+  //   delete payload.is_active;
+  //   delete payload.eliminated;
+  // }
   if (payload.name) {
     const existingUser = await getOneUser({ name: payload.name, _id: { $ne: userId } });
     if (existingUser) throw new createError(422, 'Name is already taken');
@@ -55,10 +55,10 @@ export const addNewUser = async (payload) => {
 };
 
 
-export const removeUserByID = async (currentUser, id) => {
-  if (currentUser.role !== 'ADMIN' && currentUser._id !== id) {
-    throw new createError(403, 'Permission denied');
-  }
+export const removeUserByID = async ( id) => {
+  // if (currentUser.role !== 'ADMIN' && currentUser._id !== id) {
+  //   throw new createError(403, 'Permission denied');
+  // }
   const user = await findOneAndRemoveUser({ _id: id });
   if (!user) {
     throw new createError(401, 'Invalid user ID');
