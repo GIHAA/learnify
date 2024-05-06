@@ -42,7 +42,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: example-ingress
+  name: backend-ingress
   annotations:
     nginx.org/rewrites: "serviceName=tea-svc rewrite=/;serviceName=coffee-svc rewrite=/beans/"
     kubernetes.io/ingress.class: "nginx"
