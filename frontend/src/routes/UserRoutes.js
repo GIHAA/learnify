@@ -2,6 +2,7 @@ import Landing from "views/landing";
 import CusLayout from "layout/CusLayout";
 import ShopPage from "views/shop-page";
 import PaymentGateway from "views/payment-gateway-page";
+import CourseInfo from "views/course-info"
 
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -26,20 +27,25 @@ const UserRoutes = {
     },
     {
       path: "my-courses",
-      element: <MyCourse/>,
+      element: <MyCourse />,
+    },
+    {
+      path: "course-info",
+      element: <CourseInfo />,
     },
     {
       path: "test",
-      element:  <Elements stripe={stripePromise}>
-        <PaymentGateway />
-      </Elements>,
+      element: (
+        <Elements stripe={stripePromise}>
+          <PaymentGateway />
+        </Elements>
+      ),
     },
     {
       path: "*",
-      element: <PageNotFound/>,
+      element: <PageNotFound />,
     },
   ],
-
 };
 
 export default UserRoutes;

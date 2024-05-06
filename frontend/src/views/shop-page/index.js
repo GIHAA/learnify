@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import SearchSection from "layout/MainLayout/Header/SearchSection";
 
 import MainCard from "ui-component/cards/MainCard";
-import BasicCard from "ui-component/cards/BasicCard";
+import ShopCourseCard from "ui-component/cards/ShopCourseCard";
 import { useEffect, useState } from "react";
 import { getAllCourses } from "api/courseService";
 
@@ -42,13 +42,13 @@ const CourseManagementPage = () => {
       <Grid container spacing={2} className="mt-[10px]">
         {courses.map((course) => (
           <Grid item xs={12} sm={6} md={4} lg={3} key={course.id}>
-            <BasicCard
+            <ShopCourseCard
+              id={course.id}
               title={course.title}
               description={course.description}
               imageUrl={course.thumbnail}
               rating={course.rating}
               price={course.price}
-              isBtnExist={true}
             />
           </Grid>
         ))}

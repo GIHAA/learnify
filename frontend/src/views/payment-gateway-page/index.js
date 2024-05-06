@@ -2,6 +2,9 @@ import { useState } from 'react';
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
 import toast from 'react-hot-toast';
+import Visa from "./images/visa.jpg"
+import Master from "./images/master.jpg"
+import Amex from "./images/amex.png"
 
 const PayementGateway = () => {
   const stripe = useStripe();
@@ -61,21 +64,34 @@ const PayementGateway = () => {
   return (
     <form onSubmit={handleSubmit} className="max-w-md mx-auto">
       <div className="mb-4">
-        <div className="bg-white rounded-lg shadow-md p-4">
-          
+        <div className="bg-white rounded-lg shadow-md p-8">
+          <div>
+            <div className="flex gap-4 mb-8">
+              <div className="w-[70px] shadow-md rounded-lg overflow-hidden">
+                <img src={Visa} alt="" className="h-[50px]" />
+              </div>
+              <div className="w-[70px] shadow-md rounded-lg overflow-hidden">
+                <img src={Master} alt="" className="h-[50px]" /> 
+              </div>
+              <div className="w-[70px] shadow-md rounded-lg overflow-hidden">
+                <img src={Amex} alt="" className="h-[50px]" />
+              </div>
+
+            </div>
+          </div>
           <CardElement
             className="border border-gray-300 rounded-lg p-4"
             options={{
               style: {
                 base: {
-                  fontSize: '16px',
-                  color: '#424770',
-                  '::placeholder': {
-                    color: '#aab7c4',
+                  fontSize: "16px",
+                  color: "#424770",
+                  "::placeholder": {
+                    color: "#aab7c4",
                   },
                 },
                 invalid: {
-                  color: '#9e2146',
+                  color: "#9e2146",
                 },
               },
             }}
