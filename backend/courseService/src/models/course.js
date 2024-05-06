@@ -27,6 +27,14 @@ const courseSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  category: {
+    type : String,
+    required: true
+  },
+  is_approved: {
+    type: Boolean,
+    default: false
+  },
   content: [{
     title: {
       type: String,
