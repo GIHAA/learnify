@@ -48,7 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('Assert'))
 
-app.get('/course-service/health', (_, res) => res.status(200).json({ message: 'Course service and Running' }));
+app.get('/course/health', (_, res) => res.status(200).json({ message: 'Course service and Running' }));
 
 app.use(context.middleware);
 
@@ -69,7 +69,7 @@ app.use(
 
 app.use(queryMapper);
 
-app.use('/course-service/api', routes);
+app.use('/course/api', routes);
 
 app.use(responseInterceptor);
 
