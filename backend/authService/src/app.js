@@ -49,7 +49,8 @@ app.use(express.json({ limit: '1mb' }));
 
 app.use(express.urlencoded({ extended: true }));
 
-app.get('auth/auth-service/health', (_, res) => res.status(200).json({ message: 'Auth service Up and Running' }));
+// app.get('/auth/auth-service/health', (_, res) => res.status(200).json({ message: 'Auth service Up and Running' }));
+app.get('/auth/health', (_, res) => res.status(200).json({ message: 'Auth service Up and Running' }));
 
 app.use(context.middleware);
 
@@ -70,7 +71,7 @@ app.use(
 
 app.use(queryMapper);
 
-app.use('/auth/auth-service/api', routes);
+app.use('/auth/api', routes);
 
 app.use(responseInterceptor);
 
