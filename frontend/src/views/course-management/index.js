@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import Grid from "@mui/material/Grid"; 
 import SearchSection from "layout/MainLayout/Header/SearchSection";
-
 import MainCard from "ui-component/cards/MainCard";
 import BasicCard from "ui-component/cards/BasicCard";
 import { Pagination } from "@mui/material";

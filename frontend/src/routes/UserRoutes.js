@@ -6,6 +6,8 @@ import CourseInfo from "views/course-info"
 
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
+import MyCourse from "views/my-courses";
+import PageNotFound from "views/pages/404";
 
 const stripePromise = loadStripe('pk_test_51MCtGXBSWDySeSWsiNHJCw9I1wfXLbNvkP1lSH0Wrox0E3UPHSLazZQfjQUIYrKdSOFZz34tOMBLbvx4uXov6Giy00hzE0Iz1a');
 
@@ -24,21 +26,26 @@ const UserRoutes = {
       element: <ShopPage />,
     },
     {
+      path: "my-courses",
+      element: <MyCourse />,
+    },
+    {
       path: "course-info",
       element: <CourseInfo />,
     },
     {
       path: "test",
-      element:  <Elements stripe={stripePromise}>
-        <PaymentGateway />
-      </Elements>,
+      element: (
+        <Elements stripe={stripePromise}>
+          <PaymentGateway />
+        </Elements>
+      ),
     },
-    // {
-    //   path: "*",
-    //   element: <div>404</div>,
-    // },
+    {
+      path: "*",
+      element: <PageNotFound />,
+    },
   ],
-
 };
 
 export default UserRoutes;

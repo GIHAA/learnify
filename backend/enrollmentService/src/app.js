@@ -48,7 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('Assert'))
 
-app.get('/enrollment-service/health', (_, res) => res.status(200).json({ message: 'Enrollment service and Running' }));
+app.get('/enrollment/health', (_, res) => res.status(200).json({ message: 'Enrollment service and Running' }));
 
 app.use(context.middleware);
 
@@ -69,7 +69,7 @@ app.use(
 
 app.use(queryMapper);
 
-app.use('/enrollment-service/api', routes);
+app.use('/enrollment/api', routes);
 
 app.use(responseInterceptor);
 
