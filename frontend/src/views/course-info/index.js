@@ -1,6 +1,27 @@
 import Thumbnail from "./images/course_img.jpg"
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { getCourse } from "api/courseService";
 
 const CourseInfo = () => {
+  const { id } = useParams(); // Fetching id from params
+  const [course, setCourse] = useState([]);
+
+  const fetchCourse = async (id) => {
+    try {
+      const response = await getCourse(id);
+      console.log(response)
+      setCourse(response.docs);
+      setCourse(course);
+    } catch (error) {
+      console.error("Error fetching course:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCourse(id);
+  }, [id]);
+  
   return (
     <div className="p-4">
       <div>

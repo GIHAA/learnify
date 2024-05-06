@@ -13,7 +13,7 @@ const MainCardStyle = styled(MainCard)(() => ({
   },
 }));
 
-const CourseManagementPage = () => {
+const ShopPage = () => {
   const [courses, setCourses] = useState([]);
   const [searchText, setSearchText] = useState("");
 
@@ -41,9 +41,9 @@ const CourseManagementPage = () => {
 
       <Grid container spacing={2} className="mt-[10px]">
         {courses.map((course) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={course.id}>
+          <Grid item xs={12} sm={6} md={4} lg={3} key={course._id}>
             <ShopCourseCard
-              id={course.id}
+              id={course._id}
               title={course.title}
               description={course.description}
               imageUrl={course.thumbnail}
@@ -57,4 +57,4 @@ const CourseManagementPage = () => {
   );
 };
 
-export default CourseManagementPage;
+export default ShopPage;

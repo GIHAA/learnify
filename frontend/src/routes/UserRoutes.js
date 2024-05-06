@@ -26,13 +26,17 @@ const UserRoutes = {
       element: <ShopPage />,
     },
     {
+      path: "shop/course/:id",
+      element: <CourseInfo />,
+    },
+    {
       path: "my-courses",
       element: <MyCourse />,
     },
-    {
-      path: "course-info",
-      element: <CourseInfo />,
-    },
+    // {
+    //   path: "course-info",
+    //   element: <CourseInfo />,
+    // },
     {
       path: "test",
       element: (
