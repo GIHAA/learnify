@@ -23,9 +23,9 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
+// import axios from 'axios';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-
+import {getuser,deleteuser,Updateusername} from '../../api/userService'
 
 const CourseManagementPage = () =>{
  const [rows,setrows] = useState(['']);
@@ -34,50 +34,58 @@ const CourseManagementPage = () =>{
  //  const [email,setemail] = useState()
 //  const [role,setrole] = useState()
 
-  const userdata = ()=>{
+  const userdata =  async()=>{
     
-     axios.get( 'http://localhost:3001/auth-service/api/users/').then((res)=>{
+    //  axios.get( 'http://localhost:3001/auth-service/api/users/').then((res)=>{
 
-      const data = res.data.data;
-      setrows(data);
-     }).catch()
-     
+    //   const data = res.data.data;
+    //   setrows(data);
+    //  }).catch()
+     const data =  await getuser();
+     console.log(data)
+     setrows(data);
   }
 
-  const userDelete =(id)=>{
+  const userDelete = async (id)=>{
     console.log(id)
 
-     axios.delete( `http://localhost:3001/auth-service/api/users/${id}`).then(res=>{
-       console.log(res.data.data)
+    //  axios.delete( `http://localhost:3001/auth-service/api/users/${id}`).then(res=>{
+    //    console.log(res.data.data)
       
-       userdata()
+    //    userdata()
      
-     }).catch((error)=>{
-      console.log(error)
-     })
+    //  }).catch((error)=>{
+    //   console.log(error)
+    //  })
+       await deleteuser(id)
+     userdata()
   }
 
  const settoclick = ()=>{
 
    sethidde(!hidde)
  }
-  const userUpdate = (id)=>{
+  const userUpdate = async  (id)=>{
     console.log(id)
    
 
 
-    axios.patch(`http://localhost:3001/auth-service/api/users/${id}`, { name })
-    .then((res) => {
-      console.log(res.data);
-      sethidde(true)
-      setname('')
-      userdata();
+  //   axios.patch(`http://localhost:3001/auth-service/api/users/${id}`, { name })
+  //   .then((res) => {
+  //     console.log(res.data);
+  //     sethidde(true)
+  //     setname('')
+  //     userdata();
        
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   });
+       await Updateusername(id,name)
+        sethidde(true)
+        setname('')
+        userdata();
+   }
   useEffect(()=>{
 
     userdata()
