@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const ShopCourseCard = ({ id, title, description, imageUrl, rating, price }) => {
   return (
@@ -12,9 +13,14 @@ const ShopCourseCard = ({ id, title, description, imageUrl, rating, price }) => 
         <p className="text-[16px] leading-[25px] font-bold">{rating}</p>
         <p className="text-[16px] leading-[25px] font-bold"> $ {price}</p>
       </div>
-      <Button variant="contained" className="w-[50%] rounded-[6px] ml-[20px]">
-        View More
-      </Button>
+        <Button
+          variant="contained"
+          className="w-[50%] rounded-[6px] ml-[20px]"
+          component={Link}
+          to={`/shop/course/${id}`}
+        >
+          View More
+        </Button>
     </div>
   );
 };

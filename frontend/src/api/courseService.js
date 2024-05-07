@@ -1,6 +1,5 @@
 import authFetch from "./axiosInterceptor";
-
-const API_BASE_URL = "/course-service/api/course";
+const API_BASE_URL = "/course/api/course";
 
 export const getCourses = async (page = 1, limit = 4, searchText = "") => {
     console.log(searchText);
