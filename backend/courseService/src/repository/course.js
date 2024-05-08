@@ -18,8 +18,11 @@ export const addCourseRepo = async (courses) => {
 };
 
 export const getOneCourseRepo = async (filters) => {
+  console.log(filters)
   try {
-    const course = await Course.findOne({ courseId: filters.courseId });
+    const course = await Course.findOne({ _id: filters.courseId });
+    console.log(course)
+    console.log(filters)
     if (!course) {
       logger.warn('No course found.');
       return null;

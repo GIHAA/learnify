@@ -1,10 +1,9 @@
 import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import {  Avatar } from "@mui/material";
-// import CircularWithValueLabel from "ui-component/CircularProgressWithLabel";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 
-export default function LessionCard({
+export default function TakeLessionCard({
   title,
   description,
 
@@ -19,7 +18,7 @@ export default function LessionCard({
           boxShadow: "0 0 10px 0 rgba(0,0,0,0.1)",
           margin: "12px",
           position: "relative",
-        }}
+        }}Add Course
       >
         <div className="p-[10px] flex">
           <div className="w-[50px] h-[50px] m-2.5 rounded-[7px] absolute top-1 left-0 flex justify-center">
@@ -41,14 +40,14 @@ export default function LessionCard({
   );
 }
 
-LessionCard.propTypes = {
+TakeLessionCard.propTypes = {
   imageUrl: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   duration: PropTypes.string.isRequired,
 };
 
-LessionCard.defaultProps = {
+TakeLessionCard.defaultProps = {
   imageUrl:
     "https://media.licdn.com/dms/image/D5622AQEOTHAahyxpfg/feedshare-shrink_800/0/1690448852417?e=2147483647&v=beta&t=yK08dawAbMj79XC8thPDspfk6m0-sv_2ryh1SAjzcKs",
   description: "Lession 1",

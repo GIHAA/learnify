@@ -1,6 +1,6 @@
 import authFetch from "./axiosInterceptor";
 
-const API_BASE_URL = "/auth-service/api/auth";
+const API_BASE_URL = "/auth/api/auth";
 
 
 export const login = async (data) => {

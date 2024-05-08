@@ -1,6 +1,6 @@
 import authFetch from "./axiosInterceptor";
 
-const API_BASE_URL = "/payment-service/api/payment";
+const API_BASE_URL = "/payment/api/payment";
 
 export const getDashboard = async () => {
     try {

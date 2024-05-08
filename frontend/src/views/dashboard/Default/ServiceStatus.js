@@ -79,11 +79,12 @@ const ServiceStatus = ({ isLoading , service , status  }) => {
                   }
                   secondary={
                     <Typography variant="subtitle2" sx={{ color: 'primary.light', mt: 0.25 }}>
-                      Status : {status}
+                      Status : {status ? "Running" : 'N/A'}
                     </Typography>
                   }
                 />
-                <div className={`bg-${status === 'running' ? 'green' : 'red'}-400 w-[50px] h-[50px] rounded-xl`}></div>
+                <div className={`bg-${status == true ? 'green' : 'red'}-400 w-[50px] h-[50px] rounded-xl`}></div>
+              
               </ListItem>
             </List>
           </Box>

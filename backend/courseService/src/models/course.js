@@ -29,7 +29,7 @@ const courseSchema = new mongoose.Schema({
   },
   category: {
     type : String,
-    required: true
+    required: false
   },
   is_approved: {
     type: Boolean,
@@ -42,6 +42,7 @@ const courseSchema = new mongoose.Schema({
     },
     type: {
       type: String,
+      // video or photo or text
       required: true
     },
     video: {

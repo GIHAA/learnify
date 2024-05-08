@@ -1,6 +1,7 @@
 import MainLayout from "layout/MainLayout";
 import DashboardDefault from "views/dashboard/Default";
 import CouserManagement from "views/course-management";
+import ApproveCoursePage from "views/approve-course";
 import UserManagement from "views/user-management";
 import AddCourse from "views/add-course";
 
@@ -16,6 +17,10 @@ const AdminRoutes = {
     {
       path: "course-management",
       element: <CouserManagement />,
+    },
+    {
+      path: "approve-course",
+      element: <ApproveCoursePage />,
     },
     {
       path: "user-management",

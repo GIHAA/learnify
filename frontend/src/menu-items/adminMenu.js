@@ -25,6 +25,13 @@ const adminMenu = {
       url: '/admin/course-management',
       icon: icons.IconCertificate,
       breadcrumbs: false
+    },{
+      id: 'approve-course',
+      title: 'Approve Course',
+      type: 'item',
+      url: '/admin/approve-course',
+      icon: icons.IconHelp,
+      breadcrumbs: false
     },
     {
       id: 'user-management',

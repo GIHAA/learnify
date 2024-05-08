@@ -1,8 +1,8 @@
 import authFetch from "./axiosInterceptor";
+
 const API_BASE_URL = "/course/api/course";
 
 export const getCourses = async (page = 1, limit = 4, searchText = "") => {
-    console.log(searchText);
   try {
     const response = await authFetch.get(`${API_BASE_URL}?page=${page}&limit=${limit}&searchTerm=${searchText}`);
     return response.data.data;
@@ -13,7 +13,6 @@ export const getCourses = async (page = 1, limit = 4, searchText = "") => {
 };
 
 export const getAllCourses = async (searchText = "") => {
-  console.log(searchText);
   try {
     const response = await authFetch.get(
       `${API_BASE_URL}?searchTerm=${searchText}`
@@ -47,7 +46,7 @@ export const createCourse = async (data) => {
 
 export const updateCourse = async (id, data) => {
   try {
-    const response = await authFetch.put(`${API_BASE_URL}/${id}`, data);
+    const response = await authFetch.patch(`${API_BASE_URL}/${id}`, data);
     return response.data;
   } catch (error) {
     console.error(`Error updating course with ID ${id}:`, error);
@@ -55,7 +54,7 @@ export const updateCourse = async (id, data) => {
   }
 };
 
-export const deleteCourse = async (id) => {
+export const removeCourse = async (id) => {
   try {
     await authFetch.delete(`${API_BASE_URL}/${id}`);
   } catch (error) {
