@@ -42,7 +42,6 @@ const courseSchema = new mongoose.Schema({
     },
     type: {
       type: String,
-      // video or photo or text
       required: true
     },
     video: {

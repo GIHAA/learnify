@@ -83,7 +83,7 @@ spec:
                 configMapKeyRef:
                   key: RABBITMQ_URL
                   name: auth-env
-          image: gihaa/ds-project-auth
+          image: auth
           name: auth-service
           ports:
             - containerPort: 3001
