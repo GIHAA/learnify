@@ -80,7 +80,8 @@ const ApproveCoursePage = () => {
   
   return (
     <MainCardStyle
-      title="Approve Courses"
+      title="User Management"
+      btxText="Add New Course"
     >
       <SearchSection setSearchText={setSearchText}/>
 
@@ -93,7 +94,7 @@ const ApproveCoursePage = () => {
               <TableCell>Rating</TableCell>
               <TableCell>Price</TableCell>
               <TableCell>Status</TableCell>
-              <TableCell>Action</TableCell>
+              <TableCell sx={{ textAlign: "center"}} >Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -108,12 +109,12 @@ const ApproveCoursePage = () => {
                     {course.is_approved ? "Approved" : "Pending"}
                   </span>
                 </TableCell>
-                <TableCell>
-                  <Button variant="outlined" onClick={() => handleView(course._id)}>View</Button>
-                  <span style={{ margin: '0 5px' }} />
-                  <Button variant="outlined" onClick={() => handleApprove(course._id)}>Approve</Button>
-                  <span style={{ margin: '0 5px' }} />
-                  <Button variant="outlined" onClick={() => handleRemove(course._id)}>Remove</Button>
+                <TableCell sx={{ textAlign: "center"}}>
+                  <Button className="mx-2" variant="outlined" onClick={() => handleView(course._id)}>View</Button>
+      
+                  <Button className="mx-2" variant="outlined" onClick={() => handleApprove(course._id)}>Approve</Button>
+        
+                  <Button className="mx-2" variant="outlined" onClick={() => handleRemove(course._id)}>Remove</Button>
                 </TableCell>
               </TableRow>
             ))}

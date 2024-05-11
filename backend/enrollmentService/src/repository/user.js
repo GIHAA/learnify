@@ -15,7 +15,7 @@ export const createUser = async (user) => {
   }
 };
 
-export const getAllUsers = async () => {
+export const getAllUsers = async (query) => {
   try {
     const user = await User.find().lean();
     if (!user) {

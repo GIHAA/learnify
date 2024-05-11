@@ -16,7 +16,7 @@ const users = express.Router();
 
 users.post('/notify',   tracedAsyncHandler(sendnotification));
 users.post('/', adminProtect, celebrate({ [Segments.BODY]: addUserSchema }), tracedAsyncHandler(create));
-users.get('/', adminProtect, tracedAsyncHandler(getAll));
+users.get('/',  tracedAsyncHandler(getAll));
 users.get('/:id', celebrate({ [Segments.PARAMS]: userIdSchema }), adminProtect, tracedAsyncHandler(getById));
 users.patch(
   '/change_password',
