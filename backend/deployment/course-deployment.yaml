@@ -53,7 +53,7 @@ spec:
                 configMapKeyRef:
                   key: RABBITMQ_URL
                   name: course-env
-          image: gihaa/ds-project-course
+          image: course
           name: course-service
           ports:
             - containerPort: 3002

@@ -5,12 +5,10 @@ import config from 'config';
 import * as actionTypes from './actions';
 
 export const initialState = {
-  isOpen: [], 
   isAdminOpen: [], 
   defaultId: 'default',
   fontFamily: config.fontFamily,
   borderRadius: config.borderRadius,
-  opened: true,
   adminOpened: true,
   user: null
 };

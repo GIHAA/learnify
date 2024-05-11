@@ -1,44 +1,3 @@
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: example-ingress
-#   annotations:
-#     nginx.org/rewrites: "serviceName=tea-svc rewrite=/;serviceName=coffee-svc rewrite=/beans/"
-#     kubernetes.io/ingress.class: "nginx"
-# spec:
-#   rules:
-#   - http:
-#       paths:
-#       - path: /auth
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: auth
-#             port:
-#               number: 80
-#       - path: /course
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: course
-#             port:
-#               number: 80
-#       - path: /enrollment
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: enrollment
-#             port:
-#               number: 80
-#       - path: /payment
-#         pathType: Prefix
-#         backend:
-#           service:
-#             name: payment
-#             port:
-#               number: 80
-
-
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -78,3 +37,18 @@ spec:
             name: payment
             port:
               number: 3004
+      - path: /notification
+        pathType: Prefix
+        backend:
+          service:
+            name: notification
+            port:
+              number: 3005
+      - path: /feedback
+        pathType: Prefix
+        backend:
+          service:
+            name: feedback
+            port:
+              number: 3006
+

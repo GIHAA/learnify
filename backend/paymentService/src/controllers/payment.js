@@ -1,8 +1,6 @@
 import {  getPaymentIntentService , getPaymentDetailsService  , getAdminOrderDashboardService } from '@/services/payment';
 import { makeResponse } from '@/utils/response';
 
-
-
 export const getPaymentIntent = async (req, res) => {
   const paymentIntent = await getPaymentIntentService(req.body);
   return makeResponse({ res, data: paymentIntent, message: 'Payment Intent created successfully' });

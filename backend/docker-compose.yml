@@ -45,6 +45,28 @@ services:
     env_file:
       - ./paymentService/.env
 
+  notification:
+    build:
+      dockerfile: Dockerfile
+      context: ./notificationService
+    container_name: notification-service
+    ports:
+      - "3005:3005"
+    restart: always
+    env_file:
+      - ./notificationService/.env
+
+  feedback:
+    build:
+      dockerfile: Dockerfile
+      context: ./feedbackService
+    container_name: feedback-service
+    ports:
+      - "3006:3006"
+    restart: always
+    env_file:
+      - ./feedbackService/.env
+
   nginx-proxy:
     build:
       dockerfile: Dockerfile

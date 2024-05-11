@@ -22,7 +22,7 @@ spec:
         io.kompose.service: nginx-proxy
     spec:
       containers:
-        - image: gihaa/ds-project-nginx-proxy
+        - image: nginx-proxy
           name: nginx-proxy
           ports:
             - containerPort: 80

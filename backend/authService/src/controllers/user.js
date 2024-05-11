@@ -28,8 +28,7 @@ export const changePassword = async (req, res) => {
 
 export const remove = async (req, res) => {
   try {
-    const currentUser = req.user; 
-    const items = await removeUserByID(currentUser, req.params.id);
+    const items = await removeUserByID(req.params.id);
     return makeResponse({ res, data: items, message: 'User removed successfully' });
   } catch (error) {
     return makeResponse({ res, error });

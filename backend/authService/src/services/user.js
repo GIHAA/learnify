@@ -57,10 +57,7 @@ export const addNewUser = async (payload) => {
 };
 
 
-export const removeUserByID = async (currentUser, id) => {
-  if (currentUser.role !== 'ADMIN' && currentUser._id !== id) {
-    throw new createError(403, 'Permission denied');
-  }
+export const removeUserByID = async (id) => {
   const user = await findOneAndRemoveUser({ _id: id });
   if (!user) {
     throw new createError(401, 'Invalid user ID');

@@ -5,16 +5,14 @@ import { createUser, findOneAndUpdateUser, getOneUser } from '@/repository/user'
 import { decodeJwtToken, isFromAdmin } from '@/utils';
 import { sendMail } from './email';
 
-export const authRegister = async ({ name, email, password, university, members }) => {
+export const authRegister = async ({ name, email, password, role }) => {
   password = hashSync(password);
   const verification_code = crypto.randomUUID();
   const registeredUser = await createUser({
     name,
     email,
     password,
-    verification_code: verification_code,
-    university,
-    members
+    role
   });
   await verifyMailTemplate(email, verification_code);
   return registeredUser;

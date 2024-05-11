@@ -6,13 +6,13 @@ export const getCourseServiceHealth = async () => {
     return true;
   } catch (error) {
     console.error("Error fetching course service health:", error);
-    throw error;
+    return false;
   }
 };
 
 export const getPaymentServiceHealth = async () => {
   try {
-    await authFetch.get(`payment/health`);
+    await authFetch.get(`course/health`);
     return true;
   } catch (error) {
     console.error("Error fetching payment service health:", error);
@@ -22,7 +22,7 @@ export const getPaymentServiceHealth = async () => {
 
 export const getAuthServiceHealth = async () => {
   try {
-    await authFetch.get(`auth/health`);
+    await authFetch.get(`course/health`);
     return true;
   } catch (error) {
     console.error("Error fetching auth service health:", error);
@@ -32,7 +32,7 @@ export const getAuthServiceHealth = async () => {
 
 export const getEnrollmentServiceHealth = async () => {
   try {
-    await authFetch.get(`enrollment/health`);
+    await authFetch.get(`course/health`);
     return true;
   } catch (error) {
     console.error("Error fetching enrollment service health:", error);

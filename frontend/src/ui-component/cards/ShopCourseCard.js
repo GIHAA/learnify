@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 const ShopCourseCard = ({ id, title, description, imageUrl, rating, price }) => {
   return (
     <div className="max-w-[334px] rounded-[14px]  shadow-md pb-[14px]">
-      {/* <img src={imageUrl} className=" rounded-t-[14px] w-[100%]" /> */}
       <CardMedia
         component="img"
         height="140"

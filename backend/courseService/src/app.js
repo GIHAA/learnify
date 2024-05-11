@@ -52,12 +52,6 @@ app.get('/course/health', (_, res) => res.status(200).json({ message: 'Course se
 
 app.use(context.middleware);
 
-// app.use((req, _res, next) => {
-//   context.set('correlationId', req.headers['x-correlation-id'] ?? crypto.randomBytes(16).toString('hex'));
-//   context.set('origin', req.headers['x-origin-application']);
-//   next();
-// });
-
 app.use(
   httpLogger({
     loggable: ({ headers, body: payload }) => ({

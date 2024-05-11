@@ -28,7 +28,6 @@ export const getAllCoursesService = (query) => {
 };
 
 export const getAllMyCoursesService = (payload) => {
-
   const courses = getAllMyCoursesRepo(payload.ids);
   if (courses.length === 0) throw new createError(404, 'No Courses Found');
   return courses;

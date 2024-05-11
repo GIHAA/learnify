@@ -1,6 +1,5 @@
 import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getCourses } from "api/courseService";
 import CourseCard from "ui-component/cards/CourseCard";
 import PropTypes from 'prop-types';
 
@@ -11,8 +10,6 @@ const AllCourses = ({enrollments}) => {
 
 
   useEffect(() => {
-    // fetchCourses();
-    console.log("en" , enrollments);
     setCourses(enrollments);
   }, [enrollments]);
 

@@ -31,7 +31,7 @@ const App = () => {
         </NavigationScroll>
   
       </ThemeProvider>
-      <Toaster />
+      <Toaster position="top-right" />
     </StyledEngineProvider>
   );
 };

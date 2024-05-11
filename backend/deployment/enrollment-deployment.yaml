@@ -53,7 +53,7 @@ spec:
                 configMapKeyRef:
                   key: RABBITMQ_URL
                   name: enrollment-env
-          image: gihaa/ds-project-enrollment
+          image: enrollment
           name: enrollment-service
           ports:
             - containerPort: 3003

@@ -2,8 +2,7 @@ import { addCourseService  , getAllCoursesService, getAllMyCoursesService , getO
 import { makeResponse } from '@/utils/response';
 
 export const addCourse = async (req, res) => {
-  const ProducateData = req.body;
-  const order = await addCourseService(ProducateData);
+  const order = await addCourseService(req.body);
   return makeResponse({ res, data: order, message: 'course added successfully' });
 };
 export const getAllMyCourses = async (req, res) => {

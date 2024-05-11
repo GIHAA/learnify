@@ -69,7 +69,7 @@ app.use(
 
 app.use(queryMapper);
 
-app.use('/feedback-service/api', routes);
+app.use('/feedback/api', routes);
 
 app.use(responseInterceptor);
 

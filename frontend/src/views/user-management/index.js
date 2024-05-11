@@ -12,11 +12,11 @@ import {
   Button,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getUsers, removeUser, updateUser } from "api/userService";
+import { getUsers, removeUser } from "api/userService";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import AddUserModal from "./addUserModal";
-import { sassTrue } from "sass";
+import { register } from "api/authService";
 
 const MainCardStyle = styled(MainCard)(() => ({
   "& .MuiCardHeader-root": {
@@ -31,7 +31,7 @@ const UserManagementPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchText, setSearchText] = useState("");
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -96,6 +96,17 @@ const UserManagementPage = () => {
     fetchUsers(currentPage);
   };
 
+  const createUser = async (data) => {
+    try{
+      await register(data);
+      toast.success("User created successfully");
+      fetchUsers();
+    }catch(error){
+      console.error("Error creating user:", error);
+      throw error;
+    }
+  }
+
   return (
     <MainCardStyle
       title="User Management"
@@ -103,7 +114,7 @@ const UserManagementPage = () => {
       buttonText={"Add User"}
     >
       <SearchSection setSearchText={setSearchText} />
-      <AddUserModal open={open} handleClose={handleClose}  />
+      <AddUserModal createUser={createUser} open={open} handleClose={handleClose}  />
       <TableContainer>
         <Table>
           <TableHead>
