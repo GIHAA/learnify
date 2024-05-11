@@ -1,7 +1,7 @@
 import { moduleLogger } from '@sliit-foss/module-logger';
-import { RABBIMQ_CONFIG } from './config';
 import sendEmail from '@/service/email';
 import { sendSms } from '@/service/sms';
+import { RABBIMQ_CONFIG } from './config';
 
 const amqp = require('amqplib');
 
@@ -20,20 +20,26 @@ export async function consumeEmailRequestMessages() {
     channel.consume(queue, async (message) => {
       try {
         const emaiDetails = JSON.parse(message.content.toString());
-        logger.info(`Notification Request Recieved: `);
-        
+        logger.info(`Notification Request Recieved: ${emaiDetails.subject}`);
+
         const emailSent = await sendEmail(emaiDetails);
-        const smsSent = sendSms(emaiDetails);
-       if(emailSent){
-        channel.ack(message);
-       }
+        console.log('Email Sent:', emailSent);
+
+        if (emaiDetails.phone) {
+          const smsSent = await sendSms(emaiDetails);
+          console.log('SMS Sent:', smsSent);
+        }
+
+        if (emailSent) {
+          channel.ack(message);
+        }
       } catch (error) {
         logger.error('Error consuming message:', error);
       }
     });
   } catch (error) {
     logger.error('Error setting up RabbitMQ connection:', error);
-    setTimeout(consumeEmailRequestMessages, 5000); 
+    setTimeout(consumeEmailRequestMessages, 5000);
   }
 }
 
@@ -44,4 +50,3 @@ const connectToRabbitMQ = async () => {
     throw new Error(`Failed to connect to RabbitMQ: ${error.message}`);
   }
 };
-

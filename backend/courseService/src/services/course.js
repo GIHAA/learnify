@@ -1,11 +1,22 @@
 import { default as createError } from 'http-errors';
 import { addCourseRepo, getAllCoursesRepo, getAllMyCoursesRepo , getOneCourseRepo, removeCourseRepo, updateCourseRepo, } from '@/repository/course';
+import { sendMessageToQueue } from '@/utils/messageBroker';
+import { RABBIMQ_CONFIG } from '@/utils';
 
 
 export const addCourseService = async (payload) => {
   const newCourse = await addCourseRepo({
     ...payload
   });
+  if(!newCourse) throw new createError(400, 'Course not created');
+
+  if(payload.sendEmail){
+    const message = await sendMessageToQueue(RABBIMQ_CONFIG.EMAIL_QUEUE, {
+      to: payload.email,
+      subject: 'Course Creation',
+      text: `Course ${payload.title} has been created successfully`
+    });
+  }
   return newCourse;
 };
 
@@ -17,8 +28,7 @@ export const getAllCoursesService = (query) => {
 };
 
 export const getAllMyCoursesService = (payload) => {
-  console.log('----------------;');
-  console.log(payload)
+
   const courses = getAllMyCoursesRepo(payload.ids);
   if (courses.length === 0) throw new createError(404, 'No Courses Found');
   return courses;

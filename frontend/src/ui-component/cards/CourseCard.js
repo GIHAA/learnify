@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Button } from "@mui/material";
-import LinearProgressWithLabel from "ui-component/LinearProgressWithLabel";
 import { useNavigate } from 'react-router-dom';
+import { LinearProgressWithLabel } from "layout/CusLayout/Sidebar/MenuCard";
 
 const CourseCard = ({
   image,
@@ -9,7 +9,7 @@ const CourseCard = ({
   description,
   rating,
   price,
-  progress = 10,
+  progress,
   id,
 }) => {
 
@@ -21,12 +21,10 @@ const CourseCard = ({
       <div className="p-[20px] flex flex-col gap-[8px]">
         <p className="text-[20px] leading-[28px] font-bold">{title}</p>
         <p className="text-[16px] leading-[25px]">{description}</p>
-        <p className="text-[16px] leading-[25px] font-bold">{rating}</p>
-        <p className="text-[16px] leading-[25px] font-bold"> $ {price}</p>
       </div>
-      <div className="mx-4">
-        {progress && <LinearProgressWithLabel progress={progress} />}
-      </div>
+  <div className="mx-3 mb-3">
+        <LinearProgressWithLabel value={progress} />
+  </div>
       <div className="px-3">
         <Button variant="contained" onClick={() => {
           navigate(`/take-course/${id}`)

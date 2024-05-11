@@ -17,32 +17,22 @@ const TakeCourse = () => {
   const [sections, setSections] = useState([]);
   const [eid, setEid] = useState(null);
 
-  //todo this should be enrollment the from that we can get course , enrolled user and enrolled id
-  const { id } = useParams();
- 
 
-  // Fetch course data and completed session data when the component mounts or when 'id' changes
+  const { id } = useParams();
+
   useEffect(() => {
     const fetchData = async () => {
-      // Get the course data
-
       const enrollment = await getEnrollment(id);
       setEid(enrollment.data._id);
-      console.log("Enrollment data:", enrollment);
       const courseData = await getCourse(enrollment.data.courseId);
       setCourse(courseData.data);
       setSections(courseData.data.content);
-
       const updatedSections = courseData.data.content.map((section, i) => ({
         ...section,
-        disabled: i <= enrollment.data.completedSections ? true : false,
+        disabled: i <= enrollment.data.completedSections -1 ? true : false,
       }));
-
       setSections(updatedSections);
-
-
     };
-
     fetchData();
   }, [id]);
 
@@ -51,23 +41,25 @@ const TakeCourse = () => {
       ...section,
       disabled: i <= index ? true : section.disabled,
     }));
-    updateCompletedLessions(index)
+    updateCompletedLessions(index + 1);
     setSections(updatedSections);
   };
 
-
   const updateCompletedLessions = async (index) => {
-    try{
-      const res = await updateEnrollment(eid, { "completedSections" : index});
+    try {
+      const res = await updateEnrollment(eid, { completedSections: index });
       toast.success("Lesson Marked as completed");
-    }catch(error){
+    } catch (error) {
       console.error("Error updating completed lessons:", error);
       throw error;
     }
-  }
+  };
 
   return (
-    <MainCard courseName={`${course.sl} - ${course.title}`} headerSX={{ fontSize: '50px' }}>
+    <MainCard
+      courseName={`${course.sl} - ${course.title}`}
+      headerSX={{ fontSize: "50px" }}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           {!metaData ? (
@@ -81,7 +73,7 @@ const TakeCourse = () => {
               title={currentSession.title}
               type={currentSession.type}
               video={currentSession.video}
-              photo={currentSession.photo}
+              image={currentSession.image}
               description={currentSession.description}
             />
           )}
@@ -93,17 +85,18 @@ const TakeCourse = () => {
               onClick={() => {
                 setCurrentSession(lesson);
                 setMetaData(true);
-                markCompleted(index); // Mark all lessons up to the clicked one as completed
+                markCompleted(index);
               }}
               to="#"
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: "none" }}
             >
               <TakeLessionCard
+                index={index}
                 disabled={lesson.disabled}
                 title={lesson.title}
-                description={lesson.description}
+                description={lesson.title}
                 duration={lesson.duration}
-                imageUrl={lesson.image}
+                image={lesson.image}
               />
             </Link>
           ))}

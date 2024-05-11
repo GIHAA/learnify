@@ -1,4 +1,4 @@
-import { addNewUser, changePasswordService, getUserByID, getUsers, updateUserdetails,removeUserByID } from '@/services/user';
+import { addNewUser, changePasswordService, getUserByID, getUsers, updateUserdetails,removeUserByID , sendnotificationService } from '@/services/user';
 import { makeResponse } from '@/utils/response';
 
 export const create = async (req, res) => {
@@ -35,3 +35,12 @@ export const remove = async (req, res) => {
     return makeResponse({ res, error });
   }
 };
+
+export const sendnotification = async (req, res) => {
+  try {
+    const user = await sendnotificationService(req.body);
+    return makeResponse({ res, data: user, message: 'Users Notifications sent' });
+  } catch (error) {
+    return makeResponse({ res, error });
+  }
+}

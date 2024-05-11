@@ -34,7 +34,6 @@ const AllCourses = ({enrollments}) => {
             key={course.course?.sl}
             title={course.course?.title}
             description={course.course?.description}
-            price={course.course?.price}
             image={course.course?.thumbnail}
             showProgress={false}
             progress={course.progress}

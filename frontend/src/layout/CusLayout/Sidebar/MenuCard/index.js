@@ -51,7 +51,7 @@ const CardStyle = styled(Card)(({ theme }) => ({
 
 // ==============================|| PROGRESS BAR WITH LABEL ||============================== //
 
-function LinearProgressWithLabel({ value, ...others }) {
+export function LinearProgressWithLabel({ value, ...others }) {
   const theme = useTheme();
   return (
     <Grid container direction="column" spacing={1} sx={{ mt: 1.5 }}>
@@ -77,48 +77,3 @@ function LinearProgressWithLabel({ value, ...others }) {
 LinearProgressWithLabel.propTypes = {
   value: PropTypes.number
 };
-
-// ==============================|| SIDEBAR MENU Card ||============================== //
-
-const MenuCard = () => {
-  //const theme = useTheme();
-
-  return (
-    <CardStyle>
-      <CardContent sx={{ p: 2 }}>
-        <List sx={{ p: 0, m: 0 }}>
-          <ListItem alignItems="flex-start" disableGutters sx={{ p: 0 }}>
-            {/* <ListItemAvatar sx={{ mt: 0 }}>
-              <Avatar
-                variant="rounded"
-                sx={{
-                  ...theme.typography.commonAvatar,
-                  ...theme.typography.largeAvatar,
-                  color: theme.palette.primary.main,
-                  border: 'none',
-                  borderColor: theme.palette.primary.main,
-                  background: '#fff',
-                  marginRight: '12px'
-                }}
-              >
-                <TableChartOutlinedIcon fontSize="inherit" />
-              </Avatar>
-            </ListItemAvatar> */}
-            {/* <ListItemText
-              sx={{ mt: 0 }}
-              primary={
-                <Typography variant="subtitle1" sx={{ color: theme.palette.primary[800] }}>
-                  Get Extra Space
-                </Typography>
-              }
-              secondary={<Typography variant="caption"> 28/23 GB</Typography>}
-            /> */}
-          </ListItem>
-        </List>
-        <LinearProgressWithLabel value={80} />
-      </CardContent>
-    </CardStyle>
-  );
-};
-
-export default MenuCard;

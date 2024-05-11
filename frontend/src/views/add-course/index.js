@@ -2,14 +2,14 @@ import MainCard from "ui-component/cards/MainCard";
 import LessionCard from "ui-component/cards/LessionCard";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
-// import { Button } from "@mui/material";
-// import LinearWithValueLabel from "ui-component/LinearProgressWithLabel";
 import BasicModal from "ui-component/BasicModal";
 import AddCourseForm from "ui-component/AddCourseForm";
 import AddSectionForm from "ui-component/AddSectionForm";
 import { createCourse } from "api/courseService";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import { notify } from "api/authService";
+import toast from "react-hot-toast";
 
 
 const AddCourse = () => {
@@ -29,13 +29,12 @@ const AddCourse = () => {
         duration: sectionData.duration,
         icon: sectionData.image,
         video: sectionData.video,
+        image : sectionData.image,
         type : sectionData.type
       },
     ]);
   };
 
-  console.log(metaData);
-  console.log(section);
 
   const setMetaData = (data) => {
     console.log(data);
@@ -43,10 +42,15 @@ const AddCourse = () => {
   }
 
   const publishCourse = async (isChecked) => {
+    await createCourse({ ...metaData, addedBy: user.user._id, content: section });
     if (isChecked) {
       console.log("Notify User on Publish");
+      const res = await notify({
+        subject: "New Course Published",
+        text : `${metaData.title} has been published successfully`,
+      })
+      toast.success("Course Published Successfully");
     }
-    await createCourse({ ...metaData, addedBy: user.user._id, content: section });
     navigate("/admin/course-management");
   };
 
@@ -60,9 +64,10 @@ const AddCourse = () => {
         <Grid item xs={12} md={4}>
           {section.map((lession , index) => (
             <LessionCard
+              index={index}
               key={index}
               title={lession.title}
-              description={lession.description}
+              description={lession.title}
               duration={lession.duration}
               imageUrl={lession.image}
             />

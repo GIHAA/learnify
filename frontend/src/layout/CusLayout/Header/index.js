@@ -1,19 +1,10 @@
 import PropTypes from "prop-types";
 
-// material-ui
 import { useTheme } from "@mui/material/styles";
 import {  Box, ButtonBase } from "@mui/material";
-
-// project imports
 import LogoSection from "../LogoSection";
-// import SearchSection from './SearchSection';
-import ProfileSection from "./ProfileSection";
-// import NotificationSection from "./NotificationSection";
-
-// assets
-// import { IconMenu2 } from "@tabler/icons-react";
-// import DropDown from "./DropDown";
 import { Link } from "react-router-dom";
+import ProfileSection from "layout/MainLayout/Header/ProfileSection";
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -22,7 +13,6 @@ const Header = () => {
 
   return (
     <>
-      {/* logo & toggler button */}
       <Box
         sx={{
           width: 228,
@@ -40,25 +30,6 @@ const Header = () => {
           <LogoSection />
         </Box>
         <ButtonBase sx={{ borderRadius: "12px", overflow: "hidden" }}>
-          {/* <Avatar
-            variant="rounded"
-            sx={{
-              ...theme.typography.commonAvatar,
-              ...theme.typography.mediumAvatar,
-              transition: "all .2s ease-in-out",
-              background: theme.palette.secondary.light,
-              color: theme.palette.secondary.dark,
-              "&:hover": {
-                background: theme.palette.secondary.dark,
-                color: theme.palette.secondary.light,
-              },
-            }}
-            onClick={handleLeftDrawerToggle}
-            color="inherit"
-            // className="lg:hidden"
-          >
-            <IconMenu2 stroke={1.5} size="1.3rem" />
-          </Avatar> */}
         </ButtonBase>
         <div className="hidden lg:flex lg:justify-center lg:items-center mr-6">
           {/* <DropDown/> */}
@@ -71,9 +42,6 @@ const Header = () => {
       {/* <SearchSection /> */}
       <Box sx={{ flexGrow: 1 }} />
       <Box sx={{ flexGrow: 1 }} />
-
-      {/* notification & profile */}
-      {/* <NotificationSection /> */}
       <ProfileSection />
     </>
   );

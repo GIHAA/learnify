@@ -24,8 +24,10 @@ const MyCourse = () => {
       const course = await getMyCourses(ids);
 
       const finalpayload =  enrollments.map((enrollment, index) => {
-        const completedsessions = parseInt(enrollment.completedSections) + 1;
+        const completedsessions = parseInt(enrollment.completedSections);
         const total = parseInt(course[index]?.content.length);
+        console.log(completedsessions);
+        console.log(total);
         return {
           ...enrollment,
           course: course[index],

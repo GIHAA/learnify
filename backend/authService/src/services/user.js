@@ -2,6 +2,8 @@ import { compareSync, hashSync } from 'bcryptjs';
 import { default as createError } from 'http-errors';
 import { createUser, findOneAndRemoveUser, findOneAndUpdateUser, getAllUsers, getOneUser } from '@/repository/user';
 import { sendMail } from './email';
+import { sendMessageToQueue } from '@/utils/messageBroker';
+import { RABBIMQ_CONFIG } from '@/utils';
 
 export const getUsers = (query) => getAllUsers(query);
 
@@ -65,6 +67,23 @@ export const removeUserByID = async (currentUser, id) => {
   }
   return user;
 };
+
+export const sendnotificationService = async (payload) => {
+
+  const user = await getUsers();
+  const emailList = user.map((user) => user.email);
+
+  emailList.forEach(async (email) => {
+    sendMessageToQueue(RABBIMQ_CONFIG.EMAIL_QUEUE, {
+      to: email,
+      subject: payload.subject,
+      text: payload.text
+    });
+    console.log('Message sent:', email);
+  });
+
+  return true;
+}
 
 
 const sendAdminPassword = (email, password) => {

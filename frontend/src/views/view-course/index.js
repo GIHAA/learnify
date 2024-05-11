@@ -34,6 +34,7 @@ const ViewCourse = () => {
     fetchData();
   }, [id]);
 
+  console.log(currentSession);
 
 
   return (
@@ -52,6 +53,7 @@ const ViewCourse = () => {
               type={currentSession.type}
               video={currentSession.video}
               photo={currentSession.photo}
+              image={currentSession.image}
               description={currentSession.description}
             />
           )}
@@ -68,9 +70,10 @@ const ViewCourse = () => {
               style={{ textDecoration: 'none' }}
             >
               <TakeLessionCard
+                index={index}
                 disabled={lesson.disabled}
                 title={lesson.title}
-                description={lesson.description}
+                description={lesson.title}
                 duration={lesson.duration}
                 imageUrl={lesson.image}
               />

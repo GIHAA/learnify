@@ -34,7 +34,7 @@ const InputFileUpload = (params) => {
     if (file) {
       try {
         const storage = getStorage();
-        const storageRef = ref(storage, "some-child");
+        const storageRef = ref(storage, "images/" + file.name);
 
         const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on(

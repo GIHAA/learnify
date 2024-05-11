@@ -60,7 +60,7 @@ const PayementGateway = ({ course_id , user_id , price }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className=" mx-auto w-2/3 mx-10">
       <div className="mb-4">
         <div className="bg-white rounded-lg shadow-md p-8">
           <div>

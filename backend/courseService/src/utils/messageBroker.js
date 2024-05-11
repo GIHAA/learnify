@@ -38,3 +38,29 @@ export const sendMessageToUserQueue = async (userDetails) => {
         throw error; 
     }
 }
+
+
+export const sendMessageToQueue = async ( queueName, message ) => {
+
+    try {
+
+        const connection = await amqp.connect(RABBIMQ_CONFIG.URL);
+    
+        const channel = await connection.createChannel();
+        
+        await channel.assertQueue(queueName, { durable: true });
+        
+        channel.sendToQueue(queue, Buffer.from(JSON.stringify(message)), {
+            persistent: true 
+        });
+        
+        console.log("Sent '%s'", JSON.stringify(message));
+        
+        setTimeout(() => {
+            connection.close();
+            process.exit(0);
+        }, 500); 
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}

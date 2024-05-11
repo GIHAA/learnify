@@ -5,6 +5,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import { CheckBoxRounded } from "@mui/icons-material";
 
 export default function TakeLessionCard({
+  index,
   title,
   description,
   disabled,
@@ -30,7 +31,7 @@ export default function TakeLessionCard({
           </Avatar>
 
           <div>
-            <h1 className="font-bold text-[18px] pl-5 pt-1">{title}</h1>
+            <h1 className="font-bold text-[18px] pl-5 pt-1">{index === 0 ? "Introduction" : `Chapter ${index}`}</h1>
             <h1 className="text-gray-500 text-[15px] pl-5 pt-1">
               {description} • {duration}
             </h1>
@@ -52,6 +53,7 @@ TakeLessionCard.propTypes = {
   title: PropTypes.string.isRequired,
   duration: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
+  index: PropTypes.number,
 };
 
 TakeLessionCard.defaultProps = {

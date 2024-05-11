@@ -60,11 +60,10 @@ const MainCard = forwardRef(
             <div className='m-[25px] my-[40px] text-[30px] font-bold'>
               {courseName}
             </div>          )}
-          {onClick && (
+          {buttonText  && (
             <Button variant="contained" color="primary" onClick={onClick}>
               {buttonText}
             </Button>
-          
           )}
           {/* content & header divider */}
           {title   && <Divider />}
