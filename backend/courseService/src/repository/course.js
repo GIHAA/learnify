@@ -18,9 +18,8 @@ export const addCourseRepo = async (courses) => {
 };
 
 export const getOneCourseRepo = async (filters) => {
-  console.log(filters)
   try {
-    const course = await Course.findOne({ _id: filters.courseId });
+    const course = await Course.findOne(filters);
     console.log(course)
     console.log(filters)
     if (!course) {
@@ -64,6 +63,22 @@ export const getAllCoursesRepo = async (query) => {
     throw error;
   }
 };
+
+export const getAllMyCoursesRepo = async (ids) => {
+  try {
+    const courses = await Course.find({ _id: { $in: ids }});
+    if (!courses) {
+      logger.warn('No courses found.');
+      return null;
+    }
+
+    logger.info('All courses retrieved:', courses);
+    return courses;
+  } catch (error) {
+    logger.error('Error retrieving all courses:', error.message);
+    throw error;
+  }
+}
 
 export const removeCourseRepo = async (filters) => {
   try {

@@ -17,12 +17,9 @@ const enrollmentSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  totalSections: {
-    type: Number,
-    required: true
-  },
   completedSections: {
     type: Number,
+    default: 0,
     required: true
   }
 }, {

@@ -4,6 +4,8 @@ import CouserManagement from "views/course-management";
 import ApproveCoursePage from "views/approve-course";
 import UserManagement from "views/user-management";
 import AddCourse from "views/add-course";
+import { element } from "prop-types";
+import ViewCourse from "views/view-course";
 
 
 const AdminRoutes = {
@@ -17,6 +19,10 @@ const AdminRoutes = {
     {
       path: "course-management",
       element: <CouserManagement />,
+    },
+    {
+      path : "approve-course/view-course/:id",
+      element : <ViewCourse />
     },
     {
       path: "approve-course",

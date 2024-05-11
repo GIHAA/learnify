@@ -10,12 +10,11 @@ import { Link } from "react-router-dom";
 import { getEnrollment, updateEnrollment } from "api/enrollment";
 import toast from "react-hot-toast";
 
-const TakeCourse = () => {
+const ViewCourse = () => {
   const [metaData, setMetaData] = useState(false);
   const [course, setCourse] = useState({});
   const [currentSession, setCurrentSession] = useState({});
   const [sections, setSections] = useState([]);
-  const [eid, setEid] = useState(null);
 
   //todo this should be enrollment the from that we can get course , enrolled user and enrolled id
   const { id } = useParams();
@@ -26,45 +25,16 @@ const TakeCourse = () => {
     const fetchData = async () => {
       // Get the course data
 
-      const enrollment = await getEnrollment(id);
-      setEid(enrollment.data._id);
-      console.log("Enrollment data:", enrollment);
-      const courseData = await getCourse(enrollment.data.courseId);
+      const courseData = await getCourse(id);
       setCourse(courseData.data);
       setSections(courseData.data.content);
-
-      const updatedSections = courseData.data.content.map((section, i) => ({
-        ...section,
-        disabled: i <= enrollment.data.completedSections ? true : false,
-      }));
-
-      setSections(updatedSections);
-
 
     };
 
     fetchData();
   }, [id]);
 
-  const markCompleted = (index) => {
-    const updatedSections = sections.map((section, i) => ({
-      ...section,
-      disabled: i <= index ? true : section.disabled,
-    }));
-    updateCompletedLessions(index)
-    setSections(updatedSections);
-  };
 
-
-  const updateCompletedLessions = async (index) => {
-    try{
-      const res = await updateEnrollment(eid, { "completedSections" : index});
-      toast.success("Lesson Marked as completed");
-    }catch(error){
-      console.error("Error updating completed lessons:", error);
-      throw error;
-    }
-  }
 
   return (
     <MainCard courseName={`${course.sl} - ${course.title}`} headerSX={{ fontSize: '50px' }}>
@@ -93,7 +63,6 @@ const TakeCourse = () => {
               onClick={() => {
                 setCurrentSession(lesson);
                 setMetaData(true);
-                markCompleted(index); // Mark all lessons up to the clicked one as completed
               }}
               to="#"
               style={{ textDecoration: 'none' }}
@@ -113,4 +82,4 @@ const TakeCourse = () => {
   );
 };
 
-export default TakeCourse;
+export default ViewCourse;

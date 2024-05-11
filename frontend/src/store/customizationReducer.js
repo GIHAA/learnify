@@ -10,8 +10,8 @@ export const initialState = {
   defaultId: 'default',
   fontFamily: config.fontFamily,
   borderRadius: config.borderRadius,
-  opened: false,
-  adminOpened: true,
+  opened: true,
+  adminOpened: false,
   user: null
 };
 

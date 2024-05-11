@@ -5,6 +5,7 @@ import { Pagination, Table, TableBody, TableCell, TableContainer, TableHead, Tab
 import { useEffect, useState } from "react";
 import { getCourses, removeCourse, updateCourse } from "api/courseService";
 import toast from "react-hot-toast";
+import { useNavigate } from 'react-router-dom';
 
 const MainCardStyle = styled(MainCard)(() => ({
   "& .MuiCardHeader-root": {
@@ -13,6 +14,7 @@ const MainCardStyle = styled(MainCard)(() => ({
 }));
 
 const ApproveCoursePage = () => {
+  const navigate = useNavigate();
 
   const [courses, setCourses] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -43,9 +45,8 @@ const ApproveCoursePage = () => {
   };
 
   const handleView = (courseId) => {
-    console.log("View course with ID:", courseId);
-    // Handle view action
-  };
+    navigate(`/admin/approve-course/view-course/${courseId}`);
+  }
 
   const handleApprove = async (courseId) => {
     await updateCourse(courseId, { is_approved: true });

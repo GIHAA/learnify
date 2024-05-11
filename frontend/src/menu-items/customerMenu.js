@@ -21,7 +21,7 @@ const customerMenu = {
     },
     {
       id: 'my-course',
-      title: 'My Course',
+      title: 'My Cours',
       type: 'item',
       url: '/my-course',
       icon: icons.IconBook,

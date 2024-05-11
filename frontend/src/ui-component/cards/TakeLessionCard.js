@@ -2,11 +2,12 @@ import PropTypes from "prop-types";
 import Card from "@mui/material/Card";
 import {  Avatar } from "@mui/material";
 import AssignmentIcon from "@mui/icons-material/Assignment";
+import { CheckBoxRounded } from "@mui/icons-material";
 
 export default function TakeLessionCard({
   title,
   description,
-
+  disabled,
   duration,
 }) {
   return (
@@ -34,6 +35,11 @@ export default function TakeLessionCard({
               {description} • {duration}
             </h1>
           </div>
+          {disabled && (
+            <div className="absolute top-1 right-1">
+              <CheckBoxRounded className="text-gray-500" />
+            </div>
+          )}
         </div>
       </Card>
     </div>
@@ -45,6 +51,7 @@ TakeLessionCard.propTypes = {
   description: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   duration: PropTypes.string.isRequired,
+  disabled: PropTypes.bool,
 };
 
 TakeLessionCard.defaultProps = {

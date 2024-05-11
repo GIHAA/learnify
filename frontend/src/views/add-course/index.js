@@ -9,11 +9,15 @@ import AddCourseForm from "ui-component/AddCourseForm";
 import AddSectionForm from "ui-component/AddSectionForm";
 import { createCourse } from "api/courseService";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+
 
 const AddCourse = () => {
-  const [metaData, setMetaData] = useState(); 
+  const [metaData, setMetaDataDetails] = useState(); 
   const [section, setSection] = useState([]);
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user)
+
 
   const addSection = (sectionData) => {
     setSection((prevState) => [
@@ -23,24 +27,27 @@ const AddCourse = () => {
         title: sectionData.title,
         description: sectionData.description,
         duration: sectionData.duration,
-        //todo
         icon: sectionData.image,
         video: sectionData.video,
+        type : sectionData.type
       },
     ]);
   };
+
+  console.log(metaData);
+  console.log(section);
+
+  const setMetaData = (data) => {
+    console.log(data);
+    setMetaDataDetails(data);
+  }
 
   const publishCourse = async (isChecked) => {
     if (isChecked) {
       console.log("Notify User on Publish");
     }
-   
-    await createCourse({ ...metaData, addedBy: "60f5b14eb2c4b417885a2e3a", section });
-    
-  
-    //todo toast  
+    await createCourse({ ...metaData, addedBy: user.user._id, content: section });
     navigate("/admin/course-management");
-
   };
 
   return (
@@ -61,16 +68,6 @@ const AddCourse = () => {
             />
           ))}
           <div className="flex justify-center">
-            {/* <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                width: "92%",
-              }}
-              onClick={addSection}
-            >
-              Add Lession
-            </Button> */}
           </div>
 
           <BasicModal

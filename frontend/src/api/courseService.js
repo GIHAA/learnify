@@ -12,6 +12,16 @@ export const getCourses = async (page = 1, limit = 4, searchText = "") => {
   }
 };
 
+export const getMyCourses = async (ids) => {
+  try {
+    const response = await authFetch.post(`${API_BASE_URL}/mycourse`, { ids });
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching my courses:", error);
+    throw error;
+  }
+}
+
 export const getAllCourses = async (searchText = "") => {
   try {
     const response = await authFetch.get(

@@ -53,7 +53,6 @@ const CardStyle = styled(Card)(({ theme }) => ({
 
 function LinearProgressWithLabel({ value, ...others }) {
   const theme = useTheme();
-
   return (
     <Grid container direction="column" spacing={1} sx={{ mt: 1.5 }}>
       <Grid item>

@@ -2,29 +2,22 @@ import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getCourses } from "api/courseService";
 import CourseCard from "ui-component/cards/CourseCard";
+import PropTypes from 'prop-types';
 
-const AllCourses = () => {
+const AllCourses = ({enrollments}) => {
   const [courses, setCourses] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
-  const fetchCourses = async (page = 1, searchText = "") => {
-    try {
-      const response = await getCourses(page, 3, searchText);
-      setCourses(response.docs);
-      setTotalPages(response.totalPages);
-      setCurrentPage(page);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
-    }
-  };
 
   useEffect(() => {
-    fetchCourses();
-  }, []);
+    // fetchCourses();
+    console.log("en" , enrollments);
+    setCourses(enrollments);
+  }, [enrollments]);
 
   const handlePageChange = (event, page) => {
-    fetchCourses(page);
+    // fetchCourses(page);
   };
 
   return (
@@ -35,12 +28,16 @@ const AllCourses = () => {
         </h2>
         <div className="flex gap-[20px] flex-wrap max-w-[1280px] mx-auto justify-center">
         {courses.map((course) => (
+
           <CourseCard
-            key={course.id}
-            title={course.title}
-            description={course.description}
-            price={course.price}
-            image={course.thumbnail}
+            id={course?._id}
+            key={course.course?.sl}
+            title={course.course?.title}
+            description={course.course?.description}
+            price={course.course?.price}
+            image={course.course?.thumbnail}
+            showProgress={false}
+            progress={course.progress}
           />
         ))}
         </div>
@@ -58,5 +55,10 @@ const AllCourses = () => {
     </section>
   );
 };
+
+AllCourses.propTypes = {
+  enrollments: PropTypes.array.isRequired
+}
+
 
 export default AllCourses;

@@ -36,7 +36,7 @@ const ShopPage = () => {
 
 
   return (
-    <MainCardStyle title="Shop">
+    <MainCardStyle title="Explore Courses">
       <SearchSection setSearchText={setSearchText} />
 
       <Grid container spacing={2} className="mt-[10px]">

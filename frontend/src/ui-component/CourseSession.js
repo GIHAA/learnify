@@ -23,7 +23,7 @@ const CourseSession = (params) => {
         />
       )}
       {params.description && (
-        <h1 className="text-gray-500 text-[15px] pl-5 pt-1">
+        <h1 className="text-gray-500 text-[15px] pl-5 pt-1 ">
           {params.description}
         </h1>
       )}

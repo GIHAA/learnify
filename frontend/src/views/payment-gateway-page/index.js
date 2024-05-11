@@ -5,34 +5,33 @@ import toast from 'react-hot-toast';
 import Visa from "./images/visa.jpg"
 import Master from "./images/master.jpg"
 import Amex from "./images/amex.png"
+import { createPayment } from 'api/paymentService';
+import { createEnrollment } from 'api/enrollment';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
-const PayementGateway = () => {
+const PayementGateway = ({ course_id , user_id , price }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [, setPaymentIntentId] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     if (!stripe || !elements) {
-      // Stripe.js hasn't loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
       return;
     }
 
     try {
-      // Create a payment intent on the server
-      const { data } = await axios.post(
-        'http://localhost:3002/enrollment-service/api/enrollment/create-payment-intent',
-        {
-          amount: 1099, // Amount in cents
-          currency: 'usd',
-        }
-      );
+
+      const data = await createPayment({
+        amount: price,
+        currency: 'usd',
+      });
 
       setPaymentIntentId(data.data.id);
 
-      // Confirm the payment with Stripe
       const result = await stripe.confirmCardPayment(data.data.client_secret, {
         payment_method: {
           card: elements.getElement(CardElement),
@@ -40,21 +39,20 @@ const PayementGateway = () => {
             name: 'John Doe',
           },
         },
-      });
+      });      
 
       if (result.error) {
-        // Handle payment error
         console.error(result.error);
       } else {
-        toast.success('Payment successful');
-
-        // to make a service for this
-        await axios.post('/api/enrollments', {
-          userId: 'user_id',
-          courseId: 'course_id',
-          stripePaymentIntentId: data.paymentIntentId,
-          // other enrollment data
-        });
+        const data = await createEnrollment(
+          {
+            userId: user_id,
+            courseId: course_id,
+            stripePaymentIntentId: result.paymentIntent.id,
+          }
+        );
+        navigate('/my-courses')
+        toast.success("Enrolled Sucessfully")
       }
     } catch (err) {
       console.error(err);
@@ -107,6 +105,12 @@ const PayementGateway = () => {
       </button>
     </form>
   );
+};
+
+PayementGateway.propTypes = {
+  course_id: PropTypes.string.isRequired,
+  user_id: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired
 };
 
 export default PayementGateway;
