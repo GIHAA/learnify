@@ -12,7 +12,6 @@ import NotificationSection from "./NotificationSection";
 
 // assets
 import { IconMenu2 } from "@tabler/icons-react";
-import DropDown from "./DropDown";
 import { Link } from "react-router-dom";
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
@@ -61,7 +60,6 @@ const Header = ({ handleLeftDrawerToggle }) => {
           </Avatar>
         </ButtonBase>
         <div className="hidden lg:flex lg:justify-center lg:items-center">
-          <DropDown/>
           <Link to="/my-courses" className="mx-3">My Course</Link>
         </div>
       </Box>
