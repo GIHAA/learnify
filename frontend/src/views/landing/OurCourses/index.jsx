@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { IoArrowForward } from "react-icons/io5";
 
 const OurCourses = () => {
+
+  
   
   return (
     <section className="bg-white rounded-[12px]">

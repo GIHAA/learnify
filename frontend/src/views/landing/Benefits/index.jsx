@@ -10,9 +10,9 @@ const Benefit = () => {
             <p className='text-[16px] leading-[24px] font-medium'>Elevate Your Learning Experience: Dive into the Wealth of Benefits Our Platform Offers to Fuel Your Educational Journey</p>
         </div>
         <div className='md:max-w-[688px] lg:max-w-[1280px] flex flex-wrap gap-[20px] md:gap-[10px] lg:gap-[20px] justify-center'>
-            <BenefitCard/>
-            <BenefitCard/>
-            <BenefitCard/>
+            <BenefitCard title={"Diverse Course Offerings"} number={"1"} desc={"Explore a wide range of design and development courses covering various topics."}/>
+            <BenefitCard title={"Expert Instruction"} number={"2"} desc={"Learn from industry experts who have hands-on experience in design and development."}/>
+            <BenefitCard title={"Flexible Learning Schedule"} number={"3"} desc={"Fit your coursework around your existing commitments and obligations."}/>
         </div>
       
     </section>
