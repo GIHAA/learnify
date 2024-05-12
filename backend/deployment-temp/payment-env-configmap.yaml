@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  JWT_EXPIRE: "360000"
+  JWT_REFRESH_EXPIRE: "30"
+  JWT_SECRET: gihan123
+  MONGO_URI: mongodb+srv://af123:af123@af0.etrzu5q.mongodb.net/enrollment?retryWrites=true&w=majority
+  PORT: "3004"
+  RABBITMQ_URL: amqp://rabbitmq:5672
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: payment-payment-env
+  name: payment-env

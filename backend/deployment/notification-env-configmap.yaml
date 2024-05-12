@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  EMAIL_PASS: bzuvzlqqqvztpmke
+  EMAIL_USER: spmsneakerhub@gmail.com
+  MAIL_HOST: smtp.gmail.com
+  PORT: "3005"
+  RABBITMQ_URL: amqps://rouyavsx:qNoaKmY4xk0p6b4BLFNo0qDeW8z0d2fv@lionfish.rmq.cloudamqp.com/rouyavsx
+  SMS_SENDER_ID: SendTest
+  SMS_TOKEN: 1918|OiH91YKkJhas1yHRnftVRnnaXlqxW55idLPjBMYh
+kind: ConfigMap
+metadata:
+  labels:
+    io.kompose.service: notification-notification-env
+  name: notification-env

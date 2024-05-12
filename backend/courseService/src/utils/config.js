@@ -11,4 +11,5 @@ export const MAIL_CREDENTIALS = {
 export const RABBIMQ_CONFIG = {
   URL: process.env.RABBITMQ_URL,
   USER_VALIDATION_QUEUE: 'user_validation_queue',
+  EMAIL_QUEUE: 'email_queue',
 };

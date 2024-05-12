@@ -48,15 +48,9 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('Assert'))
 
-app.get('/course-service/health', (_, res) => res.status(200).json({ message: 'Course service and Running' }));
+app.get('/course/health', (_, res) => res.status(200).json({ message: 'Course service and Running' }));
 
 app.use(context.middleware);
-
-// app.use((req, _res, next) => {
-//   context.set('correlationId', req.headers['x-correlation-id'] ?? crypto.randomBytes(16).toString('hex'));
-//   context.set('origin', req.headers['x-origin-application']);
-//   next();
-// });
 
 app.use(
   httpLogger({
@@ -69,7 +63,7 @@ app.use(
 
 app.use(queryMapper);
 
-app.use('/course-service/api', routes);
+app.use('/course/api', routes);
 
 app.use(responseInterceptor);
 

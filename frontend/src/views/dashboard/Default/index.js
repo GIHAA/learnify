@@ -12,6 +12,7 @@ import TotalIncomeDarkCard from "./TotalIncomeDarkCard";
 import { gridSpacing } from "store/constant";
 import { getDashboard } from "../../../api/paymentService";
 import ServiceStatus from "./ServiceStatus";
+import { getCourseServiceHealth, getPaymentServiceHealth , getAuthServiceHealth , getEnrollmentServiceHealth } from "api/heathService";
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
@@ -20,6 +21,12 @@ const Dashboard = () => {
   const [earnings, setEarnings] = useState(0);
   const [income, setIncome] = useState(0);
   const [orders, setOrders] = useState(0);
+  const [authServiceHealth, setAuthServiceHealth ] = useState(false);
+  const [enrollmentServiceHealth, setEnrollmentServiceHealth ] = useState(false);
+  const [courseServiceHealth, setCourseServiceHealth ] = useState(false);
+  const [paymentServiceHealth, setPaymentServiceHealth ] = useState(false);
+
+
 
   const fetchData = async () => {
     const dashboardData = await getDashboard();
@@ -32,6 +39,55 @@ const Dashboard = () => {
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+        const data = await getCourseServiceHealth();
+        setCourseServiceHealth(data);
+      }
+      fetchData();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+      const data = await getPaymentServiceHealth();
+      setPaymentServiceHealth(data);
+      }
+      fetchData();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+      const data = await getAuthServiceHealth();
+      setAuthServiceHealth(data);
+      }
+      fetchData();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      const fetchData = async () => {
+      const data = await getEnrollmentServiceHealth();
+      setEnrollmentServiceHealth(data);
+      }
+      fetchData();
+    } catch (error) {
+      console.error(error);
+    }
+  }, []);
+
 
   return (
     <Grid container spacing={gridSpacing}>
@@ -59,15 +115,22 @@ const Dashboard = () => {
 
 
         <Grid item sm={6} xs={12} md={4}>
-          <ServiceStatus isLoading={isLoading} service="Auth Service" status="running" />
+          <ServiceStatus isLoading={isLoading} service="Auth Service" status={authServiceHealth} />
         </Grid>
 
         <Grid item sm={6} xs={12} md={4}>
-          <ServiceStatus isLoading={isLoading} service="Auth Service" status="running" />
+          <ServiceStatus isLoading={isLoading} service="Enrollment Service" status={enrollmentServiceHealth} />
         </Grid>
+
         <Grid item sm={6} xs={12} md={4}>
-          <ServiceStatus isLoading={isLoading} service="Auth Service" status="running" />
+          <ServiceStatus isLoading={isLoading} service="Course Service" status={courseServiceHealth} />
         </Grid>
+
+        <Grid item sm={6} xs={12} md={4}>
+          <ServiceStatus isLoading={isLoading} service="Payment Service" status={paymentServiceHealth} />
+        </Grid>
+
+    
       </Grid>
     </Grid>
   );

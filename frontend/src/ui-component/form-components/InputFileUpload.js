@@ -24,7 +24,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-export default function InputFileUpload(params ) {
+const InputFileUpload = (params) => {
   const [progress, setProgress] = useState(0);
   const [downloadURL, setDownloadURL] = useState("");
   const inputRef = useRef(null);
@@ -34,7 +34,7 @@ export default function InputFileUpload(params ) {
     if (file) {
       try {
         const storage = getStorage();
-        const storageRef = ref(storage, "some-child");
+        const storageRef = ref(storage, "images/" + file.name);
 
         const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on(
@@ -106,3 +106,5 @@ export default function InputFileUpload(params ) {
     </label>
   );
 }
+
+export default InputFileUpload;

@@ -26,7 +26,7 @@ const Hero = () => {
     />
            <p className='text-[16px] leading-[24px] font-medium md:text-[16px] lg:text-[18px] text-[#666666] mt-[10px] md:mt-[20px] text-center md:text-left '>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
            <div className='mt-[20px] flex justify-center md:justify-start'>
-            <Button component={Link} to="/pages/register/register3" variant="contained" color="primary">Get Started</Button> 
+            <Button component={Link} to="/register" variant="contained" color="primary">Get Started</Button> 
            </div>
          </div>
          <div className='md:w-[50%] mt-[20px] md:mt-0'>

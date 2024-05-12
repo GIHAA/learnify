@@ -5,10 +5,6 @@ import { forwardRef } from 'react';
 import { useTheme } from '@mui/material/styles';
 import { Button, Card, CardContent, CardHeader, Divider, Typography } from '@mui/material';
 
-// constant
-const headerSX = {
-  '& .MuiCardHeader-action': { mr: 0 }
-};
 
 // ==============================|| CUSTOM MAIN CARD ||============================== //
 
@@ -20,7 +16,11 @@ const MainCard = forwardRef(
       children,
       content = true,
       contentClass = '',
+      courseName,
       contentSX = {},
+      headerSX = {
+        '& .MuiCardHeader-action': { mr: 0 }
+      },
       darkTitle,
       secondary,
       shadow,
@@ -56,14 +56,18 @@ const MainCard = forwardRef(
               action={secondary}
             />
           )}
-          {onClick && (
+          {courseName && (
+            <div className='m-[25px] my-[40px] text-[30px] font-bold'>
+              {courseName}
+            </div>          )}
+          {buttonText  && (
             <Button variant="contained" color="primary" onClick={onClick}>
               {buttonText}
             </Button>
-          
           )}
           {/* content & header divider */}
-          {title && <Divider />}
+          {title   && <Divider />}
+          {courseName   && <Divider />}
 
           {/* card content */}
           {content && (
@@ -86,9 +90,11 @@ MainCard.propTypes = {
   border: PropTypes.bool,
   boxShadow: PropTypes.bool,
   children: PropTypes.node,
+  courseName: PropTypes.string,
   content: PropTypes.bool,
   contentClass: PropTypes.string,
   contentSX: PropTypes.object,
+  headerSX: PropTypes.object,
   darkTitle: PropTypes.bool,
   secondary: PropTypes.oneOfType([PropTypes.node, PropTypes.string, PropTypes.object]),
   shadow: PropTypes.string,

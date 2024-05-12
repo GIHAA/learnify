@@ -38,6 +38,27 @@ export async function consumeUserValidationMessages() {
   }
 }
 
+export const sendMessageToQueue = async ( queueName, message ) => {
+
+  try {
+
+      const connection = await connectToRabbitMQ();
+ 
+      const channel = await connection.createChannel();
+      
+      await channel.assertQueue(queueName, { durable: true });
+      
+      channel.sendToQueue(queueName, Buffer.from(JSON.stringify(message)), {
+          persistent: true 
+      });
+      
+  } catch (error) {
+      console.error("Error:", error);
+  }
+}
+
+
+
 const connectToRabbitMQ = async () => {
   try {
     return await amqp.connect(RABBIMQ_CONFIG.URL);
@@ -47,8 +68,6 @@ const connectToRabbitMQ = async () => {
 };
 
 const validateUser = (userDetails) => {
-  // Todo
-  console.log('Validating user:', userDetails)
   const newUserDetails = { ...userDetails, valid: true };
   return newUserDetails;
 }

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const authFetch = axios.create({
+  // baseURL: "https://127.0.0.1",
   baseURL: "http://localhost:3002",
   headers: {
     "Content-Type": "application/json",

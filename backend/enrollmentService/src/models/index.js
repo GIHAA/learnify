@@ -1,5 +1,2 @@
 
-export { default as enrollment } from './enrollment';
-
-
-
+export { default as Enrollment } from './enrollment';

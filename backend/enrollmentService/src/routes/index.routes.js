@@ -1,4 +1,3 @@
-import { protect } from '@/middleware/auth';
 import express from 'express';
 import enrollmentRouter from './enrollment.routes';
 

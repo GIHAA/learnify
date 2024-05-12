@@ -22,7 +22,7 @@ const other = {
       id: 'documentation',
       title: 'Documentation',
       type: 'item',
-      url: 'https://codedthemes.gitbook.io/learnify/',
+      url: 'https://learnify.gitbook.io/learnify/',
       icon: icons.IconHelp,
       external: true,
       target: true

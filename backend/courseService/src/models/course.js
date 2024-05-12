@@ -27,6 +27,14 @@ const courseSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  category: {
+    type : String,
+    required: false
+  },
+  is_approved: {
+    type: Boolean,
+    default: false
+  },
   content: [{
     title: {
       type: String,
@@ -39,7 +47,7 @@ const courseSchema = new mongoose.Schema({
     video: {
       type: String
     },
-    photo: {
+    image: {
       type: String
     },
     description: {

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -6,28 +6,26 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import Rating from "@mui/material/Rating";
 
-export default function BasicCard({ imageUrl, title, price , rating }) {
+export default function BasicCard({ imageUrl, title, price, rating }) {
   return (
-    <Card sx={{
+    <Card
+      sx={{
         maxWidth: 345,
         border: "1px solid #e0e0e0",
         boxShadow: "0 0 10px 0 rgba(0,0,0,0.1)",
-        margin: "12px"
-    }}
+        margin: "12px",
+      }}
     >
-    
-    <CardMedia
-  component="img"
-  image={imageUrl}
-  alt="Card Image"
-  sx={{
-    width: "auto", // Set your desired width
-    height: "200px", // Set your desired height
-    objectFit: "cover",
-    backgroundSize: "contain",
-  }}
-/>
-
+      <CardMedia
+        component="img"
+        height="140"
+        image={imageUrl}
+        alt="Card Image"
+        sx={{
+          objectFit: "cover",
+          backgroundSize: "contain",
+        }}
+      />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title}

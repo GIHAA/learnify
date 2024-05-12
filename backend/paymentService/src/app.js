@@ -48,7 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('Assert'))
 
-app.get('/payment-service/health', (_, res) => res.status(200).json({ message: 'Payment service and Running' }));
+app.get('/payment/health', (_, res) => res.status(200).json({ message: 'Payment service and Running' }));
 
 app.use(context.middleware);
 
@@ -69,7 +69,7 @@ app.use(
 
 app.use(queryMapper);
 
-app.use('/payment-service/api', routes);
+app.use('/payment/api', routes);
 
 app.use(responseInterceptor);
 

@@ -1,5 +1,5 @@
 
-export { default as course } from './course';
+export { default as Course } from './course';
 
 
 

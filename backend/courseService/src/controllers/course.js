@@ -1,12 +1,14 @@
-import { addCourseService  , getAllCoursesService, getOneCourseService, updateCourseService , removeCourseService  } from '@/services/course';
+import { addCourseService  , getAllCoursesService, getAllMyCoursesService , getOneCourseService, updateCourseService , removeCourseService  } from '@/services/course';
 import { makeResponse } from '@/utils/response';
 
 export const addCourse = async (req, res) => {
-  const ProducateData = req.body;
-  const order = await addCourseService(ProducateData);
+  const order = await addCourseService(req.body);
   return makeResponse({ res, data: order, message: 'course added successfully' });
- 
 };
+export const getAllMyCourses = async (req, res) => {
+  const orders = await getAllMyCoursesService(req.body);
+  return makeResponse({ res, data: orders, message: 'course retrieved All successfully' });
+}
 export const getAllCourses = async (req, res) => {
   const orders = await getAllCoursesService(req.query);
   return makeResponse({ res, data: orders, message: 'course retrieved All successfully' });
