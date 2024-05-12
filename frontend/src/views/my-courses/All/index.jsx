@@ -1,21 +1,42 @@
 import { Pagination } from "@mui/material";
 import { useEffect, useState } from "react";
 import CourseCard from "ui-component/cards/CourseCard";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import AddFeedback from "./addFeedback";
+import { useSelector } from "react-redux";
 
-const AllCourses = ({enrollments}) => {
+const AllCourses = ({ enrollments, handlePageChange }) => {
   const [courses, setCourses] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [open, setOpen] = useState(false);
+  const { user } = useSelector((state) => state.user);
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   useEffect(() => {
     setCourses(enrollments);
   }, [enrollments]);
 
-  const handlePageChange = (event, page) => {
-    // fetchCourses(page);
+  const getPageChange = (event, page = 1) => {
+    handlePageChange(page);
   };
+
+  const addFeedback = (values) => {
+    const paylaod = {
+      added_by: {
+        name: user.name,
+        email: user.email,
+      },
+      feedback : values.feedback,
+      rating: values.rating,
+    }
+  }
 
   return (
     <section className="bg-white rounded-[12px]">
@@ -24,27 +45,35 @@ const AllCourses = ({enrollments}) => {
           All Enrollements
         </h2>
         <div className="flex gap-[20px] flex-wrap max-w-[1280px] mx-auto justify-center">
-        {courses.map((course) => (
-
-          <CourseCard
-            id={course?._id}
-            key={course.course?.sl}
-            title={course.course?.title}
-            description={course.course?.description}
-            image={course.course?.thumbnail}
-            showProgress={false}
-            progress={course.progress}
-          />
-        ))}
+          {courses.map((course) => (
+            <>
+              <AddFeedback
+                open={open}
+                addFeedback={addFeedback}
+                data={course}
+                handleClose={handleClose}
+              />
+              <CourseCard
+                refresh={getPageChange}
+                handleFeedback={handleOpen}
+                id={course?._id}
+                key={course.course?.sl}
+                title={course.course?.title}
+                description={course.course?.description}
+                image={course.course?.thumbnail}
+                showProgress={false}
+                progress={course.progress}
+              />
+            </>
+          ))}
         </div>
-       
 
         <div className="mt-[40px] flex justify-center">
           <Pagination
             count={totalPages}
             color="primary"
             page={currentPage}
-            onChange={handlePageChange}
+            onChange={getPageChange}
           />
         </div>
       </section>
@@ -53,8 +82,8 @@ const AllCourses = ({enrollments}) => {
 };
 
 AllCourses.propTypes = {
-  enrollments: PropTypes.array.isRequired
-}
-
+  enrollments: PropTypes.array.isRequired,
+  handlePageChange: PropTypes.func.isRequired,
+};
 
 export default AllCourses;

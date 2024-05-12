@@ -29,9 +29,6 @@ const AddCourseForm = ({ getCourseMetaData }) => {
   return (
     <form onSubmit={formik.handleSubmit}>
       <div className="mt-3">
-        {/* <Typography variant="h4" className="font-medium">
-          Enter Title
-        </Typography> */}
         <TextField
           id="title"
           label="Course Title"
@@ -41,9 +38,6 @@ const AddCourseForm = ({ getCourseMetaData }) => {
       </div>
 
       <div className="mt-3">
-        {/* <Typography variant="h4" className="font-medium">
-          Enter Description
-        </Typography> */}
         <TextField
           id="description"
           label="Course Description"
@@ -65,9 +59,6 @@ const AddCourseForm = ({ getCourseMetaData }) => {
 
 
       <div className="mt-3">
-        {/* <Typography variant="h4" className="font-medium">
-          Enter Price
-        </Typography> */}
         <TextField
           id="price"
           label="Course Price"

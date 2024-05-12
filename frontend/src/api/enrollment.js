@@ -68,7 +68,6 @@ export const getEnrollment = async (id) => {
 }
 
 export const createEnrollment = async (data) => {
-    console.log(data)
     try {
         const response = await authFetch.post(API_BASE_URL, data);
         return response.data;

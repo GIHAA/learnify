@@ -12,10 +12,11 @@ import {
   Button,
 } from "@mui/material";
 import { useEffect, useState } from "react";
-import { getUsers, removeUser } from "api/userService";
+import { getUsers, removeUser, updateUser } from "api/userService";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import AddUserModal from "./addUserModal";
+import EditUserModal from "./editUserModal";
 import { register } from "api/authService";
 
 const MainCardStyle = styled(MainCard)(() => ({
@@ -32,12 +33,21 @@ const UserManagementPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [searchText, setSearchText] = useState("");
   const [open, setOpen] = useState(false);
+  const [open2, setOpen2] = useState(false);
+  const [editData, setEditData] = useState({});
 
   const handleOpen = () => {
     setOpen(true);
   }
   const handleClose = () => {
     setOpen(false)
+  };
+
+  const handleOpen2 = () => {
+    setOpen2(true);
+  }
+  const handleClose2 = () => {
+    setOpen2(false)
   };
 
   const fetchUsers = async (page = 1, searchText = "") => {
@@ -107,6 +117,17 @@ const UserManagementPage = () => {
     }
   }
 
+  const editUser = async (data) => {
+    try{
+      await updateUser(editData._id, data);
+      toast.success("User updated successfully");
+      fetchUsers();
+    }catch(error){
+      console.error("Error updating user:", error);
+      throw error;
+    }
+  }
+
   return (
     <MainCardStyle
       title="User Management"
@@ -115,6 +136,7 @@ const UserManagementPage = () => {
     >
       <SearchSection setSearchText={setSearchText} />
       <AddUserModal createUser={createUser} open={open} handleClose={handleClose}  />
+      <EditUserModal editUser={editUser} data={editData} open={open2} handleClose={handleClose2} />
       <TableContainer>
         <Table>
           <TableHead>
@@ -135,7 +157,10 @@ const UserManagementPage = () => {
                 <TableCell sx={{ textAlign: "center" }}>
                   <Button
                     variant="outlined"
-                    onClick={() => handleView(user._id)}
+                    onClick={() => {
+                      handleOpen2()
+                      setEditData(user)
+                    }}
                   >
                     Edit
                   </Button>
