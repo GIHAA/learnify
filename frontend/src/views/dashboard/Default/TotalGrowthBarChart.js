@@ -1,45 +1,54 @@
-import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 // material-ui
-import { useTheme } from '@mui/material/styles';
-import { Grid,  Typography } from '@mui/material';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { useTheme } from "@mui/material/styles";
+import { Grid, Typography } from "@mui/material";
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 // third-party
-import ApexCharts from 'apexcharts';
-import Chart from 'react-apexcharts';
+import ApexCharts from "apexcharts";
+import Chart from "react-apexcharts";
 
 // project imports
-import SkeletonTotalGrowthBarChart from 'ui-component/cards/Skeleton/TotalGrowthBarChart';
-import MainCard from 'ui-component/cards/MainCard';
-import { gridSpacing } from 'store/constant';
+import SkeletonTotalGrowthBarChart from "ui-component/cards/Skeleton/TotalGrowthBarChart";
+import MainCard from "ui-component/cards/MainCard";
+import { gridSpacing } from "store/constant";
 
 // chart data
-import chartData from './chart-data/total-growth-bar-chart';
-import { getChartData } from 'api/courseService';
+import chartData from "./chart-data/total-growth-bar-chart";
+import { getChartData } from "api/courseService";
 
 const status = [
   {
-    value: 'today',
-    label: 'Today'
+    value: "today",
+    label: "Today",
   },
   {
-    value: 'month',
-    label: 'This Month'
+    value: "month",
+    label: "This Month",
   },
   {
-    value: 'year',
-    label: 'This Year'
-  }
+    value: "year",
+    label: "This Year",
+  },
 ];
 
 // ==============================|| DASHBOARD DEFAULT - TOTAL GROWTH BAR CHART ||============================== //
 
 const TotalGrowthBarChart = ({ isLoading }) => {
-  const [value, setValue] = useState('today');
-  const [data , setData] = useState([]);
+  const [value, setValue] = useState("today");
+  const [data, setData] = useState([]);
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
 
@@ -63,41 +72,6 @@ const TotalGrowthBarChart = ({ isLoading }) => {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    const newChartData = {
-      ...chartData.options,
-      colors: [primary200, primaryDark, secondaryMain, secondaryLight],
-      xaxis: {
-        labels: {
-          style: {
-            colors: [primary, primary, primary, primary, primary, primary, primary, primary, primary, primary, primary, primary]
-          }
-        }
-      },
-      yaxis: {
-        labels: {
-          style: {
-            colors: [primary]
-          }
-        }
-      },
-      grid: {
-        borderColor: grey200
-      },
-      tooltip: {
-        theme: 'light'
-      },
-      legend: {
-        labels: {
-          colors: grey500
-        }
-      }
-    };
-
-    if (!isLoading) {
-      ApexCharts.exec(`bar-chart`, 'updateOptions', newChartData);
-    }
-  }, [navType, primary200, primaryDark, secondaryMain, secondaryLight, primary, darkLight, grey200, isLoading, grey500]);
 
   return (
     <>
@@ -107,28 +81,36 @@ const TotalGrowthBarChart = ({ isLoading }) => {
         <MainCard>
           <Grid container spacing={gridSpacing}>
             <Grid item xs={12}>
-              <Grid container alignItems="center" justifyContent="space-between">
+              <Grid
+                container
+                alignItems="center"
+                justifyContent="space-between"
+              >
                 <Grid item>
                   <Grid container direction="column" spacing={1}>
                     <Grid item>
-                      <Typography variant="h3">Total Courses : {data.count}</Typography>
+                      <Typography variant="h3">
+                        Total Courses : {data.count}
+                      </Typography>
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              {/* <Chart {...chartData} /> */}
               <ResponsiveContainer width="100%" height={300}>
-            <BarChart data={data.data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="_id" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Bar dataKey="count" fill="#8884d8" />
-            </BarChart>
-        </ResponsiveContainer>
+                <BarChart
+                  data={data.data}
+                  margin={{ top: 20, right: 20, left: -15, bottom: 5 }}
+                >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="_id" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="count" fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
             </Grid>
           </Grid>
         </MainCard>
@@ -138,7 +120,7 @@ const TotalGrowthBarChart = ({ isLoading }) => {
 };
 
 TotalGrowthBarChart.propTypes = {
-  isLoading: PropTypes.bool
+  isLoading: PropTypes.bool,
 };
 
 export default TotalGrowthBarChart;

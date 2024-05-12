@@ -15,6 +15,8 @@ const CourseCard = ({
   progress,
   refresh,
   id,
+  showUnenroll = false,
+  showContinue = false,
 }) => {
   const navigate = useNavigate();
 
@@ -22,7 +24,7 @@ const CourseCard = ({
     toast((t) => (
       <div className=" bg-white rounded  flex">
         <p className="mb-2">Are you sure you want to Unenroll this course?</p>
-        <button 
+        <button
           className="flex ml-2 px-4 pt-3 bg-red-500 text-white rounded hover:bg-red-600 "
           onClick={() => {
             toast.dismiss(t.id);
@@ -33,18 +35,17 @@ const CourseCard = ({
         </button>
       </div>
     ));
-  }
+  };
 
   const confirmDelete = async (enrollId) => {
     toast.success("Course deleted successfully");
     await removeEnrollment(enrollId);
     refresh();
   };
-  
 
   const handleRate = (courseId) => {
     handleFeedback(courseId);
-  }
+  };
 
   return (
     <div className="max-w-[334px] rounded-[14px] shadow-md flex flex-col justify-between">
@@ -77,36 +78,47 @@ const CourseCard = ({
         )}
         <div className="px-3 mb-3">
           <div className="flex mb-3">
-            <Button
-              variant="outlined"
-              onClick={() => {
-                handleRate(id);
-              }}
-              className="w-full mr-1 rounded-[6px]"
-            >
-              Rate
-            </Button>
-            <Button
-            color="error"
-              variant="outlined"
-              onClick={() => {
-                handleUnenroll(id);
-              }}
-              className="w-full ml-1 rounded-[6px]"
-            >
-              Unenroll
-            </Button>
+            {handleFeedback ? (
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  handleRate(id);
+                }}
+                className="w-full mr-1 rounded-[6px]"
+              >
+                Rate
+              </Button>
+            ) : (
+              <> </>
+            )}
+            {showUnenroll ? (
+              <Button
+                color="error"
+                variant="outlined"
+                onClick={() => {
+                  handleUnenroll(id);
+                }}
+                className="w-full ml-1 rounded-[6px]"
+              >
+                Unenroll
+              </Button>
+            ) : (
+              <> </>
+            )}
           </div>
-
-          <Button
-            variant="contained"
-            onClick={() => {
-              navigate(`/take-course/${id}`);
-            }}
-            className="w-full rounded-[6px]"
-          >
-            Continue
-          </Button>
+          {showContinue ? (
+            <Button
+              variant="contained"
+              onClick={() => {
+                navigate(`/take-course/${id}`);
+              }}
+              className="w-full rounded-[6px]"
+            >
+              Continue
+            </Button>
+          ) : (
+            <> </>
+          )}
         </div>
       </div>
     </div>
@@ -123,6 +135,8 @@ CourseCard.propTypes = {
   id: PropTypes.string.isRequired,
   refresh: PropTypes.func.isRequired,
   handleFeedback: PropTypes.func.isRequired,
+  showUnenroll: PropTypes.bool,
+  showContinue: PropTypes.bool,
 };
 
 export default CourseCard;

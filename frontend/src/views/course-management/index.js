@@ -1,12 +1,14 @@
 import styled from "@emotion/styled";
-import Grid from "@mui/material/Grid"; 
+import Grid from "@mui/material/Grid";
 import SearchSection from "layout/MainLayout/Header/SearchSection";
 import MainCard from "ui-component/cards/MainCard";
 import BasicCard from "ui-component/cards/BasicCard";
 import { Pagination } from "@mui/material";
 import { useNavigate } from "react-router";
 import { useEffect, useState } from "react";
-import { getCourses } from "api/courseService";
+import { getCourses, updateCourse } from "api/courseService";
+import EditCourseModal from "./editCourseModal";
+import toast from "react-hot-toast";
 
 const MainCardStyle = styled(MainCard)(() => ({
   "& .MuiCardHeader-root": {
@@ -20,14 +22,23 @@ const CourseManagementPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [searchText, setSearchText] = useState("");
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState({});
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const onClick = () => {
     navigate("/admin/course-management/add");
   };
 
-  const fetchCourses = async (page = 1 , searchText = "") => {
+  const fetchCourses = async (page = 1, searchText = "") => {
     try {
-      const response = await getCourses(page, 4, searchText );
+      const response = await getCourses(page, 4, searchText);
       setCourses(response.docs);
       setTotalPages(response.totalPages);
       setCurrentPage(page);
@@ -48,6 +59,11 @@ const CourseManagementPage = () => {
     fetchCourses(page);
   };
 
+  const editCourse = async (values) => {
+    const res = await updateCourse( values.id, values);
+    fetchCourses();
+    toast.success("Course updated successfully");
+  }
 
   return (
     <MainCardStyle
@@ -55,19 +71,26 @@ const CourseManagementPage = () => {
       onClick={onClick}
       buttonText={"Add Course"}
     >
-      <SearchSection setSearchText={setSearchText}/>
-
+      <SearchSection setSearchText={setSearchText} />
+      <EditCourseModal editCourse={editCourse} open={open} data={data} handleClose={handleClose} />
       <Grid container spacing={2} className="mt-[10px]">
         {courses.map((course) => (
-          <Grid item xs={12} sm={6} md={4} lg={3} key={course.id}>
-            <BasicCard
-              title={course.title}
-              description={course.description}
-              imageUrl={course.thumbnail}
-              rating={course.rating}
-              price={course.price}
-            />
-          </Grid>
+          <>
+            <Grid item xs={12} sm={6} md={4} lg={3} key={course.id}>
+              <BasicCard
+                handleOpen={handleOpen}
+                currentPage={currentPage}
+                fetchCourses={fetchCourses}
+                id={course._id}
+                title={course.title}
+                description={course.description}
+                imageUrl={course.thumbnail}
+                rating={course.rating}
+                price={course.price}
+                setData={setData}
+              />
+            </Grid>
+          </>
         ))}
       </Grid>
       <div className="mt-[40px]">

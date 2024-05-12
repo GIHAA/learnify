@@ -28,7 +28,6 @@ import AnimateButton from 'ui-component/extended/AnimateButton';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-// import Google from 'assets/images/icons/social-google.svg';
 import { login } from 'api/authService';
 import toast from 'react-hot-toast';
 import { useDispatch } from 'react-redux';
@@ -61,7 +60,10 @@ const FirebaseLogin = ({ ...others }) => {
         navigate('/')
       }
       if (response.data.user.role === 'ADMIN') {
-        navigate('/admin')
+        navigate('/admin/dashboard')
+      }
+      if (response.data.user.role === 'INSTRUCTOR') {
+        navigate('/admin/course-management')
       }
     }
     catch (error) {

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import SearchSection from "layout/MainLayout/Header/SearchSection";
 import MainCard from "ui-component/cards/MainCard";
-import { Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button } from "@mui/material";
+import { Pagination, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Rating } from "@mui/material";
 import { useEffect, useState } from "react";
 import { getFeedbacks } from "api/feedbackService";
 import { useNavigate } from 'react-router-dom';
@@ -67,7 +67,9 @@ const FeedbacksPage = () => {
               <TableRow key={course.id}>
                 <TableCell>{course.course}</TableCell>
                 <TableCell sx={{ maxWidth: "200px" }}>{course.feedback}</TableCell>
-                <TableCell>{course.rating}</TableCell>
+                <TableCell>
+                <Rating name="read-only" value={course.rating} readOnly />
+                  </TableCell>
                 <TableCell>
                   <span style={{ color: course.is_approved ? 'green' : 'orange' }}>
                     {course.is_approved ? "Approved" : "Pending"}

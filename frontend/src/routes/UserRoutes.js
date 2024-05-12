@@ -34,10 +34,6 @@ const UserRoutes = {
       path: "my-courses",
       element: <MyCourse />,
     },
-    // {
-    //   path: "course-info",
-    //   element: <CourseInfo />,
-    // },
     {
       path : "take-course/:id",
       element : <TakeCourse />

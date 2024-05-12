@@ -74,6 +74,8 @@ const AllCourses = ({ enrollments, handlePageChange }) => {
                 image={course.course?.thumbnail}
                 showProgress={false}
                 progress={course.progress}
+                showUnenroll={true}
+                showContinue={true}
               />
             </>
           ))}
