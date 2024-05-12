@@ -53,7 +53,7 @@ spec:
                 configMapKeyRef:
                   key: RABBITMQ_URL
                   name: payment-env
-          image: payment
+          image: gihaa/ds-project-payment
           name: payment-service
           ports:
             - containerPort: 3004

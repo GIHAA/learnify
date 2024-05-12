@@ -53,7 +53,7 @@ spec:
                 configMapKeyRef:
                   key: RABBITMQ_URL
                   name: feedback-env
-          image: feedback
+          image: gihaa/ds-project-feedback
           name: feedback-service
           ports:
             - containerPort: 3006

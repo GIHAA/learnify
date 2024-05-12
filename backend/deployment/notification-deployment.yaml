@@ -58,7 +58,7 @@ spec:
                 configMapKeyRef:
                   key: SMS_TOKEN
                   name: notification-env
-          image: notification
+          image: gihaa/ds-project-notification
           name: notification-service
           ports:
             - containerPort: 3005
