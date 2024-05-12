@@ -1,7 +1,12 @@
 
+import { Button } from '@mui/material';
 import CourseGrid from './CourseGrid';
+import { Link } from 'react-router-dom';
+import { IoArrowForward } from "react-icons/io5";
 
 const OurCourses = () => {
+
+  
   
   return (
     <section className="bg-white rounded-[12px]">
@@ -10,7 +15,13 @@ const OurCourses = () => {
           Our Courses
         </h2>
         <CourseGrid/>
-      
+        <div className=' flex justify-center items-center pt-[30px]'>
+        <Button component={Link} to="/shop" variant="contained"  className='text-[18px] flex gap-[8px] bg-[#5E35B1] hover:bg-none'>
+          Brows More Courses
+          <IoArrowForward />
+          </Button> 
+        </div>
+        
       </section>
     </section>
   );
