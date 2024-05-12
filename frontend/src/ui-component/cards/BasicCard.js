@@ -25,6 +25,8 @@ export default function BasicCard({ imageUrl, title, price, rating }) {
           objectFit: "cover",
           backgroundSize: "contain",
         }}
+        style={{objectFit: "cover", backgroundSize: "contain"}}
+        className="w-full h-[225px] object-cover bg-cover bg-center rounded-t-[14px]"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">

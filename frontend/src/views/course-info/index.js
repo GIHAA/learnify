@@ -21,6 +21,7 @@ const CourseInfo = () => {
     try {
       const response = await getCourse(id);
       setCourse(response.data);
+      console.log("Course fetched:", response.data);
     } catch (error) {
       console.error("Error fetching course:", error);
     }
@@ -38,8 +39,9 @@ const CourseInfo = () => {
           <div className="flex gap-8 py-4"></div>
         </div>
 
-        <div className="flex gap-4">
-          <div className="bg-white p-4">
+        <div className="flex flex-col lg:flex-row gap-4">
+
+          <div className="bg-white p-4 lg:w-[50%]">
             <img src={course.thumbnail} className="w-" />
             <div className="mt-10">
               <div className="flex">
@@ -55,30 +57,35 @@ const CourseInfo = () => {
               <p className="mt-4 text-gray-500">{course.description}</p>
             </div>
           </div>
+
           {payment ? (
-            <div className=" w-full bg-white rounded shadow">
-              <div className="flex flex-col gap-5 justify-center items-center mt-20">
+            <div className=" w-full bg-white rounded shadow px-[20px] py-[40px]">
+              <div className="flex flex-col gap-5 justify-center items-center  ">
                 <div className="text-4xl">US$ {course.price}</div>
-                <div className="flex flex-col w-full gap-4">
+                <div className="flex flex-col w-full gap-4 ">
                   <button
                     onClick={() => {
                       setPayment(!payment);
                     }}
-                    className="w-[80%] bg-[#673ab7] text-white mx-auto p-2 rounded-lg"
+                    className="w-[80%] bg-[#673ab7] text-white mx-auto  rounded-lg p-[15px] lg:max-w-[400px] text-[25px] font-medium "
                   >
                     Buy
                   </button>
-                  <button className="w-[80%] outline outline-1 outline-[#673ab7] mx-auto p-2 rounded-lg text-[#673ab7]">
+                  <button className="w-[80%] outline outline-1 outline-[#673ab7] mx-auto p-[15px] rounded-lg text-[#673ab7] lg:max-w-[400px] text-[25px] font-medium ">
                     Wishlist
                   </button>
                 </div>
               </div>
-              <div className="ml-10 mt-10 flex flex-col gap-2">
-                <p>{course.content ? course.content.length : "0 "} sections</p>
-                <p>20 lectures</p>
+
+              
+              <div className="ml-10 mt-10 flex flex-col gap-2 text-[16px] leading-[24px]">
+                <p>{course.content ? course.content.length : "0 "} Lessons</p>
+                <p>Access on mobile and Laptop</p>
                 <p>English</p>
               </div>
             </div>
+
+               
           ) : (
             <div className="w-full bg-white rounded shadow flex justify-center items-center ">
               <Elements stripe={stripePromise}>

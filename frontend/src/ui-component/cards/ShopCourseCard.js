@@ -4,16 +4,19 @@ import { Link } from "react-router-dom";
 
 const ShopCourseCard = ({ id, title, description, imageUrl, rating, price }) => {
   return (
-    <div className="max-w-[334px] rounded-[14px]  shadow-md pb-[14px]">
+    <div className="max-w-[334px] rounded-[14px]  shadow-md pb-[14px] h-full">
       <CardMedia
         component="img"
-        height="140"
+        height="225"
+        width={"100%"}
         image={imageUrl}
         alt="Card Image"
         sx={{
           objectFit: "cover",
           backgroundSize: "contain",
         }}
+   style={{objectFit: "cover", backgroundSize: "contain"}}
+   className="w-full h-[225px] object-cover bg-cover bg-center rounded-t-[14px]"
       />
       <div className="p-[20px] flex flex-col gap-[8px]">
         <p className="text-[20px] leading-[28px] font-bold">{title}</p>
