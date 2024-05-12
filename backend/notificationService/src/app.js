@@ -50,64 +50,64 @@ app.use(httpLogger({
   })
 }));
 
-const server = createServer(app); // Create an HTTP server instance using Express
+// const server = createServer(app); // Create an HTTP server instance using Express
 
 // Integrate Socket.IO with the HTTP server
-const io = new Server(server, {
-  cors: {
-    origin: "*",
-  },
-});
+// const io = new Server(server, {
+//   cors: {
+//     origin: "*",
+//   },
+// });
 
-// Socket.IO event handling logic
-let onlineUsers = [];
+// // Socket.IO event handling logic
+// let onlineUsers = [];
 
-const addNewUser = (username, socketId) => {
-  !onlineUsers.some((user) => user.username === username) &&
-    onlineUsers.push({ username, socketId });
-};
+// const addNewUser = (username, socketId) => {
+//   !onlineUsers.some((user) => user.username === username) &&
+//     onlineUsers.push({ username, socketId });
+// };
 
-const removeUser = (socketId) => {
-  onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
-};
+// const removeUser = (socketId) => {
+//   onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
+// };
 
-const getUser = (username) => {
-  return onlineUsers.find((user) => user.username === username);
-};
+// const getUser = (username) => {
+//   return onlineUsers.find((user) => user.username === username);
+// };
 
-io.on("connection", (socket) => {
+// io.on("connection", (socket) => {
 
-  socket.on("newUser", (username) => {
-    console.log("New user added: ", username);
-    addNewUser(username, socket.id);
-  });
+//   socket.on("newUser", (username) => {
+//     console.log("New user added: ", username);
+//     addNewUser(username, socket.id);
+//   });
 
-  socket.on("sendNotification", ({ senderName, receiverName, type }) => {
-    const receiver = getUser(receiverName);
-    io.to(receiver.socketId).emit("getNotification", {
-      senderName,
-      type,
-    });
-  });
+//   socket.on("sendNotification", ({ senderName, receiverName, type }) => {
+//     const receiver = getUser(receiverName);
+//     io.to(receiver.socketId).emit("getNotification", {
+//       senderName,
+//       type,
+//     });
+//   });
 
-  socket.on("sendText", ({ senderName, receiverName, text }) => {
-    const receiver = getUser(receiverName);
-    io.to(receiver.socketId).emit("getText", {
-      senderName,
-      text,
-    });
-  });
+//   socket.on("sendText", ({ senderName, receiverName, text }) => {
+//     const receiver = getUser(receiverName);
+//     io.to(receiver.socketId).emit("getText", {
+//       senderName,
+//       text,
+//     });
+//   });
 
-  socket.on("disconnect", () => {
-    removeUser(socket.id);
-  });
-});
+//   socket.on("disconnect", () => {
+//     removeUser(socket.id);
+//   });
+// });
 
-const port = process.env.PORT || 3005;
-server.listen(port, (err) => {
-  if (!err) {
-    logger.info(`Server started on port ${port}`);
-  }
-});
+// const port = process.env.PORT || 3005;
+// server.listen(port, (err) => {
+//   if (!err) {
+//     logger.info(`Server started on port ${port}`);
+//   }
+// });
 
 consumeEmailRequestMessages();

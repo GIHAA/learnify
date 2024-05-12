@@ -61,7 +61,7 @@ const CardWrapper = styled(MainCard)(({ theme }) => ({
   }
 }));
 
-// ==============================|| DASHBOARD - TOTAL ORDER LINE CHART CARD ||============================== //
+// ==============================|| DASHBOARD - Total Enrollments LINE CHART CARD ||============================== //
 
 const TotalOrderLineChartCard = ({ isLoading , orders }) => {
   const theme = useTheme();
@@ -148,7 +148,7 @@ const TotalOrderLineChartCard = ({ isLoading , orders }) => {
                             color: theme.palette.primary[200]
                           }}
                         >
-                          Total Order
+                          Total Enrollments
                         </Typography>
                       </Grid>
                     </Grid>

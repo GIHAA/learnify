@@ -2,18 +2,22 @@ import MainCard from "ui-component/cards/MainCard";
 import LessionCard from "ui-component/cards/LessionCard";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
-// import { Button } from "@mui/material";
-// import LinearWithValueLabel from "ui-component/LinearProgressWithLabel";
 import BasicModal from "ui-component/BasicModal";
 import AddCourseForm from "ui-component/AddCourseForm";
 import AddSectionForm from "ui-component/AddSectionForm";
 import { createCourse } from "api/courseService";
 import { useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import { notify } from "api/authService";
+import toast from "react-hot-toast";
+
 
 const AddCourse = () => {
-  const [metaData, setMetaData] = useState(); 
+  const [metaData, setMetaDataDetails] = useState(); 
   const [section, setSection] = useState([]);
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user)
+
 
   const addSection = (sectionData) => {
     setSection((prevState) => [
@@ -23,23 +27,31 @@ const AddCourse = () => {
         title: sectionData.title,
         description: sectionData.description,
         duration: sectionData.duration,
-        //todo
         icon: sectionData.image,
         video: sectionData.video,
+        image : sectionData.image,
+        type : sectionData.type
       },
     ]);
   };
 
+
+  const setMetaData = (data) => {
+    console.log(data);
+    setMetaDataDetails(data);
+  }
+
   const publishCourse = async (isChecked) => {
+    await createCourse({ ...metaData, addedBy: user.user._id, content: section });
     if (isChecked) {
       console.log("Notify User on Publish");
+      const res = await notify({
+        subject: "New Course Published",
+        text : `${metaData.title} has been published successfully`,
+      })
+      toast.success("Course Published Successfully");
     }
-   
-    await createCourse({ ...metaData, addedBy: "60f5b14eb2c4b417885a2e3a", section });
-  
-    //todo toast  
     navigate("/admin/course-management");
-
   };
 
   return (
@@ -52,24 +64,15 @@ const AddCourse = () => {
         <Grid item xs={12} md={4}>
           {section.map((lession , index) => (
             <LessionCard
+              index={index}
               key={index}
               title={lession.title}
-              description={lession.description}
+              description={lession.title}
               duration={lession.duration}
               imageUrl={lession.image}
             />
           ))}
           <div className="flex justify-center">
-            {/* <Button
-              variant="contained"
-              color="primary"
-              sx={{
-                width: "92%",
-              }}
-              onClick={addSection}
-            >
-              Add Lession
-            </Button> */}
           </div>
 
           <BasicModal

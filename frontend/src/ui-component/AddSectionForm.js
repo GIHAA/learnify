@@ -1,9 +1,11 @@
-import  { useState , useRef } from 'react';
+import { useState, useRef } from "react";
 import { TextField, Button, Grid, Avatar } from "@mui/material";
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 import InputFileUpload from "./form-components/InputFileUpload";
-import propTypes from 'prop-types';
-import AssignmentIcon from '@mui/icons-material/Assignment';
+import propTypes from "prop-types";
+import OndemandVideoIcon from "@mui/icons-material/OndemandVideo";
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import FormatColorTextIcon from "@mui/icons-material/FormatColorText";
 
 const AddSectionForm = ({ getSectionData }) => {
   const [selectedAvatar, setSelectedAvatar] = useState(null);
@@ -12,15 +14,15 @@ const AddSectionForm = ({ getSectionData }) => {
 
   const handleAvatarClick = (avatarId) => {
     setSelectedAvatar(avatarId);
-    formik.setFieldValue('selectedAvatar', avatarId);
+    formik.setFieldValue("selectedAvatar", avatarId);
   };
 
   const getsVideoDownloadURL = (url) => {
-    formik.setFieldValue('video', url);
+    formik.setFieldValue("video", url);
   };
 
   const getsImageDownloadURL = (url) => {
-    formik.setFieldValue('image', url);
+    formik.setFieldValue("image", url);
   };
 
   const formik = useFormik({
@@ -30,7 +32,7 @@ const AddSectionForm = ({ getSectionData }) => {
       title: "",
       description: "",
       duration: "",
-      selectedAvatar: null,
+      type: "",
     },
     onSubmit: (values) => {
       getSectionData(values);
@@ -44,7 +46,9 @@ const AddSectionForm = ({ getSectionData }) => {
     <form onSubmit={formik.handleSubmit}>
       <InputFileUpload
         setDownloadURL={getsVideoDownloadURL}
-        setResetFunction={(reset) => { resetVideoInput.current = reset; }}
+        setResetFunction={(reset) => {
+          resetVideoInput.current = reset;
+        }}
         text="Upload Video"
         type="video"
         className="flex justify-center"
@@ -52,7 +56,9 @@ const AddSectionForm = ({ getSectionData }) => {
 
       <InputFileUpload
         setDownloadURL={getsImageDownloadURL}
-        setResetFunction={(reset) => { resetImageInput.current = reset; }}
+        setResetFunction={(reset) => {
+          resetImageInput.current = reset;
+        }}
         text="Upload Image"
         type="image"
         className="flex justify-center mt-5"
@@ -64,7 +70,7 @@ const AddSectionForm = ({ getSectionData }) => {
         multiline
         maxRows={6}
         className="w-full mt-5"
-        {...formik.getFieldProps('title')}
+        {...formik.getFieldProps("title")}
       />
 
       <TextField
@@ -73,8 +79,10 @@ const AddSectionForm = ({ getSectionData }) => {
         multiline
         maxRows={6}
         className="w-full mt-5"
-        {...formik.getFieldProps('description')}
+        {...formik.getFieldProps("description")}
       />
+
+
 
       <Grid container spacing={2}>
         <Grid item xs={6}>
@@ -84,22 +92,36 @@ const AddSectionForm = ({ getSectionData }) => {
             variant="outlined"
             fullWidth
             className="mt-5"
-            {...formik.getFieldProps('duration')}
+            {...formik.getFieldProps("duration")}
           />
         </Grid>
         <Grid item xs={6}>
           <div className="mt-[34px] ml-[20px]">
             <Grid container spacing={2} justifyContent="space-between">
-              {[1, 2, 3, 4].map((avatarId) => (
+              {[1, 2, 3].map((avatarId) => (
                 <Avatar
+                  color="primary"
                   key={avatarId}
                   variant="rounded"
                   className={`w-[50px] mt-1 h-[50px] ${
-                    selectedAvatar === avatarId ? 'bg-blue-500' : ''
+                    selectedAvatar === avatarId ? "bg-blue-400" : ""
                   }`}
-                  onClick={() => handleAvatarClick(avatarId)}
+                  onClick={() => {
+                    let type;
+                    if (avatarId === 1) type = "video";
+                    if (avatarId === 2) type = "image";
+                    if (avatarId === 3) type = "text";
+                    handleAvatarClick(avatarId);
+                    formik.setFieldValue("type", type);
+                  }}
                 >
-                  <AssignmentIcon />
+                  {avatarId === 1 ? (
+                    <OndemandVideoIcon className="text-white" color="primary" />
+                  ) : avatarId === 2 ? (
+                    <InsertPhotoIcon  className="text-white" color="primary" />
+                  ) : (
+                    <FormatColorTextIcon   className=" text-white" color="primary" />
+                  )}
                 </Avatar>
               ))}
             </Grid>
@@ -119,4 +141,3 @@ AddSectionForm.propTypes = {
 };
 
 export default AddSectionForm;
-

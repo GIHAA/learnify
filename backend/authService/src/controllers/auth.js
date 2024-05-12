@@ -25,7 +25,6 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const user = await authLogin(req.body);
   if (!user) throw new createError(401, 'Invalid email or password');
-  if (!user.is_verified) throw new createError(401, 'Account not verified. Please check your email');
   if (!user.is_active)
     throw new createError(401, 'Your account has been deactivated. Please contact an admin to resolve it');
   return sendTokenResponse(res, user, 'User logged in successfully');
@@ -56,7 +55,7 @@ export const resendVerification = async (req, res) => {
 };
 
 export const current = (req, res) => {
-  return makeResponse({ res, data: req.user, message: 'Auth group details fetched successfully' });
+  return makeResponse({ res, data: req.user, message: 'User details fetched successfully' });
 };
 
 export const forgotPassword = async (req, res) => {

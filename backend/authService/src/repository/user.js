@@ -15,24 +15,33 @@ export const createUser = async (user) => {
   }
 };
 
-export const getAllUsers = async () => {
-  try {
-    //WIP
-    const user = await User.find().lean();
-    if (!user) {
-      logger.warn('No users found.');
-      return null;
-    }
+export const getAllUsers = async (query) => {
+  const page = parseInt(query.page) || 1;
+  const limit = parseInt(query.limit) || 10;
+  const searchTerm = query.searchTerm || '';
 
-    delete user.password;
-    logger.info('All users retrieved:', user);
-    return user;
+  const filters = {
+    $or: [
+      { name: { $regex: searchTerm, $options: 'i' } },
+      { email: { $regex: searchTerm, $options: 'i' } },
+    ],
+  };
+  const options = {
+    page,
+    limit
+  };
+  try {
+    const users = await User.paginate(filters, options);
+
+    logger.info('All users retrieved:', users);
+
+    return users;
   } catch (error) {
     logger.error('Error retrieving all users:', error.message);
+    console.log(error)
     throw error;
   }
 };
-
 export const getOneUser = async (filters, returnPassword = false) => {
   try {
     const user = await User.findOne(filters).lean();

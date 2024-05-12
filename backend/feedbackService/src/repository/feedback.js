@@ -4,18 +4,18 @@ import { feedback } from '@/models';
 import { RABBIMQ_CONFIG } from '@/utils';
 import { sendMessageToQueue } from '@/utils/messageBroker';
 
-const logger = moduleLogger('feedbacke-repository');
+const logger = moduleLogger('feedback-repository');
 
 export const createfeedbacke = async (feedback) => {
   try {
     const newfeedbackes = await new feedback(feedback).save();
     
-    logger.info('feedbacke created:', newfeedbackes);
+    logger.info('feedback created:', newfeedbackes);
     sendMessageToQueue(RABBIMQ_CONFIG.FEEDBACK_VALIDATION_QUEUE, newfeedbackes);
 
     return newfeedbackes;
   } catch (error) {
-    logger.error('Error creating feedbacke:', error.message);
+    logger.error('Error creating feedback:', error.message);
     console.log(error);
     throw error;
   }
@@ -25,14 +25,14 @@ export const getOnefeedbacke = async (filters) => {
   try {
     const feedbackef = await feedback.findOne({ feedbackeId: filters.feedbackeId });
     if (!feedbackef) {
-      logger.warn('No feedbacke found.');
+      logger.warn('No feedback found.');
       return null;
     }
 
-    logger.info('feedbacke retrieved:', feedbackef);
+    logger.info('feedback retrieved:', feedbackef);
     return feedbackef;
   } catch (error) {
-    logger.error('Error retrieving feedbacke:', error.message);
+    logger.error('Error retrieving feedback:', error.message);
     throw error;
   }
 };
@@ -41,7 +41,7 @@ export const getAllfeedbacke = async () => {
   try {
     const feedbackes = await feedback.find();
     if (!feedbackes) {
-      logger.warn('No feedbacke found.');
+      logger.warn('No feedback found.');
       return null;
     }
 
@@ -59,28 +59,28 @@ export const removefeedbacke = async (filters) => {
   try {
     const feedbackedelete = await feedback.findOneAndRemove(filters);
     if (!feedbackedelete) {
-      logger.warn('No feedbacke found with filters:', filters);
+      logger.warn('No feedback found with filters:', filters);
       return null;
     }
-    logger.info('feedbacke removed:', feedbackedelete);
+    logger.info('feedback removed:', feedbackedelete);
     return feedbackedelete;
   } catch (error) {
-    logger.error('error toremovw feedbacke', error.message);
+    logger.error('error toremovw feedback', error.message);
     throw error;
   }
 };
 
 export const updatefeedbacke = async (filters, data) => {
   try {
-    const feedbacke = await feedback.findByIdAndUpdate(filters._id, data);
-    if (!feedbacke) {
-      logger.warn('No feedbacke found with filters:', filters);
+    const feedback = await feedback.findByIdAndUpdate(filters._id, data);
+    if (!feedback) {
+      logger.warn('No feedback found with filters:', filters);
       return null;
     }
-    logger.info('feedbacke updated:', feedbacke);
-    return feedbacke;
+    logger.info('feedback updated:', feedback);
+    return feedback;
   } catch (e) {
-    logger.error('error update feedbacke', e.message);
+    logger.error('error update feedback', e.message);
     throw e;
   }
 };

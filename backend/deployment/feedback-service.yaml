@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.33.0 (HEAD)
+  labels:
+    io.kompose.service: feedback
+  name: feedback
+spec:
+  ports:
+    - name: "3006"
+      port: 3006
+      targetPort: 3006
+  selector:
+    io.kompose.service: feedback

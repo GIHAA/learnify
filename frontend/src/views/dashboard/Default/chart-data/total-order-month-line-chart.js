@@ -1,4 +1,4 @@
-// ===========================|| DASHBOARD - TOTAL ORDER MONTH CHART ||=========================== //
+// ===========================|| DASHBOARD - Total Enrollments MONTH CHART ||=========================== //
 
 const chartData = {
   type: 'line',
@@ -34,7 +34,7 @@ const chartData = {
         show: false
       },
       y: {
-        title: 'Total Order'
+        title: 'Total Enrollments'
       },
       marker: {
         show: false

@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
-import aggregatePaginate from 'mongoose-aggregate-paginate-v2';
+import mongoosePaginate from 'mongoose-paginate-v2';
+import { autoInc } from 'auto-increment-group';
 
 const UserSchema = new mongoose.Schema({
   name: {
@@ -37,7 +38,7 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['ADMIN', 'USER'],
+    enum: ['ADMIN', 'USER' , 'INSTRUCTOR'],
     default: 'USER'
   },
   photo_url: String
@@ -46,11 +47,16 @@ const UserSchema = new mongoose.Schema({
   timestamps: { createdAt: 'created_at', updatedAt: 'updated_at' }
 });
 
-UserSchema.plugin(aggregatePaginate);
-UserSchema.index({ createdAt: 1 });
+UserSchema.plugin(autoInc, {
+  field: "sl",
+  digits: 4,
+  startAt: 1,
+  incrementBy: 1,
+  unique: false
+});
+UserSchema.plugin(mongoosePaginate);
 
 const User = mongoose.model('User', UserSchema);
 
-User.syncIndexes();
 
 export default User;
