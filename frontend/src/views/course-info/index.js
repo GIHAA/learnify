@@ -60,6 +60,24 @@ const CourseInfo = () => {
 
           {payment ? (
             <div className=" w-full bg-white rounded shadow px-[20px] py-[40px]">
+              
+
+              
+              <div className="ml-10 mb-10 flex flex-col gap-2 text-[16px] leading-[24px]">
+                <p className=" font-bold">{course.content ? course.content.length : "0 "} Chapters</p>
+                <li className="flex flex-col gap-[8px] ml-[15px]">
+                {course.content?.map((chapter, index) => (
+                  <ol key={index}>{index+1} . {chapter.title}</ol>
+                ))}
+                </li>
+                <div className="flex flex-col gap-[8px]">
+                <p>Last update on : {course ? new Date(course.updated_at).toLocaleDateString('en-CA') : "0"} </p>
+                </div>
+               
+                <p>Access on mobile and Laptop</p>
+                <p>English</p>
+              </div>
+
               <div className="flex flex-col gap-5 justify-center items-center  ">
                 <div className="text-4xl">US$ {course.price}</div>
                 <div className="flex flex-col w-full gap-4 ">
@@ -76,13 +94,6 @@ const CourseInfo = () => {
                   </button>
                 </div>
               </div>
-
-              
-              <div className="ml-10 mt-10 flex flex-col gap-2 text-[16px] leading-[24px]">
-                <p>{course.content ? course.content.length : "0 "} Lessons</p>
-                <p>Access on mobile and Laptop</p>
-                <p>English</p>
-              </div>
             </div>
 
                
@@ -96,7 +107,7 @@ const CourseInfo = () => {
                 />
               </Elements>
             </div>
-            
+
           )}
         </div>
       </div>
