@@ -1,9 +1,15 @@
 import { default as createError } from 'http-errors';
 import { createfeedbacke, getAllfeedbacke,  getOnefeedbacke, removefeedbacke, updatefeedbacke,imagefindbyid } from '@/repository/feedback';
+import Sentiment from 'sentiment';
+
 
 export const addFeedbacknew = async (payload) => {
+  const sentiment = new Sentiment();
+  const result = sentiment.analyze(payload.feedback);
   const newFeedback = await createfeedbacke({
-    ...payload
+    ...payload,
+    sentiment_analysis_score : result.score,
+    is_positive : result.score > 0 ? true : false
   });
   return newFeedback;
 };
