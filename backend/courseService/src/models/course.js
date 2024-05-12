@@ -3,9 +3,6 @@ import { autoInc } from 'auto-increment-group';
 import mongoosePaginate from 'mongoose-paginate-v2';
 
 const courseSchema = new mongoose.Schema({
-  sn:{
-    type: String,
-  },
   title: {
     type: String,
     required: true
@@ -30,6 +27,14 @@ const courseSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  category: {
+    type : String,
+    required: false
+  },
+  is_approved: {
+    type: Boolean,
+    default: false
+  },
   content: [{
     title: {
       type: String,
@@ -42,7 +47,7 @@ const courseSchema = new mongoose.Schema({
     video: {
       type: String
     },
-    photo: {
+    image: {
       type: String
     },
     description: {
@@ -50,8 +55,7 @@ const courseSchema = new mongoose.Schema({
     }
   }],
   addedBy: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
     required: true
   }
 }, {

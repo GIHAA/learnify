@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.33.0 (HEAD)
+  labels:
+    io.kompose.service: nginx-proxy
+  name: nginx-proxy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: nginx-proxy
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.33.0 (HEAD)
+      labels:
+        io.kompose.network/backend-default: "true"
+        io.kompose.service: nginx-proxy
+    spec:
+      containers:
+        - image: gihaa/ds-project-nginx-proxy
+          name: nginx-proxy
+          ports:
+            - containerPort: 80
+              hostPort: 80
+              protocol: TCP
+      restartPolicy: Always

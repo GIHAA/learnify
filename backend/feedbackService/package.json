@@ -51,6 +51,7 @@
     "nodemailer": "6.7.7",
     "parth": "4.2.3",
     "path": "0.12.7",
+    "sentiment": "^5.0.2",
     "uuid": "9.0.1"
   },
   "devDependencies": {

@@ -8,8 +8,8 @@ const AuthFooter = () => (
     <Typography variant="subtitle2" component={Link} href="https://learnifydashboard.io" target="_blank" underline="hover">
       learnifydashboard.io
     </Typography>
-    <Typography variant="subtitle2" component={Link} href="https://codedthemes.com" target="_blank" underline="hover">
-      &copy; codedthemes.com
+    <Typography variant="subtitle2" component={Link} href="https://learnify.com" target="_blank" underline="hover">
+      &copy; learnify.com
     </Typography>
   </Stack>
 );

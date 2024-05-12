@@ -1,25 +1,25 @@
 import { moduleLogger } from '@sliit-foss/module-logger';
-import { course } from '@/models';
+import { Course } from '@/models';
 
 const logger = moduleLogger('course-repository');
 
 export const addCourseRepo = async (courses) => {
- 
   try {
-    const newcourses = (await new course(courses).save());
+    const newcourses = await new Course(courses).save();
     logger.info('course created:', newcourses);
     return newcourses;
   } catch (error) {
     logger.error('Error creating course:', error.message);
-    console.log(error)
+    console.log(error);
     throw error;
   }
-  
 };
 
 export const getOneCourseRepo = async (filters) => {
   try {
-    const course = await course.findOne({ courseId: filters.courseId });
+    const course = await Course.findOne(filters);
+    console.log(course);
+    console.log(filters);
     if (!course) {
       logger.warn('No course found.');
       return null;
@@ -39,32 +39,45 @@ export const getAllCoursesRepo = async (query) => {
   const searchTerm = query.searchTerm || '';
 
   const filters = {
-    $or: [
-      { title: { $regex: searchTerm, $options: 'i' } },
-      { sl: { $regex: searchTerm, $options: 'i' } },
-    ],
+    $or: [{ title: { $regex: searchTerm, $options: 'i' } }, { sl: { $regex: searchTerm, $options: 'i' } }]
   };
 
   const options = {
     page,
-    limit,
+    limit
   };
   try {
-    const courses = await course.paginate(filters, options);
+    const courses = await Course.paginate(filters, options);
 
     logger.info('All courses retrieved:', courses);
 
     return courses;
   } catch (error) {
     logger.error('Error retrieving all courses:', error.message);
-    console.log(error)
+    console.log(error);
+    throw error;
+  }
+};
+
+export const getAllMyCoursesRepo = async (ids) => {
+  try {
+    const courses = await Course.find({ _id: { $in: ids } });
+    if (!courses) {
+      logger.warn('No courses found.');
+      return null;
+    }
+
+    logger.info('All courses retrieved:', courses);
+    return courses;
+  } catch (error) {
+    logger.error('Error retrieving all courses:', error.message);
     throw error;
   }
 };
 
 export const removeCourseRepo = async (filters) => {
   try {
-    const coursedelete = await course.findOneAndRemove(filters);
+    const coursedelete = await Course.findOneAndRemove(filters);
     if (!coursedelete) {
       logger.warn('No course found with filters:', filters);
       return null;
@@ -79,7 +92,7 @@ export const removeCourseRepo = async (filters) => {
 
 export const updateCourseRepo = async (filters, data) => {
   try {
-    const course = await course.findByIdAndUpdate(filters._id, data);
+    const course = await Course.findByIdAndUpdate(filters._id, data, { new: true });
     if (!course) {
       logger.warn('No course found with filters:', filters);
       return null;
@@ -89,5 +102,26 @@ export const updateCourseRepo = async (filters, data) => {
   } catch (e) {
     logger.error('error update course', e.message);
     throw e;
+  }
+};
+
+export const getChartDataRepo = async () => {
+  try {
+    const data = await Course.aggregate([
+      {
+        $group: {
+          _id: '$category',
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $sort: { count: -1 }
+      }
+    ]);
+    const count = await Course.countDocuments();
+    return { data, count };
+  } catch (error) {
+    logger.error('Error retrieving chart data:', error.message);
+    throw error;
   }
 };

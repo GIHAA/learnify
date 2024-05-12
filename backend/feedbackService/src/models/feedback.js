@@ -6,6 +6,15 @@ const feedbackSchema = new mongoose.Schema(
       type: String,
       required: true
     },
+    course: {
+      type: String,
+      required: true
+    },
+    rating: {
+      type: Number,
+      default: 0,
+      required: true
+    },
     added_by: {
       name: {
         type: String,
@@ -16,12 +25,11 @@ const feedbackSchema = new mongoose.Schema(
         required: true
       }
     },
-    sentiment_analysis: {
-      type: String
+    sentiment_analysis_score: {
+      type: Number
     },
-    is_analysed: {
-      type: Boolean,
-      default: false
+    is_positive: {
+      type: String
     }
   },
   {

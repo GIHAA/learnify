@@ -1,9 +1,18 @@
-import { createStore } from 'redux';
-import reducer from './reducer';
+import { createStore } from "redux";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import reducer from "./reducer";
 
 // ==============================|| REDUX - MAIN STORE ||============================== //
 
-const store = createStore(reducer);
-const persister = 'Free';
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
-export { store, persister };
+const persistedReducer = persistReducer(persistConfig, reducer);
+
+const store = createStore(persistedReducer);
+const persistor = persistStore(store);
+
+export { store, persistor };

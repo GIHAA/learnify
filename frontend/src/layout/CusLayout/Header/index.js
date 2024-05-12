@@ -1,28 +1,20 @@
 import PropTypes from "prop-types";
 
-// material-ui
 import { useTheme } from "@mui/material/styles";
-import { Avatar, Box, ButtonBase } from "@mui/material";
-
-// project imports
-import LogoSection from "../LogoSection";
-// import SearchSection from './SearchSection';
-import ProfileSection from "./ProfileSection";
-import NotificationSection from "./NotificationSection";
-
-// assets
-import { IconMenu2 } from "@tabler/icons-react";
-import DropDown from "./DropDown";
+import {  Box, ButtonBase } from "@mui/material";
+// import LogoSection from "../LogoSection";
 import { Link } from "react-router-dom";
+import ProfileSection from "layout/MainLayout/Header/ProfileSection";
+import lernify from './image/lernify.png'
+
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
-const Header = ({ handleLeftDrawerToggle }) => {
+const Header = () => {
   const theme = useTheme();
 
   return (
     <>
-      {/* logo & toggler button */}
       <Box
         sx={{
           width: 228,
@@ -31,38 +23,24 @@ const Header = ({ handleLeftDrawerToggle }) => {
             width: "auto",
           },
         }}
-        className='lg:flex lg:justify-between flex-row w-[100%]'
+        className='lg:flex lg:justify-between flex-row w-[100%] max-w-[1440px] mx-auto'
       >
         <Box
           component="span"
           sx={{ display: { xs: "none", md: "block" }, flexGrow: 1 }}
         >
-          <LogoSection />
+          {/* <LogoSection /> */}
+          <Link to="/" className="mx-3 text-[20px]">  
+          <img src={lernify} alt="Learnify" width="100" />
+          </Link>
+        
         </Box>
         <ButtonBase sx={{ borderRadius: "12px", overflow: "hidden" }}>
-          <Avatar
-            variant="rounded"
-            sx={{
-              ...theme.typography.commonAvatar,
-              ...theme.typography.mediumAvatar,
-              transition: "all .2s ease-in-out",
-              background: theme.palette.secondary.light,
-              color: theme.palette.secondary.dark,
-              "&:hover": {
-                background: theme.palette.secondary.dark,
-                color: theme.palette.secondary.light,
-              },
-            }}
-            onClick={handleLeftDrawerToggle}
-            color="inherit"
-            className="lg:hidden"
-          >
-            <IconMenu2 stroke={1.5} size="1.3rem" />
-          </Avatar>
         </ButtonBase>
-        <div className="hidden lg:flex lg:justify-center lg:items-center">
-          <DropDown/>
-          <Link to="/admin" className="mx-3">My Course</Link>
+        <div className="hidden lg:flex lg:justify-center lg:items-center mr-6">
+          {/* <DropDown/> */}
+          <Link to="/shop" className="mx-3 text-[20px]">Courses</Link>
+          <Link to="/my-courses" className="mx-3 text-[20px]">My Learning</Link>
         </div>
       </Box>
 
@@ -70,9 +48,6 @@ const Header = ({ handleLeftDrawerToggle }) => {
       {/* <SearchSection /> */}
       <Box sx={{ flexGrow: 1 }} />
       <Box sx={{ flexGrow: 1 }} />
-
-      {/* notification & profile */}
-      <NotificationSection />
       <ProfileSection />
     </>
   );

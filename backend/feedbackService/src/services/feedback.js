@@ -12,9 +12,7 @@ export const getFeedback = (query) => getAllfeedbacke(query);
 
 export const getFeedbackbtID = async (id) => {
   const Feedbacks = await  getOnefeedbacke({ _id: id });
-
   if (!Feedbacks) throw new createError(401, 'Invalid Feedback ID');
-
   return Feedbacks;
 };
 
@@ -30,6 +28,5 @@ export const deleteFeedback = async (id) => {
 };
 
 export const findImage = (filename,res)=>{
-
   imagefindbyid(filename,res)
 }

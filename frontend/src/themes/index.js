@@ -7,6 +7,7 @@ import colors from 'assets/scss/_themes-vars.module.scss';
 import componentStyleOverrides from './compStyleOverride';
 import themePalette from './palette';
 import themeTypography from './typography';
+import { margin, maxWidth, width } from '@mui/system';
 
 /**
  * Represent theme style and structure as per Material-UI
@@ -36,6 +37,9 @@ export const theme = (customization) => {
     palette: themePalette(themeOption),
     mixins: {
       toolbar: {
+        maxWidth: '1440px',
+        width: '100%',
+        margin: '0 auto',
         minHeight: '48px',
         padding: '16px',
         '@media (min-width: 600px)': {

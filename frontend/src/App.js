@@ -12,6 +12,7 @@ import themes from 'themes';
 // project imports
 import NavigationScroll from 'layout/NavigationScroll';
 // import ResponsiveAppBar from 'ui-component/header/ResponsiveAppBar';
+import { Toaster } from 'react-hot-toast';
 
 // ==============================|| APP ||============================== //
 
@@ -30,6 +31,7 @@ const App = () => {
         </NavigationScroll>
   
       </ThemeProvider>
+      <Toaster position="top-center" />
     </StyledEngineProvider>
   );
 };

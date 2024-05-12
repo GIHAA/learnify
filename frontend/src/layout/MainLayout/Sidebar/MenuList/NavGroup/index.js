@@ -7,26 +7,38 @@ import { Divider, List, Typography } from '@mui/material';
 // project imports
 import NavItem from '../NavItem';
 import NavCollapse from '../NavCollapse';
+import { useSelector } from "react-redux";
 
 // ==============================|| SIDEBAR MENU LIST GROUP ||============================== //
 
 const NavGroup = ({ item }) => {
+  const { user } = useSelector((state) => state.user);
   const theme = useTheme();
+
 
   // menu list collapse & items
   const items = item.children?.map((menu) => {
-    switch (menu.type) {
-      case 'collapse':
-        return <NavCollapse key={menu.id} menu={menu} level={1} />;
-      case 'item':
+  
+    if(menu.id == "course-management"){
+      if(user.role == "INSTRUCTOR"){
         return <NavItem key={menu.id} item={menu} level={1} />;
-      default:
-        return (
-          <Typography key={menu.id} variant="h6" color="error" align="center">
-            Menu Items Error
-          </Typography>
-        );
+      }
     }
+    if(user.role == "ADMIN" ){
+      switch (menu.type) {
+        case 'collapse':
+          return <NavCollapse key={menu.id} menu={menu} level={1} />;
+        case 'item':
+          return <NavItem key={menu.id} item={menu} level={1} />;
+        default:
+          return (
+            <Typography key={menu.id} variant="h6" color="error" align="center">
+              Menu Items Error
+            </Typography>
+          );
+      }
+    }
+
   });
 
   return (

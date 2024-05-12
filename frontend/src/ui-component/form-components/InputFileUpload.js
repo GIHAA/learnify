@@ -9,7 +9,7 @@ import {
 } from "firebase/storage";
 import "firebase/storage";
 import LinearWithValueLabel from "ui-component/LinearProgressWithLabel";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CardMedia } from "@mui/material";
 
 const VisuallyHiddenInput = styled("input")({
@@ -24,16 +24,17 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-export default function InputFileUpload(params) {
+const InputFileUpload = (params) => {
   const [progress, setProgress] = useState(0);
   const [downloadURL, setDownloadURL] = useState("");
+  const inputRef = useRef(null);
 
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (file) {
       try {
         const storage = getStorage();
-        const storageRef = ref(storage, "some-child");
+        const storageRef = ref(storage, "images/" + file.name);
 
         const uploadTask = uploadBytesResumable(storageRef, file);
         uploadTask.on(
@@ -60,6 +61,17 @@ export default function InputFileUpload(params) {
     }
   };
 
+  const resetInput = () => {
+    if (inputRef.current) {
+      inputRef.current.value = "";
+      setProgress(0);
+      setDownloadURL("");
+    }
+  };
+
+  if(params.setResetFunction)
+  params.setResetFunction(resetInput);
+
   return (
     <label>
       <div className="ml-2">
@@ -67,7 +79,14 @@ export default function InputFileUpload(params) {
           <LinearWithValueLabel progress={progress} />
         )}
       </div>
-      {progress === 0 && (
+      {(progress === 100 && params.type ==="image" && downloadURL  ) && (
+        <CardMedia component="img" className="my-4 rounded-[10px] drop-shadow-md " image={downloadURL} />
+      )}
+      {(progress === 100 && params.type ==="video" && downloadURL ) && (
+        <CardMedia component="video" className="my-4 rounded-[10px] drop-shadow-md " controls src={downloadURL} />
+      )}
+
+      {( progress === 0 || !params.reset ) && (
         <>
           <Button
             component="span"
@@ -79,16 +98,13 @@ export default function InputFileUpload(params) {
           >
             {params.text}
           </Button>
-          <VisuallyHiddenInput type="file" onChange={handleFileChange} />
+          <VisuallyHiddenInput type="file" ref={inputRef} onChange={handleFileChange} />
         </>
       )}
-      {(progress === 100 && params.type ==="image") && (
-        <CardMedia component="img" image={downloadURL} />
-      )}
-      {(progress === 100 && params.type ==="video") && (
-        <CardMedia component="video" controls src={downloadURL} />
-      )}
+
 
     </label>
   );
 }
+
+export default InputFileUpload;

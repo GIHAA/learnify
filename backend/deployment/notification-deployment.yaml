@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert -f docker-compose.yml
+    kompose.version: 1.33.0 (HEAD)
+  labels:
+    io.kompose.service: notification
+  name: notification
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: notification
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert -f docker-compose.yml
+        kompose.version: 1.33.0 (HEAD)
+      labels:
+        io.kompose.network/backend-default: "true"
+        io.kompose.service: notification
+    spec:
+      containers:
+        - env:
+            - name: EMAIL_PASS
+              valueFrom:
+                configMapKeyRef:
+                  key: EMAIL_PASS
+                  name: notification-env
+            - name: EMAIL_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: EMAIL_USER
+                  name: notification-env
+            - name: MAIL_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: MAIL_HOST
+                  name: notification-env
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: PORT
+                  name: notification-env
+            - name: RABBITMQ_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: RABBITMQ_URL
+                  name: notification-env
+            - name: SMS_SENDER_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: SMS_SENDER_ID
+                  name: notification-env
+            - name: SMS_TOKEN
+              valueFrom:
+                configMapKeyRef:
+                  key: SMS_TOKEN
+                  name: notification-env
+          image: gihaa/ds-project-notification
+          name: notification-service
+          ports:
+            - containerPort: 3005
+              hostPort: 3005
+              protocol: TCP
+      restartPolicy: Always

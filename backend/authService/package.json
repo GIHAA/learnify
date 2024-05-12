@@ -31,6 +31,7 @@
     "@sliit-foss/module-logger": "1.1.5",
     "@sliit-foss/service-connector": "1.2.4",
     "amqplib": "0.10.3",
+    "auto-increment-group": "1.1.0",
     "bcryptjs": "2.4.3",
     "celebrate": "15.0.1",
     "compression": "1.7.4",
