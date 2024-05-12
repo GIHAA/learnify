@@ -31,6 +31,7 @@ const AllCourses = ({ enrollments, handlePageChange }) => {
 
   const addFeedback = async (values) => {
     const paylaod = {
+      course : values.course,
       added_by: {
         name: user.name,
         email: user.email,
