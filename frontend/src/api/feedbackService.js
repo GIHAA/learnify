@@ -21,9 +21,9 @@ authFetch.interceptors.request.use(
     }
 );
 
-const API_BASE_URL = "/auth/api/feedback";
+const API_BASE_URL = "/feedback/api/feedback";
 
-export const addFeedback = async (data) => {
+export const sendFeedback = async (data) => {
     try {
         const response = await authFetch.post(`${API_BASE_URL}`, data);
         return response.data;

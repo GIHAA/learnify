@@ -4,6 +4,8 @@ import CourseCard from "ui-component/cards/CourseCard";
 import PropTypes from "prop-types";
 import AddFeedback from "./addFeedback";
 import { useSelector } from "react-redux";
+import { sendFeedback } from "api/feedbackService";
+import toast from "react-hot-toast";
 
 const AllCourses = ({ enrollments, handlePageChange }) => {
   const [courses, setCourses] = useState([]);
@@ -27,7 +29,7 @@ const AllCourses = ({ enrollments, handlePageChange }) => {
     handlePageChange(page);
   };
 
-  const addFeedback = (values) => {
+  const addFeedback = async (values) => {
     const paylaod = {
       added_by: {
         name: user.name,
@@ -36,6 +38,14 @@ const AllCourses = ({ enrollments, handlePageChange }) => {
       feedback : values.feedback,
       rating: values.rating,
     }
+
+   try{
+    await sendFeedback( paylaod);
+    toast.success("Feedback added successfully");
+   }catch(error){
+    toast.error("Error sending feedback");
+     console.error("Error sending feedback:", error);
+   }
   }
 
   return (

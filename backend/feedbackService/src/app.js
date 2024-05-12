@@ -48,7 +48,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static('Assert'))
 
-app.get('/feedback-service/health', (_, res) => res.status(200).json({ message: 'Feedback service and Running' }));
+app.get('/feedback/health', (_, res) => res.status(200).json({ message: 'Feedback service and Running' }));
 
 app.use(context.middleware);
 
