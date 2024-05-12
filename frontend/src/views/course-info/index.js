@@ -61,10 +61,10 @@ const CourseInfo = () => {
           {payment ? (
             <div className=" w-full bg-white rounded shadow px-[20px] py-[40px]">
               
-
+              <h2 className="text-[24px] leading-[29px] font-bold mb-[16px]">This course includes</h2>
               
               <div className="ml-10 mb-10 flex flex-col gap-2 text-[16px] leading-[24px]">
-                <p className=" font-bold">{course.content ? course.content.length : "0 "} Chapters</p>
+                <p className=" font-semibold">{course.content ? course.content.length : "0 "} Chapters</p>
                 <li className="flex flex-col gap-[8px] ml-[15px]">
                 {course.content?.map((chapter, index) => (
                   <ol key={index}>{index+1} . {chapter.title}</ol>
