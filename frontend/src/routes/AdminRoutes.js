@@ -6,7 +6,7 @@ import UserManagement from "views/user-management";
 import AddCourse from "views/add-course";
 import { element } from "prop-types";
 import ViewCourse from "views/view-course";
-
+import FeedbacksPage from "views/feedback";
 
 const AdminRoutes = {
   path: "/admin",
@@ -14,15 +14,15 @@ const AdminRoutes = {
   children: [
     {
       path: "dashboard",
-      element: <DashboardDefault />
+      element: <DashboardDefault />,
     },
     {
       path: "course-management",
       element: <CouserManagement />,
     },
     {
-      path : "approve-course/view-course/:id",
-      element : <ViewCourse />
+      path: "approve-course/view-course/:id",
+      element: <ViewCourse />,
     },
     {
       path: "approve-course",
@@ -31,7 +31,12 @@ const AdminRoutes = {
     {
       path: "user-management",
       element: <UserManagement />,
-    },{
+    },
+    {
+      path: "feedback-management",
+      element: <FeedbacksPage />,
+    },
+    {
       path: "course-management/add",
       element: <AddCourse />,
     },
