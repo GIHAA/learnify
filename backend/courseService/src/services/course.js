@@ -1,5 +1,5 @@
 import { default as createError } from 'http-errors';
-import { addCourseRepo, getAllCoursesRepo, getAllMyCoursesRepo , getOneCourseRepo, removeCourseRepo, updateCourseRepo, } from '@/repository/course';
+import { addCourseRepo, getAllCoursesRepo, getAllMyCoursesRepo , getChartDataRepo  , getOneCourseRepo, removeCourseRepo, updateCourseRepo, } from '@/repository/course';
 import { sendMessageToQueue } from '@/utils/messageBroker';
 import { RABBIMQ_CONFIG } from '@/utils';
 
@@ -51,3 +51,9 @@ export const removeCourseService = async (id) => {
   if (!Courses) throw new createError(401, 'Invalid Course ID');
   return Courses;
 };
+
+export const getChartDataService = async () => {
+  const Courses = await getChartDataRepo();
+  if (!Courses) throw new createError(401, 'Invalid Course ID');
+  return Courses;
+}
