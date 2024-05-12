@@ -72,3 +72,13 @@ export const removeCourse = async (id) => {
     throw error;
   }
 };
+
+export const getChartData = async () => {
+  try {
+    const response = await authFetch.get(`${API_BASE_URL}/chart-data`);
+    return response.data.data;
+  } catch (error) {
+    console.error("Error fetching chart data:", error);
+    throw error;
+  }
+}

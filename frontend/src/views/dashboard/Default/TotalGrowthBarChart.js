@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
-import { Grid, MenuItem, TextField, Typography } from '@mui/material';
+import { Grid,  Typography } from '@mui/material';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // third-party
 import ApexCharts from 'apexcharts';
@@ -17,6 +18,7 @@ import { gridSpacing } from 'store/constant';
 
 // chart data
 import chartData from './chart-data/total-growth-bar-chart';
+import { getChartData } from 'api/courseService';
 
 const status = [
   {
@@ -37,6 +39,7 @@ const status = [
 
 const TotalGrowthBarChart = ({ isLoading }) => {
   const [value, setValue] = useState('today');
+  const [data , setData] = useState([]);
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
 
@@ -50,6 +53,15 @@ const TotalGrowthBarChart = ({ isLoading }) => {
   const primaryDark = theme.palette.primary.dark;
   const secondaryMain = theme.palette.secondary.main;
   const secondaryLight = theme.palette.secondary.light;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getChartData();
+      setData(data);
+    };
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const newChartData = {
@@ -82,7 +94,6 @@ const TotalGrowthBarChart = ({ isLoading }) => {
       }
     };
 
-    // do not load chart when loading
     if (!isLoading) {
       ApexCharts.exec(`bar-chart`, 'updateOptions', newChartData);
     }
@@ -100,26 +111,24 @@ const TotalGrowthBarChart = ({ isLoading }) => {
                 <Grid item>
                   <Grid container direction="column" spacing={1}>
                     <Grid item>
-                      <Typography variant="subtitle2">Total Growth</Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="h3">$2,324.00</Typography>
+                      <Typography variant="h3">Total Courses : {data.count}</Typography>
                     </Grid>
                   </Grid>
-                </Grid>
-                <Grid item>
-                  <TextField id="standard-select-currency" select value={value} onChange={(e) => setValue(e.target.value)}>
-                    {status.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <Chart {...chartData} />
+              {/* <Chart {...chartData} /> */}
+              <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={data.data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="_id" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="count" fill="#8884d8" />
+            </BarChart>
+        </ResponsiveContainer>
             </Grid>
           </Grid>
         </MainCard>
