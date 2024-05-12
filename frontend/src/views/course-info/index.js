@@ -96,6 +96,7 @@ const CourseInfo = () => {
                 />
               </Elements>
             </div>
+            
           )}
         </div>
       </div>
