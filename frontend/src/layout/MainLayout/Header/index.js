@@ -1,16 +1,17 @@
 import PropTypes from 'prop-types';
-
+import { Link } from "react-router-dom";
 // material-ui
 import { useTheme } from '@mui/material/styles';
 import { Avatar, Box, ButtonBase } from '@mui/material';
 
 // project imports
-import LogoSection from '../LogoSection';
+// import LogoSection from '../LogoSection';
 // import SearchSection from './SearchSection';
 import ProfileSection from './ProfileSection';
 
 // assets
 import { IconMenu2 } from '@tabler/icons-react';
+import lernify from './image/lernify.png'
 
 // ==============================|| MAIN NAVBAR / HEADER ||============================== //
 
@@ -29,7 +30,9 @@ const Header = ({ handleLeftDrawerToggle }) => {
         }}
       >
         <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
-          <LogoSection />
+        <Link to="/" className="mx-3 text-[20px]">  
+          <img src={lernify} alt="Learnify" width="100" />
+          </Link>
         </Box>
         <ButtonBase sx={{ borderRadius: '12px', overflow: 'hidden' }}>
 

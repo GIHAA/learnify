@@ -57,3 +57,4 @@ ShopCourseCard.propTypes = {
 };
 
 export default ShopCourseCard;
+
