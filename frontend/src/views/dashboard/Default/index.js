@@ -5,14 +5,12 @@ import { Grid } from "@mui/material";
 
 // project imports
 import EarningCard from "./EarningCard";
-// import PopularCard from './PopularCard';
 import TotalOrderLineChartCard from "./TotalOrderLineChartCard";
 import TotalIncomeDarkCard from "./TotalIncomeDarkCard";
-// import TotalGrowthBarChart from './TotalGrowthBarChart';
+import TotalGrowthBarChart from "./TotalGrowthBarChart";
 import { gridSpacing } from "store/constant";
 import { getDashboard } from "../../../api/paymentService";
-import ServiceStatus from "./ServiceStatus";
-import { getCourseServiceHealth, getPaymentServiceHealth , getAuthServiceHealth , getEnrollmentServiceHealth } from "api/heathService";
+import ServiceStatusGroup from "./ServiceStatusGroup";
 
 // ==============================|| DEFAULT DASHBOARD ||============================== //
 
@@ -21,12 +19,6 @@ const Dashboard = () => {
   const [earnings, setEarnings] = useState(0);
   const [income, setIncome] = useState(0);
   const [orders, setOrders] = useState(0);
-  const [authServiceHealth, setAuthServiceHealth ] = useState(false);
-  const [enrollmentServiceHealth, setEnrollmentServiceHealth ] = useState(false);
-  const [courseServiceHealth, setCourseServiceHealth ] = useState(false);
-  const [paymentServiceHealth, setPaymentServiceHealth ] = useState(false);
-
-
 
   const fetchData = async () => {
     const dashboardData = await getDashboard();
@@ -39,55 +31,6 @@ const Dashboard = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
-  useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const data = await getCourseServiceHealth();
-        setCourseServiceHealth(data);
-      }
-      fetchData();
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    try {
-      const fetchData = async () => {
-      const data = await getPaymentServiceHealth();
-      setPaymentServiceHealth(data);
-      }
-      fetchData();
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    try {
-      const fetchData = async () => {
-      const data = await getAuthServiceHealth();
-      setAuthServiceHealth(data);
-      }
-      fetchData();
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
-  useEffect(() => {
-    try {
-      const fetchData = async () => {
-      const data = await getEnrollmentServiceHealth();
-      setEnrollmentServiceHealth(data);
-      }
-      fetchData();
-    } catch (error) {
-      console.error(error);
-    }
-  }, []);
-
 
   return (
     <Grid container spacing={gridSpacing}>
@@ -102,35 +45,22 @@ const Dashboard = () => {
           <Grid item lg={4} md={12} sm={12} xs={12}>
             <Grid container spacing={gridSpacing}>
               <Grid item sm={6} xs={12} md={6} lg={12}>
-                <TotalIncomeDarkCard isLoading={isLoading} income={income} />
+                <TotalIncomeDarkCard isLoading={isLoading} income={income} />                
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       </Grid>
+      
       <Grid item xs={12}>
-        {/* <Grid item xs={12} md={8}>
-        <TotalGrowthBarChart isLoading={isLoading} />
-        </Grid> */}
-
-
-        <Grid item sm={6} xs={12} md={4}>
-          <ServiceStatus isLoading={isLoading} service="Auth Service" status={authServiceHealth} />
+        <Grid container justifyContent="space-between" spacing={gridSpacing}>
+          <Grid item xs={12} md={8}>
+            <TotalGrowthBarChart isLoading={isLoading} />
+          </Grid>
+          <Grid item xs={12} md={4}>
+             <ServiceStatusGroup isLoading={isLoading}  style={{ width: '100%' }} />
+          </Grid>
         </Grid>
-
-        <Grid item sm={6} xs={12} md={4}>
-          <ServiceStatus isLoading={isLoading} service="Enrollment Service" status={enrollmentServiceHealth} />
-        </Grid>
-
-        <Grid item sm={6} xs={12} md={4}>
-          <ServiceStatus isLoading={isLoading} service="Course Service" status={courseServiceHealth} />
-        </Grid>
-
-        <Grid item sm={6} xs={12} md={4}>
-          <ServiceStatus isLoading={isLoading} service="Payment Service" status={paymentServiceHealth} />
-        </Grid>
-
-    
       </Grid>
     </Grid>
   );
