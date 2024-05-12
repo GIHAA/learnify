@@ -25,7 +25,6 @@ users.patch(
 );
 users.patch(
   '/:id',
-  celebrate({ [Segments.PARAMS]: userIdSchema, [Segments.BODY]: updateSchema }),
   tracedAsyncHandler(update)
 );
 users.delete('/:id',  tracedAsyncHandler(remove));

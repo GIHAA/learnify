@@ -17,7 +17,7 @@ export const getById = async (req, res) => {
 };
 
 export const update = async (req, res) => {
-  const user = await updateUserdetails(req.params.id, req.user, req.body);
+  const user = await updateUserdetails(req.params.id, req.body);
   return makeResponse({ res, data: user, message: 'User updated successfully' });
 };
 

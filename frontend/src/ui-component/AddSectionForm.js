@@ -82,8 +82,6 @@ const AddSectionForm = ({ getSectionData }) => {
         {...formik.getFieldProps("description")}
       />
 
-
-
       <Grid container spacing={2}>
         <Grid item xs={6}>
           <TextField

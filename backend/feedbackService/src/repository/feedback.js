@@ -1,6 +1,6 @@
 import { moduleLogger } from '@sliit-foss/module-logger';
 import mongoose from 'mongoose';
-import { feedback } from '@/models';
+import { Feedback } from '@/models';
 import { RABBIMQ_CONFIG } from '@/utils';
 import { sendMessageToQueue } from '@/utils/messageBroker';
 
@@ -8,7 +8,7 @@ const logger = moduleLogger('feedback-repository');
 
 export const createfeedbacke = async (feedback) => {
   try {
-    const newfeedbackes = await new feedback(feedback).save();
+    const newfeedbackes = await new Feedback(feedback).save();
     
     logger.info('feedback created:', newfeedbackes);
     sendMessageToQueue(RABBIMQ_CONFIG.FEEDBACK_VALIDATION_QUEUE, newfeedbackes);
@@ -23,7 +23,7 @@ export const createfeedbacke = async (feedback) => {
 
 export const getOnefeedbacke = async (filters) => {
   try {
-    const feedbackef = await feedback.findOne({ feedbackeId: filters.feedbackeId });
+    const feedbackef = await Feedback.findOne({ feedbackeId: filters.feedbackeId });
     if (!feedbackef) {
       logger.warn('No feedback found.');
       return null;
@@ -39,7 +39,7 @@ export const getOnefeedbacke = async (filters) => {
 
 export const getAllfeedbacke = async () => {
   try {
-    const feedbackes = await feedback.find();
+    const feedbackes = await Feedback.find();
     if (!feedbackes) {
       logger.warn('No feedback found.');
       return null;
@@ -57,7 +57,7 @@ export const getAllfeedbacke = async () => {
 
 export const removefeedbacke = async (filters) => {
   try {
-    const feedbackedelete = await feedback.findOneAndRemove(filters);
+    const feedbackedelete = await Feedback.findOneAndRemove(filters);
     if (!feedbackedelete) {
       logger.warn('No feedback found with filters:', filters);
       return null;
@@ -72,7 +72,7 @@ export const removefeedbacke = async (filters) => {
 
 export const updatefeedbacke = async (filters, data) => {
   try {
-    const feedback = await feedback.findByIdAndUpdate(filters._id, data);
+    const feedback = await Feedback.findByIdAndUpdate(filters._id, data);
     if (!feedback) {
       logger.warn('No feedback found with filters:', filters);
       return null;
