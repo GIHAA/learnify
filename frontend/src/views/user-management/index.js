@@ -78,7 +78,6 @@ const UserManagementPage = () => {
   };
 
   const onClick = () => {
-
     handleOpen();
   };
 

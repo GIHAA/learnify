@@ -21,7 +21,7 @@ authFetch.interceptors.request.use(
     }
 );
 
-const API_BASE_URL = "/feedback/api/feedback";
+const API_BASE_URL = "/feedback/api/";
 
 export const sendFeedback = async (data) => {
     try {

@@ -16,7 +16,7 @@ const style = {
 };
 
 const AddFeedback = ({ open, handleClose , addFeedback , data }) => {
-
+  console.log(data);
   return (
     <Modal
       open={open}
@@ -29,9 +29,9 @@ const AddFeedback = ({ open, handleClose , addFeedback , data }) => {
           initialValues={{
             feedback: '',
             rating: 0,
+            course : data.course.title
           }}
           onSubmit={(values, { setSubmitting }) => {
-            console.log(values);
             addFeedback(values);
             setSubmitting(false);
             handleClose();

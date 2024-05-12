@@ -42,7 +42,7 @@ const AddCourse = () => {
   }
 
   const publishCourse = async (isChecked) => {
-    await createCourse({ ...metaData, addedBy: user.user._id, content: section });
+    await createCourse({ ...metaData, addedBy: user.user.name, content: section });
     if (isChecked) {
       console.log("Notify User on Publish");
       const res = await notify({
