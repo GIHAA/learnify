@@ -1,8 +1,8 @@
 // assets
-import { IconBrandChrome, IconHelp , IconDashboard , IconCertificate , IconUsers} from '@tabler/icons-react';
+import { IconBrandChrome, IconHelp , IconDashboard , IconCertificate , IconUsers , IconMoodCheck } from '@tabler/icons-react';
 
 // constant
-const icons = { IconBrandChrome, IconHelp , IconDashboard , IconCertificate , IconUsers};
+const icons = { IconBrandChrome, IconHelp , IconDashboard , IconCertificate , IconUsers , IconMoodCheck};
 
 // ==============================|| SAMPLE PAGE & DOCUMENTATION MENU ITEMS ||============================== //
 
@@ -34,14 +34,21 @@ const adminMenu = {
       breadcrumbs: false
     },
     {
+      id: 'feedback-management',
+      title: 'Feedbacks',
+      type: 'item',
+      url: '/admin/feedback-management',
+      icon: icons.IconMoodCheck,
+      breadcrumbs: false
+    },
+    {
       id: 'user-management',
       title: 'User Management',
       type: 'item',
       url: '/admin/user-management',
       icon: icons.IconUsers,
       breadcrumbs: false
-    },
-    
+    }
   ]
 };
 
