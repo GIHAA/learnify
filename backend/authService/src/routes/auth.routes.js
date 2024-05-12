@@ -35,7 +35,7 @@ const verifyEmailLimiter = rateLimit({
 });
 
 auth.post('/login', celebrate({ [Segments.BODY]: loginSchema }), tracedAsyncHandler(login));
-auth.post('/register', celebrate({ [Segments.BODY]: registerSchema }), tracedAsyncHandler(register));
+auth.post('/register', tracedAsyncHandler(register));
 auth.get('/current', protect, tracedAsyncHandler(current));
 auth.post(
   '/verify',

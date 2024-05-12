@@ -5,9 +5,7 @@ import { changePassword, create, sendnotification , getAll, getById, update,remo
 import { protect,adminProtect } from '@/middleware/auth';
 
 import {
-  addUserSchema,
   changePasswordSchema,
-  updateSchema,
   userIdSchema
 } from '@/validations/user';
 
@@ -15,7 +13,7 @@ const users = express.Router();
 
 
 users.post('/notify',   tracedAsyncHandler(sendnotification));
-users.post('/', adminProtect, celebrate({ [Segments.BODY]: addUserSchema }), tracedAsyncHandler(create));
+users.post('/', tracedAsyncHandler(create));
 users.get('/',  tracedAsyncHandler(getAll));
 users.get('/:id', celebrate({ [Segments.PARAMS]: userIdSchema }), adminProtect, tracedAsyncHandler(getById));
 users.patch(

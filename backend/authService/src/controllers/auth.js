@@ -15,9 +15,10 @@ import {
 import { makeResponse, sendRefreshTokenResponse, sendTokenResponse } from '@/utils';
 
 export const register = async (req, res) => {
-  await authRegister(req.body);
+  const user = await authRegister(req.body);
   return makeResponse({
     res,
+    data: user,
     message: 'Registration Successfull. Please check your email to verify your account.'
   });
 };
