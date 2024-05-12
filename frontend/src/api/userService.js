@@ -45,7 +45,7 @@ export const getUsers = async () => {
 
 export const updateUser = async (userId, data) => {
     try {
-        const response = await authFetch.put(`${API_BASE_URL}/${userId}`, data);
+        const response = await authFetch.patch(`${API_BASE_URL}/${userId}`, data);
         return response.data;
     } catch (error) {
         console.error("Error updating user:", error);

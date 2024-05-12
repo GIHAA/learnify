@@ -21,14 +21,7 @@ export const changePasswordService = async (user, oldPassword, newPassword) => {
   return findOneAndUpdateUser({ email: user.email }, { password: hashedPassword });
 };
 
-export const updateUserdetails = async (userId, user, payload) => {
-  if (user.role !== 'ADMIN') {
-    if (userId !== user._id.toString()) {
-      throw new createError(403, 'You are not authorized to update this user');
-    }
-    delete payload.is_active;
-    delete payload.eliminated;
-  }
+export const updateUserdetails = async (userId,payload) => {
   if (payload.name) {
     const existingUser = await getOneUser({ name: payload.name, _id: { $ne: userId } });
     if (existingUser) throw new createError(422, 'Name is already taken');
