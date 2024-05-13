@@ -51,7 +51,6 @@ const ApproveCoursePage = () => {
   const handleApprove = async (courseId) => {
     await updateCourse(courseId, { is_approved: true });
     fetchCourses(currentPage);
-    // Handle approve action
   };
 
   const handleRemove = async (courseId) => {
@@ -80,7 +79,7 @@ const ApproveCoursePage = () => {
   
   return (
     <MainCardStyle
-      title="User Management"
+      title="Approve Courses"
       btxText="Add New Course"
     >
       <SearchSection setSearchText={setSearchText}/>
