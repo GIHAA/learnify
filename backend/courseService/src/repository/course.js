@@ -61,7 +61,7 @@ export const getAllCoursesRepo = async (query) => {
 
 export const getAllMyCoursesRepo = async (ids) => {
   try {
-    const courses = await Course.find({ _id: { $in: ids } });
+    const courses = await Course.find({ _id: { $in: ids } }).sort({ created_at: -1 });
     if (!courses) {
       logger.warn('No courses found.');
       return null;
