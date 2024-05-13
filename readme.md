@@ -9,12 +9,12 @@
 ## General Setup
 1. Clone the repository:
    ```
-   git clone https://github.com/username/projectname
+   https://github.com/GIHAA/learnify
    ```
 
 2. Navigate to the project directory:
    ```
-   cd projectname
+   cd learnify
    ```
 
 ## Frontend Setup (React.js)
