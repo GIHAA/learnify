@@ -24,7 +24,12 @@ const Hero = () => {
       repeat={false}
       className='text-center md:text-left text-[28px] leading-[42px]  md:text-[32px] lg:text-[54px] lg:leading-[64px] font-bold'
     />
-           <p className='text-[16px] leading-[24px] font-medium md:text-[16px] lg:text-[18px] text-[#666666] mt-[10px] md:mt-[20px] text-center md:text-left '>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+           <p className='text-[16px] leading-[24px] font-medium md:text-[16px] lg:text-[18px] text-[#666666] mt-[10px] md:mt-[20px] text-center md:text-left '>
+
+           Embark on a journey of discovery and growth with our diverse range of expert-led courses. Expand your
+            horizons and deepen your expertise in a supportive learning environment. Whether you are starting a new career or enhancing existing skills,
+            our comprehensive courses are designed to empower your aspirations.
+           </p>
            <div className='mt-[20px] flex justify-center md:justify-start'>
             <Button component={Link} to="/register" variant="contained" color="primary">Get Started</Button> 
            </div>
