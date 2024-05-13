@@ -72,7 +72,7 @@
 ## Accessing the Application
 - Once the servers are running, the frontend should be accessible via the browser on the host machine at `http://localhost:3000` (adjust port as necessary based on your React app's configuration).
 
--
+
 ## High Level Architecture
 
 ![Group 2302](https://github.com/GIHAA/learnify/assets/86099252/edc0afe2-0e39-4e87-bcfd-f6f58d785b34)
