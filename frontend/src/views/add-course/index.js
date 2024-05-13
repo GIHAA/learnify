@@ -42,13 +42,15 @@ const AddCourse = () => {
   }
 
   const publishCourse = async (isChecked) => {
+    const res = await notify({
+      subject: "New Course Published",
+      text : `${metaData.title} has been published successfully`,
+    })
+    console.log(res);
+    
     await createCourse({ ...metaData, addedBy: user.user.name, content: section });
     if (isChecked) {
-      console.log("Notify User on Publish");
-      const res = await notify({
-        subject: "New Course Published",
-        text : `${metaData.title} has been published successfully`,
-      })
+
       toast.success("Course Published Successfully");
     }
     navigate("/admin/course-management");
