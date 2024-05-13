@@ -4,6 +4,7 @@ import { createUser, findOneAndRemoveUser, findOneAndUpdateUser, getAllUsers, ge
 import { sendMail } from './email';
 import { sendMessageToQueue } from '@/utils/messageBroker';
 import { RABBIMQ_CONFIG } from '@/utils';
+import { User } from '@/models';
 
 export const getUsers = (query) => getAllUsers(query);
 
@@ -59,12 +60,11 @@ export const removeUserByID = async (id) => {
 };
 
 export const sendnotificationService = async (payload) => {
-
-  const user = await getUsers();
+  const user = await User.find();
   const emailList = user.map((user) => user.email);
 
   emailList.forEach(async (email) => {
-    sendMessageToQueue(RABBIMQ_CONFIG.EMAIL_QUEUE, {
+    const mes = await sendMessageToQueue(RABBIMQ_CONFIG.EMAIL_QUEUE, {
       to: email,
       subject: payload.subject,
       text: payload.text

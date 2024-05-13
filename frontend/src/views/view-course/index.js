@@ -1,7 +1,7 @@
 import MainCard from "ui-component/cards/MainCard";
 import Grid from "@mui/material/Grid";
 import { useEffect, useState } from "react";
-import { getCourse } from "api/courseService"; // Import the function that fetches completed sessions
+import { getCourse, updateCourse } from "api/courseService"; // Import the function that fetches completed sessions
 import { useParams } from "react-router";
 import CourseLanding from "ui-component/CourseLanding";
 import CourseSession from "ui-component/CourseSession";
@@ -9,18 +9,14 @@ import TakeLessionCard from "ui-component/cards/TakeLessionCard";
 import { Link } from "react-router-dom";
 import { getEnrollment, updateEnrollment } from "api/enrollment";
 import toast from "react-hot-toast";
+import { Button } from "@mui/material";
 
 const ViewCourse = () => {
   const [metaData, setMetaData] = useState(false);
   const [course, setCourse] = useState({});
   const [currentSession, setCurrentSession] = useState({});
   const [sections, setSections] = useState([]);
-
-  //todo this should be enrollment the from that we can get course , enrolled user and enrolled id
   const { id } = useParams();
- 
-
-  // Fetch course data and completed session data when the component mounts or when 'id' changes
   useEffect(() => {
     const fetchData = async () => {
       // Get the course data
@@ -28,17 +24,27 @@ const ViewCourse = () => {
       const courseData = await getCourse(id);
       setCourse(courseData.data);
       setSections(courseData.data.content);
-
     };
 
     fetchData();
   }, [id]);
 
-  console.log(currentSession);
 
+  const handleApprove = async () => {
+    try {
+      await updateCourse(id, { is_approved: true });
+      toast.success("Course approved successfully");
+    } catch (error) {
+      console.error("Error approving course:", error);
+      toast.error("Error approving course");
+    }
+  };
 
   return (
-    <MainCard courseName={`${course.sl} - ${course.title}`} headerSX={{ fontSize: '50px' }}>
+    <MainCard
+      courseName={`${course.sl} - ${course.title}`}
+      headerSX={{ fontSize: "50px" }}
+    >
       <Grid container spacing={2}>
         <Grid item xs={12} md={8}>
           {!metaData ? (
@@ -67,7 +73,7 @@ const ViewCourse = () => {
                 setMetaData(true);
               }}
               to="#"
-              style={{ textDecoration: 'none' }}
+              style={{ textDecoration: "none" }}
             >
               <TakeLessionCard
                 index={index}
@@ -79,6 +85,18 @@ const ViewCourse = () => {
               />
             </Link>
           ))}
+          <div className="px-3">
+            <Button
+              onClick={() => {
+                handleApprove();
+              }}
+              className="w-full"
+              variant="contained"
+              color="primary"
+            >
+              Approve
+            </Button>
+          </div>
         </Grid>
       </Grid>
     </MainCard>
