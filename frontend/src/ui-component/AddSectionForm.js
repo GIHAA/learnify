@@ -32,7 +32,7 @@ const AddSectionForm = ({ getSectionData }) => {
       title: "",
       description: "",
       duration: "",
-      type: "",
+      type: "text",
     },
     onSubmit: (values) => {
       getSectionData(values);

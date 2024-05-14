@@ -61,15 +61,15 @@ export const removeUserByID = async (id) => {
 
 export const sendnotificationService = async (payload) => {
   const user = await User.find();
-  const emailList = user.map((user) => user.email);
 
-  emailList.forEach(async (email) => {
+  user.forEach(async (user) => {
     const mes = await sendMessageToQueue(RABBIMQ_CONFIG.EMAIL_QUEUE, {
-      to: email,
+      to: user.email,
       subject: payload.subject,
-      text: payload.text
+      text: payload.text,
+      phone : user.phone
     });
-    console.log('Message sent:', email);
+    console.log('Message sent:', user.name);
   });
 
   return true;
